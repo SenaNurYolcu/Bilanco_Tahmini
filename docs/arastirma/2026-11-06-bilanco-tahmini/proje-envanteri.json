@@ -1,0 +1,130 @@
+[
+  {
+    "repository": "forma-lab-mccombs/forma-release",
+    "url": "https://github.com/forma-lab-mccombs/forma-release",
+    "default_branch": "main",
+    "pushed_at": "2026-10-01T03:46:42Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "dario-disanto/quarterly-eps-forecast-study",
+    "url": "https://github.com/dario-disanto/quarterly-eps-forecast-study",
+    "default_branch": "main",
+    "pushed_at": "2026-06-12T11:02:06Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "minsu0011/eps-forecasting",
+    "url": "https://github.com/minsu0011/eps-forecasting",
+    "default_branch": "main",
+    "pushed_at": "2026-09-11T00:46:22Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "alpdemiroz1994/financial-forecasting-fpa-ml-comparison",
+    "url": "https://github.com/alpdemiroz1994/financial-forecasting-fpa-ml-comparison",
+    "default_branch": "main",
+    "pushed_at": "2026-09-24T22:26:44Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "alexanderpei/DeepEarnings",
+    "url": "https://github.com/alexanderpei/DeepEarnings",
+    "default_branch": "master",
+    "pushed_at": "2020-06-01T19:58:53Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "chuyuxu/EPSBench",
+    "url": "https://github.com/chuyuxu/EPSBench",
+    "default_branch": "main",
+    "pushed_at": "2026-09-30T23:54:59Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "fundamental-research-labs/streetbench",
+    "url": "https://github.com/fundamental-research-labs/streetbench",
+    "default_branch": "main",
+    "pushed_at": "2026-11-03T05:01:18Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "abhay-yemekar/forecastgpt-financial-outlook-agent",
+    "url": "https://github.com/abhay-yemekar/forecastgpt-financial-outlook-agent",
+    "default_branch": "main",
+    "pushed_at": "2026-11-02T17:16:42Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "JamesEzeilo/eps-forecasting-ml-sgd",
+    "url": "https://github.com/JamesEzeilo/eps-forecasting-ml-sgd",
+    "default_branch": "main",
+    "pushed_at": "2026-08-11T16:51:58Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "kryptologyst/Corporate-Earnings-Prediction",
+    "url": "https://github.com/kryptologyst/Corporate-Earnings-Prediction",
+    "default_branch": "main",
+    "pushed_at": "2026-01-12T19:50:53Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "AnanmayS/Earnings-Surprise-Prediction-Platform",
+    "url": "https://github.com/AnanmayS/Earnings-Surprise-Prediction-Platform",
+    "default_branch": "main",
+    "pushed_at": "2026-04-25T18:04:04Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "my2582/predicting-per",
+    "url": "https://github.com/my2582/predicting-per",
+    "default_branch": "master",
+    "pushed_at": "2019-08-26T03:50:58Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "UmerMuzaffar/financial-health-forecasting-psx",
+    "url": "https://github.com/UmerMuzaffar/financial-health-forecasting-psx",
+    "default_branch": "main",
+    "pushed_at": "2026-06-12T23:28:58Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "chandewardnyanesh/earnings-engine",
+    "url": "https://github.com/chandewardnyanesh/earnings-engine",
+    "default_branch": "main",
+    "pushed_at": "2026-06-10T18:05:41Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "Moozzart/Beating-Analysts-Predictions-Using-Machine-Learning-Algorithms-to-predict-EPS-of-US-Firms",
+    "url": "https://github.com/Moozzart/Beating-Analysts-Predictions-Using-Machine-Learning-Algorithms-to-predict-EPS-of-US-Firms",
+    "default_branch": "master",
+    "pushed_at": "2020-09-03T18:36:45Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  },
+  {
+    "repository": "DhirainVij/earnings-prediction",
+    "url": "https://github.com/DhirainVij/earnings-prediction",
+    "default_branch": "main",
+    "pushed_at": "2024-12-04T21:34:56Z",
+    "reviewed_at": "2026-11-06",
+    "note": "See PROJELERIN_DEGISKENLERI.md for code versus README verification scope."
+  }
+]

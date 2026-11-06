@@ -1,0 +1,1890 @@
+[
+  {
+    "project": "DeepEarnings",
+    "variable": "acomincq",
+    "meaning_tr": "Birikmiş diğer kapsamlı gelir/gider",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "accumulated other comprehensive income (loss)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "acoq",
+    "meaning_tr": "Diğer dönen varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "current assets - other - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "actq",
+    "meaning_tr": "Toplam dönen varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "current assets - total*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "altoq",
+    "meaning_tr": "Diğer uzun vadeli varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "other long-term assets"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "amcy",
+    "meaning_tr": "Nakit akışındaki itfa gideri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "amortization (cash flow)*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ancq",
+    "meaning_tr": "Toplam duran varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "non-current assets - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "aolochy",
+    "meaning_tr": "Diğer varlık ve yükümlülüklerin net değişimi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "assets and liabilities - other (net change)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "aoq",
+    "meaning_tr": "Diğer varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "assets - other - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "apq",
+    "meaning_tr": "Ticari borçlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "account payable/creditors - trade"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "atq",
+    "meaning_tr": "Toplam aktifler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "assets - total*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "capsq",
+    "meaning_tr": "Sermaye yedekleri / ihraç primleri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "capital surplus/share premium reserve"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "capxy",
+    "meaning_tr": "Yatırım harcamaları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "capital expenditures"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cdvcy",
+    "meaning_tr": "Adi hisselere ödenen nakit temettü; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cash dividends on common stock (cash flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ceqq",
+    "meaning_tr": "Adi hissedarlara ait özkaynak",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "common/ordinary equity - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "chechy",
+    "meaning_tr": "Nakit ve nakit benzerlerindeki değişim; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cash and cash equivalents - increase (decrease)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cheq",
+    "meaning_tr": "Nakit ve kısa vadeli yatırımlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cash and short-term investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "chq",
+    "meaning_tr": "Nakit",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cash*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cibegniq",
+    "meaning_tr": "Kapsamlı gelir hesabının başlangıç net kârı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - beginning net income"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cibegniy",
+    "meaning_tr": "Kapsamlı gelir hesabının başlangıç net kârı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - beginning net income"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cicurrq",
+    "meaning_tr": "Kapsamlı gelirde döviz çevrim düzeltmesi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - currency trans adj"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cicurry",
+    "meaning_tr": "Kapsamlı gelirde döviz çevrim düzeltmesi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - currency trans adj"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ciderglq",
+    "meaning_tr": "Kapsamlı gelirde türev kazanç/kayıpları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - derivative gains/losses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cidergly",
+    "meaning_tr": "Kapsamlı gelirde türev kazanç/kayıpları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - derivative gains/losses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cimiiq",
+    "meaning_tr": "Kapsamlı gelirde kontrol gücü olmayan paylar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - noncontrolling interest"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cimiiy",
+    "meaning_tr": "Kapsamlı gelirde kontrol gücü olmayan paylar; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - noncontrolling interest"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ciotherq",
+    "meaning_tr": "Kapsamlı gelirde diğer düzeltmeler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - other adj"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ciothery",
+    "meaning_tr": "Kapsamlı gelirde diğer düzeltmeler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - other adj"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ciq",
+    "meaning_tr": "Toplam kapsamlı gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ciy",
+    "meaning_tr": "Toplam kapsamlı gelir; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cisecglq",
+    "meaning_tr": "Kapsamlı gelirde menkul kıymet kazanç/kayıpları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - securities gains/losses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cisecgly",
+    "meaning_tr": "Kapsamlı gelirde menkul kıymet kazanç/kayıpları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comp inc - securities gains/losses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "citotalq",
+    "meaning_tr": "Ana ortaklığa ait kapsamlı gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - parent"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "citotaly",
+    "meaning_tr": "Ana ortaklığa ait kapsamlı gelir; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "comprehensive income - parent"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cogsq",
+    "meaning_tr": "Satışların maliyeti",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cost of goods sold*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cogsy",
+    "meaning_tr": "Satışların maliyeti; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cost of goods sold*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cshiq",
+    "meaning_tr": "İhraç edilmiş adi hisse sayısı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "common shares issued"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cshopq",
+    "meaning_tr": "Çeyrekte geri alınan hisse sayısı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "total shares repurchased - quarter"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cstkeq",
+    "meaning_tr": "Adi hisse eşdeğerlerine ilişkin dolar cinsinden tasarruf",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "common stock equivalents - dollar savings*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cstkey",
+    "meaning_tr": "Adi hisse eşdeğerlerine ilişkin dolar cinsinden tasarruf; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "common stock equivalents - dollar savings*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "cstkq",
+    "meaning_tr": "Adi hisse sermayesi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "common/ordinary stock (capital)*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dcomq",
+    "meaning_tr": "Ertelenmiş ücret / çalışan tazminatı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "deferred compensation"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dd1q",
+    "meaning_tr": "Bir yıl içinde ödenecek uzun vadeli borç",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "long-term debt due in one year*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "depcy",
+    "meaning_tr": "Nakit akışındaki amortisman ve tükenme payı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "depreciation and depletion (cash flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "deracq",
+    "meaning_tr": "Kısa vadeli türev varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "derivative assets current"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "deraltq",
+    "meaning_tr": "Uzun vadeli türev varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "derivative assets long-term"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "derhedglq",
+    "meaning_tr": "Türev ve riskten korunma kazanç/kayıpları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "gain/losses on derivatives and hedging"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "derhedgly",
+    "meaning_tr": "Türev ve riskten korunma kazanç/kayıpları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "gain/losses on derivatives and hedging"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "derlcq",
+    "meaning_tr": "Kısa vadeli türev yükümlülükler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "derivative liabilities current"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "derlltq",
+    "meaning_tr": "Uzun vadeli türev yükümlülükler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "derivative liabilities long-term"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dlcchy",
+    "meaning_tr": "Kısa vadeli borç değişimi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "changes in current debt"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dlcq",
+    "meaning_tr": "Kısa vadeli yükümlülüklerdeki finansal borç",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "debt in current liabilities"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dltisy",
+    "meaning_tr": "Yeni uzun vadeli borçlanma; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "long-term debt - issuance"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dltry",
+    "meaning_tr": "Uzun vadeli borç geri ödemesi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "long-term debt - reduction"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dlttq",
+    "meaning_tr": "Uzun vadeli finansal borç",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "long-term debt - total*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "doq",
+    "meaning_tr": "Durdurulan faaliyetler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "discontinued operations"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "doy",
+    "meaning_tr": "Durdurulan faaliyetler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "discontinued operations"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dpactq",
+    "meaning_tr": "Birikmiş amortisman, itfa ve tükenme payı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "depreciation, depletion and amoritzation (accumulated)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dpcy",
+    "meaning_tr": "Nakit akışındaki amortisman ve itfa; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "depreciation and amortization - statement of cash flows"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dpq",
+    "meaning_tr": "Amortisman ve itfa gideri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "depreciation and amortization - total*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dpy",
+    "meaning_tr": "Amortisman ve itfa gideri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "depreciation and amortization - total*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "drcq",
+    "meaning_tr": "Kısa vadeli ertelenmiş gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "deferred revenue - current"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "drltq",
+    "meaning_tr": "Uzun vadeli ertelenmiş gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "deferred revenue - long-term"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dteaq",
+    "meaning_tr": "Borç kapatmanın vergi sonrası etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt after-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dteay",
+    "meaning_tr": "Borç kapatmanın vergi sonrası etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt after-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dtedq",
+    "meaning_tr": "Borç kapatmanın seyreltilmiş EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt diluted EPS effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dtedy",
+    "meaning_tr": "Borç kapatmanın seyreltilmiş EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt diluted EPS effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dteepsq",
+    "meaning_tr": "Borç kapatmanın temel EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt basic EPS effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dteepsy",
+    "meaning_tr": "Borç kapatmanın temel EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt basic EPS effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dtepq",
+    "meaning_tr": "Borç kapatmanın vergi öncesi etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dtepy",
+    "meaning_tr": "Borç kapatmanın vergi öncesi etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "extinguishment of debt pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvintfq",
+    "meaning_tr": "Alınacak temettü ve faiz",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "dividends and interest receivable (cash flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvpq",
+    "meaning_tr": "İmtiyazlı hisse temettüsü",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "dividends - preferred/preference"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvpy",
+    "meaning_tr": "İmtiyazlı hisse temettüsü; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "dividends - preferred/preference"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvpspq",
+    "meaning_tr": "Ödeme tarihine göre hisse başına temettü",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "dividends per share - pay date - quarter"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvpsxq",
+    "meaning_tr": "Hak kullanım tarihine göre hisse başına temettü",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "div per share - exdate - quarter"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "dvy",
+    "meaning_tr": "Nakit temettüler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "cash dividends*"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "esubcy",
+    "meaning_tr": "Nakit akışında iştirak kâr/zarar payı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "equity in net loss/earnings (c/f)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "esubq",
+    "meaning_tr": "Konsolide edilmeyen iştiraklerin kâr payı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "equity in earnings (i/s) unconsodilated subsidaries"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "esuby",
+    "meaning_tr": "Konsolide edilmeyen iştiraklerin kâr payı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "equity in earnings (i/s) unconsolidated subsidaries"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ffoq",
+    "meaning_tr": "GYO için faaliyetlerden yaratılan fon",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "funds from operations (reit)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ffoy",
+    "meaning_tr": "GYO için faaliyetlerden yaratılan fon; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "funds from operations (reit)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "fopty",
+    "meaning_tr": "Faaliyetlerden yaratılan toplam fon; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "funds from operations - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "fsrcty",
+    "meaning_tr": "Toplam fon kaynakları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "sources of funds - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "fusety",
+    "meaning_tr": "Toplam fon kullanımları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "use of funds - total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "gdwlamq",
+    "meaning_tr": "Şerefiye itfası",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "amortization of goodwill"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "gdwlamy",
+    "meaning_tr": "Şerefiye itfası; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "amortization of goodwill"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "gdwlq",
+    "meaning_tr": "Net şerefiye",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "goodwill (net)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibadj12",
+    "meaning_tr": "Adi hisse eşdeğerleri için düzeltilmiş olağanüstü kalem öncesi kâr; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extra Items - Adj for Common Stock Equivalents - 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibadjq",
+    "meaning_tr": "Adi hisse eşdeğerleri için düzeltilmiş olağanüstü kalem öncesi kâr",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items - Adjusted for Common Stock Equivalents"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibadjy",
+    "meaning_tr": "Adi hisse eşdeğerleri için düzeltilmiş olağanüstü kalem öncesi kâr; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items - Adjusted for Common Stock Equivalents"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibcomq",
+    "meaning_tr": "Adi hissedarlara ait olağanüstü kalem öncesi kâr",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items - Available for Common"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibcomy",
+    "meaning_tr": "Adi hissedarlara ait olağanüstü kalem öncesi kâr; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items - Available for Common"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibcy",
+    "meaning_tr": "Nakit akışında olağanüstü kalem öncesi kâr; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items - Statement of Cash Flows"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibmiiq",
+    "meaning_tr": "Olağanüstü kalemler ve azınlık payı öncesi kâr",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income before Extraordinary Items and Noncontrolling Interests"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibmiiy",
+    "meaning_tr": "Olağanüstü kalemler ve azınlık payı öncesi kâr; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income before Extraordinary Items and Noncontrolling Interests"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ibq",
+    "meaning_tr": "Olağanüstü kalem öncesi kâr",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "iby",
+    "meaning_tr": "Olağanüstü kalem öncesi kâr; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Before Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "icaptq",
+    "meaning_tr": "Toplam yatırılmış sermaye",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Invested Capital - Total - Quarterly"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "intaccq",
+    "meaning_tr": "Tahakkuk etmiş faiz",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Interest Accrued"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "intanoq",
+    "meaning_tr": "Diğer maddi olmayan duran varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Other Intangibles"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "intanq",
+    "meaning_tr": "Toplam maddi olmayan duran varlıklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Intangible Assets - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "intpny",
+    "meaning_tr": "Net ödenen faiz; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Interest Paid - Net"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invchy",
+    "meaning_tr": "Stoklardaki azalış/artışın nakit etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventory - Decrease (Increase)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invfgq",
+    "meaning_tr": "Mamul stokları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventory - Finished Goods"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invoq",
+    "meaning_tr": "Diğer stoklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventory - Other"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invrmq",
+    "meaning_tr": "Hammadde stokları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventory - Raw Materials"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invtq",
+    "meaning_tr": "Toplam stoklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventories - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "invwipq",
+    "meaning_tr": "Yarı mamul / devam eden üretim stokları",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Inventory - Work in Process"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "itccy",
+    "meaning_tr": "Net yatırım vergi kredisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Investment Tax Credit - Net (Cash Flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivacoy",
+    "meaning_tr": "Diğer yatırım faaliyetleri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Investing Activities - Other"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivaeqq",
+    "meaning_tr": "Özkaynak yatırımları ve avanslar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Investment and Advances - Equity"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivaoq",
+    "meaning_tr": "Diğer yatırımlar ve avanslar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Investment and Advances - Other"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivchy",
+    "meaning_tr": "Yatırımlardaki artış; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Increase in Investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivltq",
+    "meaning_tr": "Toplam uzun vadeli yatırımlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Total Long-term Investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivncfy",
+    "meaning_tr": "Yatırım faaliyetlerinden net nakit akışı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Investing Activities - Net Cash Flow"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivstchy",
+    "meaning_tr": "Kısa vadeli yatırımlardaki değişim; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Short-Term Investments - Change"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ivstq",
+    "meaning_tr": "Toplam kısa vadeli yatırımlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Short-Term Investments- Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "lcoq",
+    "meaning_tr": "Diğer kısa vadeli yükümlülükler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Current Liabilities - Other - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "lctq",
+    "meaning_tr": "Toplam kısa vadeli yükümlülükler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Current Liabilities - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "lltq",
+    "meaning_tr": "Toplam uzun vadeli yükümlülükler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Long-Term Liabilities (Total)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "mkvaltq",
+    "meaning_tr": "Toplam piyasa değeri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Market Value - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "pncy",
+    "meaning_tr": "Temel emeklilik düzeltmesi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Core Pension Adjustment"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "prstkccy",
+    "meaning_tr": "Adi hisse geri alımı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Purchase of Common Stock (Cash Flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "prstkcy",
+    "meaning_tr": "Adi ve imtiyazlı hisse geri alımı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Purchase of Common and Preferred Stock"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "prstkpcy",
+    "meaning_tr": "İmtiyazlı hisse geri alımı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Purchase of Preferred/Preference Stock (Cash Flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "pstknq",
+    "meaning_tr": "Geri çağrılamayan imtiyazlı hisse sermayesi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Preferred/Preference Stock - Nonredeemable"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "pstkq",
+    "meaning_tr": "Toplam imtiyazlı hisse sermayesi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Preferred/Preference Stock (Capital) - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipaq",
+    "meaning_tr": "Devam eden Ar-Ge'nin vergi sonrası gider etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipay",
+    "meaning_tr": "Devam eden Ar-Ge'nin vergi sonrası gider etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipdq",
+    "meaning_tr": "Devam eden Ar-Ge'nin seyreltilmiş EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipdy",
+    "meaning_tr": "Devam eden Ar-Ge'nin seyreltilmiş EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipepsq",
+    "meaning_tr": "Devam eden Ar-Ge'nin temel EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipepsy",
+    "meaning_tr": "Devam eden Ar-Ge'nin temel EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D Expense Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipq",
+    "meaning_tr": "Devam eden Ar-Ge gideri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rdipy",
+    "meaning_tr": "Devam eden Ar-Ge gideri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "In Process R&D"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "recchy",
+    "meaning_tr": "Alacaklardaki azalış/artışın nakit etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Accounts Receivable - Decrease (Increase)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "recdq",
+    "meaning_tr": "Şüpheli alacak tahmini",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Receivables - Estimated Doubtful"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rectaq",
+    "meaning_tr": "Birikmiş diğer kapsamlı gelirde döviz çevrim düzeltmesi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Accum Other Comp Inc - Cumulative Translation Adjustments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rectoq",
+    "meaning_tr": "Vergi iadeleri dahil diğer kısa vadeli alacaklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Receivables - Current Other incl Tax Refunds"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rectq",
+    "meaning_tr": "Toplam alacaklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Receivables - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rectrq",
+    "meaning_tr": "Ticari alacaklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Receivables - Trade"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "recubq",
+    "meaning_tr": "Faturalanmamış alacaklar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Unbilled Receivables - Quarterly"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "req",
+    "meaning_tr": "Birikmiş / dağıtılmamış kârlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Retained Earnings"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "retq",
+    "meaning_tr": "Toplam gayrimenkul varlığı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Total RE Property"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "reunaq",
+    "meaning_tr": "Düzeltilmemiş dağıtılmamış kârlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Unadjusted Retained Earnings"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "revtq",
+    "meaning_tr": "Toplam gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Revenue - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "revty",
+    "meaning_tr": "Toplam gelir; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Revenue - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rllq",
+    "meaning_tr": "Kredi / varlık zarar karşılığı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Reserve for Loan/Asset Losses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rstcheltq",
+    "meaning_tr": "Uzun vadeli kısıtlı nakit ve yatırımlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Long-Term Restricted Cash & Investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "rstcheq",
+    "meaning_tr": "Kısa vadeli kısıtlı nakit ve yatırımlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Restricted Cash & Investments - Current"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "saleq",
+    "meaning_tr": "Net satışlar",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Sales/Turnover (Net)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "saley",
+    "meaning_tr": "Net satışlar; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Sales/Turnover (Net)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "scstkcy",
+    "meaning_tr": "Adi hisse ihracından sağlanan nakit; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Sale of Common Stock (Cash Flow)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "seqoq",
+    "meaning_tr": "Diğer özkaynak düzeltmeleri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Other Stockholders- Equity Adjustments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "seta12",
+    "meaning_tr": "Dava/sigorta uzlaşmasının vergi sonrası etkisi; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) AfterTax - 12mm"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setaq",
+    "meaning_tr": "Dava/sigorta uzlaşmasının vergi sonrası etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setay",
+    "meaning_tr": "Dava/sigorta uzlaşmasının vergi sonrası etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setd12",
+    "meaning_tr": "Dava/sigorta uzlaşmasının seyreltilmiş EPS etkisi; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Diluted EPS Effect 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setdq",
+    "meaning_tr": "Dava/sigorta uzlaşmasının seyreltilmiş EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setdy",
+    "meaning_tr": "Dava/sigorta uzlaşmasının seyreltilmiş EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "seteps12",
+    "meaning_tr": "Dava/sigorta uzlaşmasının temel EPS etkisi; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Basic EPS Effect 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setepsq",
+    "meaning_tr": "Dava/sigorta uzlaşmasının temel EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setepsy",
+    "meaning_tr": "Dava/sigorta uzlaşmasının temel EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setpq",
+    "meaning_tr": "Dava/sigorta uzlaşmasının vergi öncesi etkisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "setpy",
+    "meaning_tr": "Dava/sigorta uzlaşmasının vergi öncesi etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Settlement (Litigation/Insurance) Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "sivy",
+    "meaning_tr": "Yatırımların satışı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Sale of Investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "sstky",
+    "meaning_tr": "Adi ve imtiyazlı hisse ihracı; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Sale of Common and Preferred Stock"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdbcaq",
+    "meaning_tr": "Kısa vadeli ertelenmiş vergi varlığı",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Current Deferred Tax Asset"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdbclq",
+    "meaning_tr": "Kısa vadeli ertelenmiş vergi yükümlülüğü",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Current Deferred Tax Liability"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdbq",
+    "meaning_tr": "Finansal durum tablosunda ertelenmiş vergi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Deferred Taxes - Balance Sheet"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdcy",
+    "meaning_tr": "Nakit akışında ertelenmiş vergi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Deferred Taxes (Statement of Cash Flows)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdiq",
+    "meaning_tr": "Ertelenmiş gelir vergisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes - Deferred"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txditcq",
+    "meaning_tr": "Ertelenmiş vergi ve yatırım vergi kredisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Deferred Taxes and Investment Tax Credit"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txdiy",
+    "meaning_tr": "Ertelenmiş gelir vergisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes - Deferred"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txpdy",
+    "meaning_tr": "Ödenen gelir vergisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes Paid"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txpq",
+    "meaning_tr": "Ödenecek gelir vergisi",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes Payable"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txtq",
+    "meaning_tr": "Toplam gelir vergisi gideri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "txty",
+    "meaning_tr": "Toplam gelir vergisi gideri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Income Taxes - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "uddq",
+    "meaning_tr": "Kamu hizmeti şirketlerinin tahvil borcu",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Debt (Debentures) - Utility"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "udfccy",
+    "meaning_tr": "Kamu hizmeti şirketlerinde ertelenmiş yakıt maliyeti nakit değişimi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Deferred Fuel - Increase (Decrease) (Statement of Cash Flows)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "udmbq",
+    "meaning_tr": "İpotekli tahvil borcu",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Debt (Mortgage Bonds)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "udoltq",
+    "meaning_tr": "Diğer uzun vadeli kamu hizmeti şirketi borcu",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Debt (Other Long-Term)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "udpcoq",
+    "meaning_tr": "Kirlilik kontrolü finansman yükümlülükleri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Debt (Pollution Control Obligations)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ugiq",
+    "meaning_tr": "Faiz gideri öncesi brüt gelir",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Gross Income (Income Before Interest Charges)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "ulcoq",
+    "meaning_tr": "Diğer kısa vadeli kamu hizmeti şirketi yükümlülükleri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Current Liabilities - Other"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "utemq",
+    "meaning_tr": "Toplam bakım gideri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Maintenance Expense - Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "utfdocy",
+    "meaning_tr": "Faaliyetlerden yaratılan toplam fon; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Total Funds From Ops (FOF)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "utfoscy",
+    "meaning_tr": "Dış kaynaklardan sağlanan toplam fon; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Tot Funds Frm Outside Sources (FOF)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xaccq",
+    "meaning_tr": "Tahakkuk etmiş giderler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Accrued Expenses"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xidoq",
+    "meaning_tr": "Olağanüstü kalemler ve durdurulan faaliyetler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Extraordinary Items and Discontinued Operations"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xidoy",
+    "meaning_tr": "Olağanüstü kalemler ve durdurulan faaliyetler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Extraordinary Items and Discontinued Operations"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xintq",
+    "meaning_tr": "Faiz ve ilişkili giderler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Interest and Related Expense- Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xinty",
+    "meaning_tr": "Faiz ve ilişkili giderler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Interest and Related Expense- Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xiq",
+    "meaning_tr": "Olağanüstü kalemler",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xiy",
+    "meaning_tr": "Olağanüstü kalemler; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xoprq",
+    "meaning_tr": "Toplam faaliyet giderleri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Operating Expense- Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xopry",
+    "meaning_tr": "Toplam faaliyet giderleri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Operating Expense- Total"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xrdq",
+    "meaning_tr": "Ar-Ge gideri",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Research and Development Expense"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "xrdy",
+    "meaning_tr": "Ar-Ge gideri; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "mkvaltq ile bölünür",
+    "original_description": "Research and Development Expense"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "capr1q",
+    "meaning_tr": "Risk ağırlıklı birinci kuşak sermaye oranı",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "risk-adjusted capital ratio - tier 1"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "capr2q",
+    "meaning_tr": "Risk ağırlıklı ikinci kuşak sermaye oranı",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "risk-adjusted capital ratio - tier 2"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glaq",
+    "meaning_tr": "Vergi sonrası kazanç/kayıp",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss After-Tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glay",
+    "meaning_tr": "Vergi sonrası kazanç/kayıp; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss After-Tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glcea12",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: vergi sonrası; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) After-tax 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glceaq",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: vergi sonrası",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glceay",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: vergi sonrası; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) After-tax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glced12",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: seyreltilmiş EPS etkisi; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS Effect 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glcedq",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: seyreltilmiş EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glcedy",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: seyreltilmiş EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Diluted EPS"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glceeps12",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: temel EPS etkisi; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect 12MM"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glceepsq",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: temel EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glceepsy",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: temel EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glcepq",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: vergi öncesi",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glcepy",
+    "meaning_tr": "Çekirdek kâra göre düzeltilmiş satış kazanç/kaybı: vergi öncesi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss on Sale (Core Earnings Adjusted) Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "gldq",
+    "meaning_tr": "Kazanç/kaybın seyreltilmiş EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "gldy",
+    "meaning_tr": "Kazanç/kaybın seyreltilmiş EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Diluted EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glepsq",
+    "meaning_tr": "Kazanç/kaybın temel EPS etkisi",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glepsy",
+    "meaning_tr": "Kazanç/kaybın temel EPS etkisi; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Basic EPS Effect"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glivq",
+    "meaning_tr": "Yatırım kazanç/kayıpları",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gains/Losses on investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glivy",
+    "meaning_tr": "Yatırım kazanç/kayıpları; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gains/Losses on investments"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glpq",
+    "meaning_tr": "Vergi öncesi kazanç/kayıp",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "glpy",
+    "meaning_tr": "Vergi öncesi kazanç/kayıp; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Gain/Loss Pretax"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "optvolq",
+    "meaning_tr": "Opsiyon değerlemesinde varsayılan oynaklık",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Volatility - Assumption (%)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "optvoly",
+    "meaning_tr": "Opsiyon değerlemesinde varsayılan oynaklık; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Volatility - Assumption (%)"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsf12",
+    "meaning_tr": "Olağanüstü kalemler hariç seyreltilmiş EPS; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Excluding Extraordinary Items - 12 Months Mo"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsfi12",
+    "meaning_tr": "Olağanüstü kalemler dahil seyreltilmiş EPS; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Including Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsfiq",
+    "meaning_tr": "Olağanüstü kalemler dahil seyreltilmiş EPS",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Including Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsfiy",
+    "meaning_tr": "Olağanüstü kalemler dahil seyreltilmiş EPS; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Including Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsfxq",
+    "meaning_tr": "Olağanüstü kalemler hariç seyreltilmiş EPS",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Excluding Extraordinary items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsfxy",
+    "meaning_tr": "Olağanüstü kalemler hariç seyreltilmiş EPS; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Diluted) - Excluding Extraordinary items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epspi12",
+    "meaning_tr": "Olağanüstü kalemler dahil temel EPS; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Including Extraordinary Items - 12 Months Movi"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epspiq",
+    "meaning_tr": "Olağanüstü kalemler dahil temel EPS",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Including Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epspiy",
+    "meaning_tr": "Olağanüstü kalemler dahil temel EPS; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Including Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epspxq",
+    "meaning_tr": "Olağanüstü kalemler hariç temel EPS",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Excluding Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epspxy",
+    "meaning_tr": "Olağanüstü kalemler hariç temel EPS; yıl başından birikimli gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Excluding Extraordinary Items"
+  },
+  {
+    "project": "DeepEarnings",
+    "variable": "epsx12",
+    "meaning_tr": "Olağanüstü kalemler hariç temel EPS; 12 aylık gösterim",
+    "status": "declared_candidate",
+    "processing": "Piyasa değeriyle bölünmez",
+    "original_description": "Earnings Per Share (Basic) - Excluding Extraordinary Items - 12 Months Movi"
+  }
+]

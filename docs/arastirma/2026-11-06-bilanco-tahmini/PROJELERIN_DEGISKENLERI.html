@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>projelerin_degiskenleri</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="PROJELERIN_DEGISKENLERI_files/libs/clipboard/clipboard.min.js"></script>
+<script src="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/popper.min.js"></script>
+<script src="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/anchor.min.js"></script>
+<link href="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="PROJELERIN_DEGISKENLERI_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="PROJELERIN_DEGISKENLERI_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="PROJELERIN_DEGISKENLERI_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="PROJELERIN_DEGISKENLERI_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="incelenen-tüm-projelerin-değişken-sözlüğü" class="level1">
+<h1>İncelenen tüm projelerin değişken sözlüğü</h1>
+<p>Tarih: <strong>2026-11-06</strong>. Kapsam: ana raporda değerlendirilen <strong>16 proje</strong>. Bu belge GitHub’daki bütün projelerin envanteri değildir. Forma’nın yardımcı <code>proforma-20q</code> deposu aynı proje ailesidir.</p>
+<p><strong>Okuma kuralı:</strong> bir dosyada bulunan sütun, otomatik olarak model girdisi değildir. Aşağıda <strong>gerçek girdi</strong>, <strong>aday girdi</strong>, <strong>ara hedef</strong>, <strong>son hedef</strong>, <strong>kimlik/tarih</strong> ve <strong>yalnızca raporda okunan alan</strong> ayrılmıştır. Koddan tam liste çıkarılamayan yerlerde eksiklik yazılmıştır; muhtemel girdiler uydurulmamıştır.</p>
+<section id="ortak-terimler" class="level2">
+<h2 class="anchored" data-anchor-id="ortak-terimler">Ortak terimler</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Terim</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EPS</td>
+<td>Hisse başına kâr. Basic/temel ve diluted/seyreltilmiş farklı tanımlardır.</td>
+</tr>
+<tr class="even">
+<td>GAAP / adjusted</td>
+<td>Raporlama standardındaki değer ile şirket/analist tarafından düzeltilmiş değer; birbirinin yerine kullanılamaz.</td>
+</tr>
+<tr class="odd">
+<td>TTM</td>
+<td>Son dört çeyreklik dönem. Hisse sayısı ve dönem tanımı tutarlı değilse dört EPS’yi toplamak aynı hedefi vermeyebilir.</td>
+</tr>
+<tr class="even">
+<td><code>lag1</code>, <code>lag4</code></td>
+<td>Hedef döneme göre bir ve dört dönem önceki değer. Bir yılda dört çeyrek varsayılır. Minsu’daki <code>lag_0</code> ise tahmin anında bilinen en güncel değerdir.</td>
+</tr>
+<tr class="odd">
+<td>YoY</td>
+<td>Geçen yılın aynı dönemiyle karşılaştırma; genellikle <code>x_t/x_(t-4)-1</code>.</td>
+</tr>
+<tr class="even">
+<td>QoQ</td>
+<td>Önceki çeyrekle karşılaştırma; tutar farkı veya büyüme oranı olabilir. Proje kodu esas alınmalıdır.</td>
+</tr>
+<tr class="odd">
+<td>CFO / OCF</td>
+<td>İşletme faaliyetlerinden nakit akışı. Kümülatif sunulan tutar, tek çeyrek tutarına çevrilmelidir.</td>
+</tr>
+<tr class="even">
+<td>Accruals / tahakkuk</td>
+<td>Kâr ile nakit temelli sonuç arasındaki bileşenler. Her projedeki formül aynı değildir.</td>
+</tr>
+<tr class="odd">
+<td>EBIT / EBITDA</td>
+<td>Faiz ve vergi öncesi kâr / ayrıca amortisman öncesi kâr.</td>
+</tr>
+<tr class="even">
+<td>SG&amp;A</td>
+<td>Satış, genel yönetim ve idari giderler.</td>
+</tr>
+<tr class="odd">
+<td>ROA / ROE</td>
+<td>Aktif kârlılığı / özkaynak kârlılığı. Payda dönem sonu veya ortalama değer olabilir.</td>
+</tr>
+<tr class="even">
+<td>Mask</td>
+<td>Bir gözlemin mevcut olup olmadığını söyleyen 0/1 işareti. Sıfır kârla eksik veriyi ayırır.</td>
+</tr>
+<tr class="odd">
+<td>bps</td>
+<td>Baz puan; 100 baz puan bir yüzde puandır. Büyüme oranıyla karıştırılmamalıdır.</td>
+</tr>
+<tr class="even">
+<td>Point-in-time</td>
+<td>Yalnızca tahmin anında gerçekten açıklanmış bilgi. Eski dönemin sonradan düzeltilmiş verisi bunu tek başına sağlamaz.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="forma-78-kalemin-geçmişi-ve-sektör" class="level2">
+<h2 class="anchored" data-anchor-id="forma-78-kalemin-geçmişi-ve-sektör">1. Forma — 78 kalemin geçmişi ve sektör</h2>
+<p><a href="https://github.com/forma-lab-mccombs/forma-release">Depo</a> · <a href="https://github.com/forma-lab-mccombs/forma-release/blob/main/configs/r13_forma_fgrid_seed60.yaml">Kanonik ayar</a> · <a href="EK_FORMA_78.md">78 kalemin tamamı ve Türkçe anlamları</a>.</p>
+<p><strong>Son hedefler:</strong> 78 kalemin gelecek 1–20 çeyrek değerleri. <strong>Gerçek girdiler:</strong> aynı 78 kalemin geçmiş 12 çeyrekte raporlanmış değerleri; hesap kimliği; göreli çeyrek konumu; FF48 sektör kodu. Ayrıca başlangıç tarihindeki şirket büyüklüğünü taşıyan bir <code>scale</code> belirteci girer; bu 78 hedefin dışında bir yardımcı girdidir ve gelecekte tahmin edilmez. Hesap ve çeyrek kodu, muhasebe tutarının hangi hesaba/hangi döneme ait olduğunu belirtir. Şirket/ticker model özelliği olarak kullanılmaz.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grup</th>
+<th>Örnekler ve anlamları</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gelir/maliyet/kâr</td>
+<td><code>revtq</code> ciro; <code>cogsq</code> satış maliyeti; <code>gpq</code> brüt kâr; <code>xsgaq</code> SG&amp;A; <code>xrdq</code> Ar-Ge; <code>oiadpq</code> EBIT; <code>oibdpq</code> EBITDA; <code>niq</code> net kâr</td>
+</tr>
+<tr class="even">
+<td>Faiz/vergi/özel kalem</td>
+<td><code>xintq</code> faiz; <code>txtq</code> vergi gideri; <code>piq</code> vergi öncesi kâr; <code>spiq</code> özel kalemler</td>
+</tr>
+<tr class="odd">
+<td>Varlıklar</td>
+<td><code>cheq</code> nakit/kısa yatırımlar; <code>rectq</code> alacak; <code>invtq</code> stok; <code>ppentq</code> net maddi duran varlık; <code>atq</code> toplam aktif</td>
+</tr>
+<tr class="even">
+<td>Finansman</td>
+<td><code>dlcq</code> kısa borç; <code>dlttq</code> uzun borç; <code>apq</code> ticari borç; <code>ltq</code> yükümlülükler; <code>seqq</code> özkaynak</td>
+</tr>
+<tr class="odd">
+<td>Nakit akışı</td>
+<td><code>oancfq</code> işletme nakdi; <code>capxq</code> yatırım harcaması; <code>ivncfq</code> yatırım nakdi; <code>fincfq</code> finansman nakdi; <code>dvq</code> temettü</td>
+</tr>
+<tr class="even">
+<td>Türetilmiş</td>
+<td><code>fcfq</code> serbest nakit akışı; <code>wcapq</code> çalışma sermayesi; bazı alt toplamlar ve ayrıştırmalar</td>
+</tr>
+</tbody>
+</table>
+<p>Kanonik modelde makro, haber, fiyat ve analist konsensüsü yok. <code>proforma-20q</code> tabular görünümündeki alternatif modeller dört yakın seviye ve sekiz yıllık değişim kanalı ile sektör göstergeleri kullanır; bu görünüm Forma’nın üçlü girdisiyle aynı kodlama değildir. Ölçekleme/tarih ayrıntıları makale Ek A’da.</p>
+</section>
+<section id="dario-sekiz-gerçek-girdi" class="level2">
+<h2 class="anchored" data-anchor-id="dario-sekiz-gerçek-girdi">2. Dario — sekiz gerçek girdi</h2>
+<p><a href="https://github.com/dario-disanto/quarterly-eps-forecast-study">Depo</a> · <a href="https://github.com/dario-disanto/quarterly-eps-forecast-study/blob/main/src/epsforecast/features.py">Girdi üretimi</a>.</p>
+<p><strong>Son hedef:</strong> <code>epsfxq</code>, olağanüstü kalemler hariç seyreltilmiş çeyreklik EPS.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model girdisi</th>
+<th>Formülü / anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>epsfxq_lag1</code></td>
+<td>Önceki çeyreğin EPS’si; kısa vadeli süreklilik.</td>
+</tr>
+<tr class="even">
+<td><code>epsfxq_lag4</code></td>
+<td>Geçen yıl aynı çeyreğin EPS’si; mevsimsellik.</td>
+</tr>
+<tr class="odd">
+<td><code>cfo_lag1</code></td>
+<td>Bir çeyrek gecikmeli <code>oancfq/atq</code>; işletme nakit akışı/aktif.</td>
+</tr>
+<tr class="even">
+<td><code>accruals_lag1</code></td>
+<td>Bir çeyrek gecikmeli <code>ibq/atq - oancfq/atq</code>; nakit dışı kârlılık bileşeni.</td>
+</tr>
+<tr class="odd">
+<td><code>gross_margin_lag1</code></td>
+<td>Bir çeyrek gecikmeli <code>(saleq-cogsq)/saleq</code>; brüt marj.</td>
+</tr>
+<tr class="even">
+<td><code>asset_turnover_lag1</code></td>
+<td>Bir çeyrek gecikmeli <code>saleq/atq</code>; aktif devir hızı.</td>
+</tr>
+<tr class="odd">
+<td><code>sales_growth_lag1</code></td>
+<td>Önceki çeyrekte ölçülen <code>saleq/saleq_lag4-1</code>; yıllık satış büyümesi.</td>
+</tr>
+<tr class="even">
+<td><code>lev_lag1</code></td>
+<td>Bir çeyrek gecikmeli <code>(ltq-lctq)/atq</code>; uzun vadeli yükümlülük/aktif. <strong>Yalnızca faizli borç oranı değildir.</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ham kalemler: <code>ibq</code> olağanüstü kalem öncesi kâr, <code>oancfq</code> CFO, <code>atq</code> aktif, <code>lctq</code> kısa yükümlülük, <code>ltq</code> toplam yükümlülük, <code>saleq</code> satış, <code>cogsq</code> satış maliyeti. <code>gvkey</code>, <code>datadate</code>, <code>fyearq</code>, <code>fqtr</code> şirket/mali dönem eşleştirmesi içindir. <code>sic</code> örneklemi tanımlamak için kullanılmış; modele girmez.</p>
+</section>
+<section id="minsu-v2-tablo-girdisi-88-sütun" class="level2">
+<h2 class="anchored" data-anchor-id="minsu-v2-tablo-girdisi-88-sütun">3. Minsu — V2 tablo girdisi 88 sütun</h2>
+<p><a href="https://github.com/minsu0011/eps-forecasting">Depo</a> · <a href="https://github.com/minsu0011/eps-forecasting/blob/main/research/eps_model_lab_v2/model_common.py">Kesin giriş fonksiyonu</a> · <a href="https://github.com/minsu0011/eps-forecasting/blob/main/research/eps_model_lab_v2/sequence.py">Sıra modeli girdisi</a>.</p>
+<p><strong>Son hedefler:</strong> <code>h1</code>–<code>h4</code> gelecek dört native mali çeyreğin EPS’si; <code>ttm</code> ise dördüncü çeyrek ilerideki native TTM hedefi. Aynı hedef değiller.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Girdi ailesi</th>
+<th style="text-align: right;">Sütun sayısı</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>eps_lag_0</code> … <code>eps_lag_31</code></td>
+<td style="text-align: right;">32</td>
+<td>En güncel bilinen EPS ve 31 eski mali çeyrek. Ölçeklenir.</td>
+</tr>
+<tr class="even">
+<td><code>ttm_lag_0</code> … <code>ttm_lag_7</code></td>
+<td style="text-align: right;">8</td>
+<td>Güncel ve yedi eski TTM EPS gözlemi. Ölçeklenir.</td>
+</tr>
+<tr class="odd">
+<td>Yukarıdaki değerlerin <code>isfinite</code> maskeleri</td>
+<td style="text-align: right;">40</td>
+<td>Her gecikmenin gerçekten mevcut olması; eksik değeri sayısal sıfırdan ayırır.</td>
+</tr>
+<tr class="even">
+<td><code>eps_growth</code></td>
+<td style="text-align: right;">1</td>
+<td>EPS büyüme/değişim ölçüsü; ayrıca örnek ölçeğine bölünür.</td>
+</tr>
+<tr class="odd">
+<td><code>eps_acceleration</code></td>
+<td style="text-align: right;">1</td>
+<td>EPS değişiminin hızlanma/yavaşlama ölçüsü.</td>
+</tr>
+<tr class="even">
+<td><code>eps_volatility</code></td>
+<td style="text-align: right;">1</td>
+<td>EPS geçmişindeki değişkenlik.</td>
+</tr>
+<tr class="odd">
+<td><code>eps_negative</code></td>
+<td style="text-align: right;">1</td>
+<td>Zarar işareti.</td>
+</tr>
+<tr class="even">
+<td><code>fiscal_sin</code>, <code>fiscal_cos</code></td>
+<td style="text-align: right;">2</td>
+<td>Mali çeyreğin döngüsel mevsim kodları.</td>
+</tr>
+<tr class="odd">
+<td><code>history_observed</code></td>
+<td style="text-align: right;">1</td>
+<td>Geçmişte gözlenmiş veri miktarı.</td>
+</tr>
+<tr class="even">
+<td><code>eps_staleness_quarters</code></td>
+<td style="text-align: right;">1</td>
+<td>En yakın mevcut EPS’nin kaç mali çeyrek eskidiği.</td>
+</tr>
+</tbody>
+</table>
+<p>Tablo modelindeki toplam: <strong>40 değer + 40 maske + 3 türev + 5 sabit = 88</strong>. <code>scale</code>, değerleri karşılaştırılabilir hale getiren bölen; bu fonksiyonda ayrıca bir ham özellik olarak eklenmiyor.</p>
+<p>Sıra modelleri EPS ve TTM kanallarını, mevcutluk/eskilik ve mali çeyrek bilgilerini kendi veri yapısıyla işliyor; “her model aynı 88 girdiyi kullanıyor” denemez. V1’de araştırılan çok daha geniş model/finansal kanal listesi, V2’nin etkin girdi listesi değildir. V2 muhasebe kanalı Track A veri doğrulama yetersizliği nedeniyle bloke edilmiş. Fiyat, F/K ve kaynak kimlikleri çıktıda/entegrasyonda bulunabilir; <code>native_features</code> girdisinde yok.</p>
+</section>
+<section id="financial-forecasting-fpa-ml-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="financial-forecasting-fpa-ml-comparison">4. Financial Forecasting FP&amp;A ML Comparison</h2>
+<p><a href="https://github.com/alpdemiroz1994/financial-forecasting-fpa-ml-comparison">Depo ve notebook</a>.</p>
+<p><strong>Son hedef:</strong> ayrı modellerde <code>OperatingIncome</code> faaliyet kârı ve <code>OperatingCashFlow_quarterly</code> tek çeyreklik CFO.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Girdi</th>
+<th>Anlamı / hangi model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>OperatingIncome_lag1</code></td>
+<td>Önceki çeyrek faaliyet kârı; iki modelde de.</td>
+</tr>
+<tr class="even">
+<td><code>OperatingIncome_lag4</code></td>
+<td>Geçen yıl aynı çeyrek faaliyet kârı; faaliyet kârı modelinde.</td>
+</tr>
+<tr class="odd">
+<td><code>OperatingCashFlow_quarterly_lag1</code></td>
+<td>Önceki tek çeyrek CFO; CFO modelinde.</td>
+</tr>
+<tr class="even">
+<td><code>Revenue_lag1</code>, <code>Assets_lag1</code></td>
+<td>Önceki çeyrek ciro ve aktif büyüklüğü; iki modelde.</td>
+</tr>
+<tr class="odd">
+<td><code>inflation_rate_lag1</code></td>
+<td>Bir çeyrek gecikmeli CPI yıllık artışı.</td>
+</tr>
+<tr class="even">
+<td><code>gdp_growth_lag1</code></td>
+<td>Bir çeyrek gecikmeli GDP yıllık artışı.</td>
+</tr>
+<tr class="odd">
+<td><code>unemployment_rate_lag1</code></td>
+<td>Bir çeyrek gecikmeli işsizlik oranı.</td>
+</tr>
+<tr class="even">
+<td><code>fed_funds_rate_lag1</code></td>
+<td>Bir çeyrek gecikmeli ABD politika/faiz serisi.</td>
+</tr>
+<tr class="odd">
+<td><code>Q_2</code>, <code>Q_3</code>, <code>Q_4</code></td>
+<td>Çeyrek göstergeleri; ilk çeyrek referans.</td>
+</tr>
+<tr class="even">
+<td><code>sector_Technology</code></td>
+<td>Teknoloji sektörünü imalat grubundan ayıran gösterge.</td>
+</tr>
+</tbody>
+</table>
+<p>Her modelin final listesi 12 girdiden oluşur. Dört çeyreklik hareketli ortalama ayrıca karşılaştırma tahmini; onu kendiliğinden final RF/XGBoost girdisi saymıyoruz. Ciro/aktifler kaynak tablo kalemleri, diğer birçok indirilen XBRL etiketi final listede yok.</p>
+</section>
+<section id="deepearnings" class="level2">
+<h2 class="anchored" data-anchor-id="deepearnings">5. DeepEarnings</h2>
+<p><a href="https://github.com/alexanderpei/DeepEarnings">Depo</a> · <a href="EK_DEEPEARNINGS.md">236 tanımlanmış finansal adayın tamamı</a>.</p>
+<p><strong>Son hedef:</strong> <code>Reported &gt; Estimate</code>, yani açıklanan EPS’nin analist beklentisinden yüksek olup olmadığı. Tutar regresyonu değil. Üç deney kolu ayrı:</p>
+<ul>
+<li><strong>Finansal kol:</strong> <code>list_my_quarterly_features.txt</code> içinde 199, <code>list_my_quarterly_features_nonorm.txt</code> içinde 37 aday. İlk grup dönem piyasa değeri <code>mkvaltq</code> ile bölünüyor. Kod daha sonra tümü eksik sütunları düşürdüğü için <strong>236 = tanımlanmış aday sayısı</strong>, nihai eğitilmiş kolon sayısı değil. Nihai sütun listesi kullanılan veriyle birlikte değişiyor.</li>
+<li><strong>Piyasa kolu:</strong> açıklama öncesi 30 gözlem boyunca açılış, yüksek, düşük, kapanış ve hacim (OHLCV). Bu kol finansal kolun girdilerine otomatik eklenmiş değil.</li>
+<li><strong>Metin kolu:</strong> 10-Q/10-K metninden aşağıdaki sayımlar; karakter sayısına bölme sonrası <code>CharCnt</code> sütunu çıkarılıyor, böylece 10 alan kalıyor.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metin alanı</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CharCnt</code></td>
+<td>Karakter sayısı; ölçekleme paydası, son metin matrisinde çıkarılır.</td>
+</tr>
+<tr class="even">
+<td><code>ComplexWordCnt</code></td>
+<td>Karmaşık sözcük sayısı.</td>
+</tr>
+<tr class="odd">
+<td><code>lmDictCnt</code></td>
+<td>Loughran–McDonald finans sözlüğü eşleşme sayısı.</td>
+</tr>
+<tr class="even">
+<td><code>lmNegCnt</code>, <code>lmPosCnt</code></td>
+<td>Finans sözlüğündeki olumsuz ve olumlu sözcük sayımları.</td>
+</tr>
+<tr class="odd">
+<td><code>lmStrongCnt</code>, <code>lmModCnt</code>, <code>lmWeakCnt</code></td>
+<td>Güçlü, orta ve zayıf modal ifadeler.</td>
+</tr>
+<tr class="even">
+<td><code>lmUncerCnt</code></td>
+<td>Belirsizlik sözcükleri.</td>
+</tr>
+<tr class="odd">
+<td><code>lmLitigCnt</code></td>
+<td>Hukuki/dava çağrışımlı sözcükler.</td>
+</tr>
+<tr class="even">
+<td><code>harvNegCnt</code></td>
+<td>Harvard sözlüğüne göre olumsuz sözcükler.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kod uyarısı:</strong> standardizasyon ve KNN imputasyon train/test ayrımından önce; bu test bilgisi sızdırabilir. <code>shuffle=False</code> tek başına doğru zaman bölmesi yapmaz: veriyi hazırlayan kod şirketleri ardışık bloklar halinde yazar. Kaynaklar: <code>trn_PrepDataCompustat.py</code>, <code>trn_NetCompustat.py</code>, <code>trn_PrepDataSentiment.py</code>.</p>
+</section>
+<section id="epsbench-şirket-özelinde-ara-hedefler" class="level2">
+<h2 class="anchored" data-anchor-id="epsbench-şirket-özelinde-ara-hedefler">6. EPSBench — şirket özelinde ara hedefler</h2>
+<p><a href="https://github.com/chuyuxu/EPSBench">Depo</a> · <a href="EK_EPSBENCH_SURUCULERI.md">Bütün 149 şemanın sürücüleri</a>.</p>
+<p><strong>Son hedef:</strong> GAAP diluted EPS. <strong>Asıl girdiler:</strong> bilgi kesim tarihinden önceki raporlar, önceki sonuç toplantısı, haberler ve geçmiş muhasebe dayanak değerleri. <strong>LLM’nin tahmin ettiği ara hedefler:</strong> şirketin gelir ve gider sürücüleri. Bunlar tabular modele önceden bilinen sayılar olarak verilen sabit özellikler değildir.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sürücü türü</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>*_yoy</code></td>
+<td>Geçen yıl aynı döneme göre ilgili kalemin büyümesi.</td>
+</tr>
+<tr class="even">
+<td><code>*_margin_delta_bps</code> / <code>type=bps</code></td>
+<td>İlgili maliyetin belirlenmiş gelir paydasına oranında baz puan değişimi.</td>
+</tr>
+<tr class="odd">
+<td><code>*_abs</code> / <code>type=absolute</code></td>
+<td>Hedef dönemin doğrudan tutarı veya hisse sayısı.</td>
+</tr>
+<tr class="even">
+<td><code>tax_rate</code>, <code>type=rate_override</code></td>
+<td>Hedef efektif vergi oranını doğrudan belirleme; her şirkette kullanılmaz. Baz puan değişimi değildir.</td>
+</tr>
+<tr class="odd">
+<td><code>tax_amount</code>, <code>income_taxes_abs</code></td>
+<td>Vergi tutarı; özellikle zarar/sıfıra yakın vergi öncesi kârda oran yerine.</td>
+</tr>
+<tr class="even">
+<td><code>shares_abs</code></td>
+<td>Seyreltilmiş ağırlıklı ortalama hisse sayısı.</td>
+</tr>
+</tbody>
+</table>
+<p>Örnek MSFT şeması: ürün geliri, hizmet/diğer gelir büyümeleri; COGS marj değişimi; Ar-Ge; satış/pazarlama; genel/idari giderler; diğer net gider; vergi; seyreltilmiş hisse sayısı. Farklı dönem şemalarında isimler de değişebiliyor. Banka veya sigorta şeması bundan farklı. <code>formulas</code> alanı ara tahminlerden faaliyet kârı → vergi öncesi kâr → net kâr → EPS hesaplar. <code>target_fq_eps</code> gibi <code>_validation</code> alanları değerlendirme gerçeğidir, kullanılabilir gelecek girdisi sayılmaz.</p>
+</section>
+<section id="streetbench-sabit-sayısal-girdi-listesi-yok" class="level2">
+<h2 class="anchored" data-anchor-id="streetbench-sabit-sayısal-girdi-listesi-yok">7. Streetbench — sabit sayısal girdi listesi yok</h2>
+<p><a href="https://github.com/fundamental-research-labs/streetbench">Depo</a>.</p>
+<p><strong>Son hedef:</strong> belirlenen çeyreğin normalize seyreltilmiş EPS’si. <strong>Asıl girdiler:</strong> önceki finansal geçmiş, yönetim yönlendirmesi, raporlar, şirket/sektör araştırması ve tarih kesimi uygulanmış web kanıtları. <code>case_id</code>, şirket, mali dönem ve kesim zamanı görevi tanımlar; finansal faktör değildir.</p>
+<p>Raporlarda ele alınan ekonomik kalemler gelir, maliyet/gider, vergi ve hisse sayısıdır; ajan bunları her olayda farklı kanıtlarla değerlendirebilir. Bu nedenle bütün ajanlara ortak “17 girdi kolonu” gibi bir liste yok. Açıklanan hedef EPS ve final konsensüs puanlama için; forecasting task’a doğrudan verilmiş girdiler olarak sayılmadı. Sonuçlar geriye dönük benchmark’tır.</p>
+</section>
+<section id="forecastgpt-nitel-rapor-üretimi" class="level2">
+<h2 class="anchored" data-anchor-id="forecastgpt-nitel-rapor-üretimi">8. ForecastGPT — nitel rapor üretimi</h2>
+<p><a href="https://github.com/abhay-yemekar/forecastgpt-financial-outlook-agent">Depo</a> · <a href="https://github.com/abhay-yemekar/forecastgpt-financial-outlook-agent/blob/main/app/tools/financial_extractor.py">Çıkarım kodu</a>.</p>
+<p><strong>Son çıktı:</strong> gelecek çeyreğe ilişkin nitel görünüm ve gerekçeler. <strong>Belge girdileri:</strong> son finansal sonuç PDF’leri ve sonuç toplantıları; RAG ile yönetim yönlendirmesi, risk ve fırsatlar. Düzenli denetimli sayısal tahmin modeli yok.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Çıkarılan alan</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>total_revenue_inr_cr</code></td>
+<td>Toplam gelir; INR crore.</td>
+</tr>
+<tr class="even">
+<td><code>net_profit_inr_cr</code></td>
+<td>Net kâr.</td>
+</tr>
+<tr class="odd">
+<td><code>operating_profit_inr_cr</code></td>
+<td>Faaliyet kârı.</td>
+</tr>
+<tr class="even">
+<td><code>ebitda_inr_cr</code></td>
+<td>EBITDA/FAVÖK.</td>
+</tr>
+<tr class="odd">
+<td><code>operating_margin_pct</code>, <code>ebitda_margin_pct</code>, <code>net_margin_pct</code></td>
+<td>Faaliyet, EBITDA ve net kâr marjları.</td>
+</tr>
+<tr class="even">
+<td><code>net_interest_income_inr_cr</code>, <code>net_interest_margin_pct</code></td>
+<td>Bankalar için net faiz geliri ve net faiz marjı.</td>
+</tr>
+<tr class="odd">
+<td>QoQ/YoY değişimleri</td>
+<td>Mevcut/geçmiş çıkarılmış rakamların değişimleri.</td>
+</tr>
+<tr class="even">
+<td><code>price_inr</code></td>
+<td>En güncel piyasa fiyatı; yardımcı bağlam, kanıtlanmış EPS regresyon özelliği değil.</td>
+</tr>
+</tbody>
+</table>
+<p>Şirket kimliği/rapor dönemi metrikleri doğru belgeye bağlamak için kullanılır. Crore = 10 milyon. Girdi eksikse modelin rakam uydurması yerine eksikliği raporlama tasarımı bulunur.</p>
+</section>
+<section id="jamesezeilo-eps-forecasting-ml-sgd" class="level2">
+<h2 class="anchored" data-anchor-id="jamesezeilo-eps-forecasting-ml-sgd">9. JamesEzeilo — EPS Forecasting ML SGD</h2>
+<p><a href="https://github.com/JamesEzeilo/eps-forecasting-ml-sgd">Depo</a>. Aşağıdaki liste README’deki X seçimine dayanır; dış Excel dosyası arşivde yok.</p>
+<p><strong>Son hedef:</strong> <code>Earns Per Share</code> mevcut EPS.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Girdi</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>1 Year Growth Total Sales</code></td>
+<td>Yıllık toplam satış büyümesi.</td>
+</tr>
+<tr class="even">
+<td><code>Gross Income Margin</code></td>
+<td>Brüt kâr marjı.</td>
+</tr>
+<tr class="odd">
+<td><code>3y Price Volatility</code></td>
+<td>Üç yıllık fiyat oynaklığı.</td>
+</tr>
+<tr class="even">
+<td><code>EBITDA Oper Income</code></td>
+<td>EBITDA niteliğindeki faaliyet sonucu; dış veri sağlayıcı tanımı gerekli.</td>
+</tr>
+<tr class="odd">
+<td><code>Total L T &amp; S T Debt</code></td>
+<td>Uzun ve kısa vadeli toplam borç.</td>
+</tr>
+<tr class="even">
+<td><code>Total Inven</code></td>
+<td>Toplam stok.</td>
+</tr>
+<tr class="odd">
+<td><code>Net Account Receiv</code></td>
+<td>Net alacaklar.</td>
+</tr>
+<tr class="even">
+<td><code>Capital Expend CF</code></td>
+<td>Nakit akış tablosundaki yatırım harcaması.</td>
+</tr>
+<tr class="odd">
+<td><code>Selling General &amp; Admin Expense</code></td>
+<td>Satış/genel/idari gider.</td>
+</tr>
+<tr class="even">
+<td><code>Earns Per Share 1y back</code>, <code>2y back</code>, <code>5y back</code></td>
+<td>Bir, iki ve beş yıl önceki EPS.</td>
+</tr>
+</tbody>
+</table>
+<p>Toplam 12 tahmin girdisi. Rastgele şirket bölmesi, mevcut döneme ait diğer finansal tutarlarla bilinmeyen EPS’yi kestirme ve gelecek raporu tahmin etme arasındaki farkı çözmez.</p>
+</section>
+<section id="corporate-earnings-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="corporate-earnings-prediction">10. Corporate Earnings Prediction</h2>
+<p><a href="https://github.com/kryptologyst/Corporate-Earnings-Prediction">Depo</a> · <a href="https://github.com/kryptologyst/Corporate-Earnings-Prediction/blob/main/configs/default.yaml">Varsayılan girdi seçimi</a> · <a href="https://github.com/kryptologyst/Corporate-Earnings-Prediction/blob/main/src/features/engineering.py">Üretim kodu</a>.</p>
+<p><strong>Son hedef:</strong> <code>target_eps</code>. <strong>Veri:</strong> sentetik demo. Varsayılan listede 15 aday girdi:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Grup</th>
+<th>Değişkenler ve anlamları</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Finansal, 7</td>
+<td><code>revenue_growth</code> satış büyümesi; <code>profit_margin</code> net marj; <code>debt_to_equity</code> borç/özkaynak; <code>current_ratio</code> cari oran; <code>roe</code> özkaynak kârlılığı; <code>pe_ratio</code> F/K; <code>pb_ratio</code> PD/DD.</td>
+</tr>
+<tr class="even">
+<td>Teknik, 4</td>
+<td><code>price_momentum_3m</code>, <code>price_momentum_12m</code> fiyat momentumu; <code>volatility_3m</code> oynaklık; <code>volume_trend</code> hacim sapması.</td>
+</tr>
+<tr class="odd">
+<td>Makro, 4</td>
+<td><code>gdp_growth</code>, <code>inflation_rate</code>, <code>interest_rate</code>, <code>market_sentiment</code>: büyüme, enflasyon, faiz, piyasa duyarlılığı.</td>
+</tr>
+</tbody>
+</table>
+<p>Kod ayrıca <code>price_momentum_6m</code>, <code>price_volume_ratio</code> fiyat/hacim, <code>asset_turnover</code> ciro/aktif, <code>equity_multiplier</code> aktif/özkaynak, <code>gross_margin</code>, <code>revenue_growth_rate</code>, <code>eps_growth_rate</code>, <code>real_interest_rate</code>, <code>yield_curve_slope</code>, <code>credit_spread</code> üretir; bunlar <strong>varsayılan final listeyle aynı şey değil</strong>. Bazıları rastgele simüle edilir. <code>volatility_3m</code> adı altında son 20 gözlem kullanılıyor; momentum pencereleri günlük seride gerçekten ay saymıyor. Tüm serinin sonundan referans almak geçmiş satırlarda ileri bilgi kullanabilir. Alan ismine bakarak ekonomik ölçüm doğruluğu varsayılmamalı.</p>
+</section>
+<section id="earnings-surprise-prediction-platform" class="level2">
+<h2 class="anchored" data-anchor-id="earnings-surprise-prediction-platform">11. Earnings Surprise Prediction Platform</h2>
+<p><a href="https://github.com/AnanmayS/Earnings-Surprise-Prediction-Platform">Depo</a> · <a href="https://github.com/AnanmayS/Earnings-Surprise-Prediction-Platform/blob/main/backend/ml/config.py">Kesin liste</a>.</p>
+<p><strong>Son hedef:</strong> <code>beat_miss</code>. 16 sayısal ve 1 kategorik girdi:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Girdi</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>return_5d_pre_earnings</code>, <code>return_20d_pre_earnings</code>, <code>return_60d_pre_earnings</code></td>
+<td>Açıklama öncesi 5/20/60 gün getiri.</td>
+</tr>
+<tr class="even">
+<td><code>volatility_20d_pre_earnings</code></td>
+<td>Açıklama öncesi 20 günlük oynaklık.</td>
+</tr>
+<tr class="odd">
+<td><code>volume_change_20d_pre_earnings</code></td>
+<td>Açıklama öncesi 20 günlük hacim değişimi.</td>
+</tr>
+<tr class="even">
+<td><code>news_sentiment_pre_earnings</code></td>
+<td>Açıklama öncesi haber duyarlılığı.</td>
+</tr>
+<tr class="odd">
+<td><code>revenue_growth_last_reported</code>, <code>eps_growth_last_reported</code></td>
+<td>Son açıklanan satış/EPS büyümesi.</td>
+</tr>
+<tr class="even">
+<td><code>analyst_revision_trend</code></td>
+<td>Analist tahminlerindeki revizyon yönü.</td>
+</tr>
+<tr class="odd">
+<td><code>pe_ratio</code>, <code>debt_to_equity</code>, <code>profit_margin</code></td>
+<td>F/K, borç/özkaynak, net marj.</td>
+</tr>
+<tr class="even">
+<td><code>prior_eps_surprise</code></td>
+<td>Önceki açıklamanın EPS sürprizi.</td>
+</tr>
+<tr class="odd">
+<td><code>eps_surprise_mean_4q</code></td>
+<td>Önceki dört çeyreğin ortalama sürprizi.</td>
+</tr>
+<tr class="even">
+<td><code>trailing_beat_rate_4q</code></td>
+<td>Önceki dört çeyrekte beklenti aşma sıklığı.</td>
+</tr>
+<tr class="odd">
+<td><code>days_since_last_earnings</code></td>
+<td>Son açıklamadan itibaren geçen gün.</td>
+</tr>
+<tr class="even">
+<td><code>sector</code></td>
+<td>Sektör kategorisi.</td>
+</tr>
+</tbody>
+</table>
+<p>Tarihsel eğitim verisi kısmen sentetik; canlı eksik alanlar tahminî yedek değerlere dönebilir. Bunların gözlenmiş gerçek girdilerle aynı kabul edilmesi uygun değil.</p>
+</section>
+<section id="predicting-per" class="level2">
+<h2 class="anchored" data-anchor-id="predicting-per">12. Predicting PER</h2>
+<p><a href="https://github.com/my2582/predicting-per">Depo</a>. Liste README’deki bağımlı/bağımsız değişkenlerden; ham WRDS/CRSP verileri gerektirir.</p>
+<p><strong>Hedefler:</strong> piyasa değeri <code>mkvaltq</code> ve olağanüstü kalem öncesi kâr <code>ibq</code>; çalışmanın amacı ileri F/K. <strong>Girdiler:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kod</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>saleq</code></td>
+<td>Satış.</td>
+</tr>
+<tr class="even">
+<td><code>cogsq</code></td>
+<td>Satış maliyeti; README’deki <code>Coqsq</code> yazımı için bu standart karşılık kullanıldı.</td>
+</tr>
+<tr class="odd">
+<td><code>xsgaq</code></td>
+<td>Satış/genel/idari gider.</td>
+</tr>
+<tr class="even">
+<td><code>oiadpq</code></td>
+<td>Amortisman sonrası faaliyet kârı.</td>
+</tr>
+<tr class="odd">
+<td><code>cheq</code>, <code>rectq</code>, <code>invtq</code>, <code>acoq</code></td>
+<td>Nakit/kısa yatırım, alacak, stok, diğer dönen varlık.</td>
+</tr>
+<tr class="even">
+<td><code>ppentq</code>, <code>aoq</code></td>
+<td>Net maddi duran varlık, diğer varlık.</td>
+</tr>
+<tr class="odd">
+<td><code>dlcq</code>, <code>apq</code>, <code>txpq</code></td>
+<td>Kısa vadeli borç, ticari borç, ödenecek vergi.</td>
+</tr>
+<tr class="even">
+<td><code>ltq</code></td>
+<td>Toplam yükümlülük; README bunu “other current liabilities” diye etiketliyor. <strong>Kaynak içinde tanım çelişkisi var.</strong></td>
+</tr>
+<tr class="odd">
+<td><code>Mom3m</code>, <code>Mom6m</code>, <code>Mom9m</code></td>
+<td>3, 6, 9 aylık fiyat momentumu.</td>
+</tr>
+</tbody>
+</table>
+<p>Piyasa değeriyle ölçekleme ve dönüşümler kullanılıyor. Bu hedef setini doğrudan sonraki rapor net kâr modeliyle eşitlememeli.</p>
+</section>
+<section id="financial-health-forecasting-psx" class="level2">
+<h2 class="anchored" data-anchor-id="financial-health-forecasting-psx">13. Financial Health Forecasting PSX</h2>
+<p><a href="https://github.com/UmerMuzaffar/financial-health-forecasting-psx">Depo</a> · <a href="https://github.com/UmerMuzaffar/financial-health-forecasting-psx/blob/main/Financial_Health_Forecasting.ipynb">Notebook</a>.</p>
+<p><strong>Son hedef:</strong> ayrı ayrı 30 yıllık finansal oran. Çeyreklik EPS değil.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Oran grubu</th>
+<th>Hedef/girdi geçmişi olarak kullanılan oranlar ve anlamları</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kârlılık, 8</td>
+<td>Gross Profit Ratio brüt marj; Operating Profit Ratio faaliyet marjı; EBT/Sales vergi öncesi marj; EAT/Sales vergi sonrası marj; Net Profit Ratio net marj; ROE, ROA; ROCE kullanılan sermaye kârlılığı.</td>
+</tr>
+<tr class="even">
+<td>Likidite, 3</td>
+<td>Current Ratio dönen varlık/kısa yükümlülük; Acid Test Ratio stok hariç likidite; Cash Ratio nakit oranı.</td>
+</tr>
+<tr class="odd">
+<td>Kaldıraç, 4</td>
+<td>Debt to Equity, Debt to Total Assets, Debt to Capital: borcun özkaynak/aktif/toplam sermayeye oranları; Interest Coverage faiz karşılama.</td>
+</tr>
+<tr class="even">
+<td>Etkinlik, 8</td>
+<td>Inventory, Payable, Receivable, Asset ve Fixed Asset Turnover: stok/borç/alacak/aktif/duran varlık devirleri; Avg Collection Period tahsilat günü; Avg Payment Days ödeme günü; Operating Cycle faaliyet döngüsü.</td>
+</tr>
+<tr class="odd">
+<td>Çalışma sermayesi, 1</td>
+<td>Cash Conversion Cycle nakit dönüşüm süresi.</td>
+</tr>
+<tr class="even">
+<td>Piyasa/diğer, 6</td>
+<td>P/E F/K; Price to Book PD/DD; Price to Sales fiyat/satış; Book Value per Share hisse başına defter değeri; Sales per Share hisse başına satış; Days Inventory Outstanding stok tutma günü.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>113 adayın üretim kuralı:</strong> 30 oranın bir ve iki yıllık gecikmesi = 60; üç yıllık hareketli ortalama = 30; brüt/net marj, ROE, cari oran, borç/özkaynak, faiz karşılama değişimleri = 6; aşağıdaki 10 finansal özellik; dört makro; iki etkileşim; yıl = 113.</p>
+<p>10 finansal özellik: <code>yoy_sales</code>, <code>yoy_profit</code>, <code>yoy_assets</code>, <code>yoy_equity</code>, <code>yoy_cogs</code>, <code>yoy_cfo</code> yıllık değişimler; <code>n_debt_ratio</code> borç/aktif; <code>n_cfo_margin</code> CFO/satış; <code>n_capex_ratio</code> yatırım harcaması/aktif; <code>n_profit_mgn</code> net kâr/satış.</p>
+<p>Makro: <code>pkr_usd</code> Pakistan rupisi/dolar; <code>inflation</code> enflasyon; <code>policy_rate</code> politika faizi; <code>oil_brent</code> Brent. Etkileşim: <code>risk_debt_coverage</code> borç/özkaynak oranının faiz karşılamaya bölümü; <code>momentum_profit</code> brüt marj değişimi × gecikmiş brüt marj. <code>year</code> yıl.</p>
+<p><strong>Etkin son 60 sütun</strong>, eksiklik filtresi ve eğitim verisinde <code>SelectKBest</code> sonucuyla seçiliyor. Sabit bir 60 isim listesi kodda yazılı değil; yayımlanmayan nihai listeyi uydurmadık. <strong>Önemli kod bulgusu:</strong> trendler ve <code>roll3</code> aynı yılın değerini de içeriyor; <code>n_profit_mgn</code> mevcut yıl net marj hedefiyle aynı bilgiyi taşıyabilir. Bunlar bir çeyrek/yıl henüz açıklanmamışken bilinmez. Zaman bölmesi bu hedef sızıntısını tek başına düzeltmez.</p>
+</section>
+<section id="earnings-engine" class="level2">
+<h2 class="anchored" data-anchor-id="earnings-engine">14. Earnings Engine</h2>
+<p><a href="https://github.com/chandewardnyanesh/earnings-engine">Depo</a> · <code>earnings_engine/features/price_features.py</code>, <code>earnings_features.py</code>, <code>dataset.py</code>.</p>
+<p><strong>Son hedef:</strong> açıklama tarihinin etrafında <code>close(T+1)/close(T-1)-1</code> getirisinin işareti. <strong>16 gerçek girdi:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Girdi</th>
+<th>Anlamı</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ret_5d</code>, <code>ret_21d</code>, <code>ret_63d</code></td>
+<td>Önceki 5/21/63 işlem gününün getirileri.</td>
+</tr>
+<tr class="even">
+<td><code>vol_21d</code></td>
+<td>Son 21 günlük getirilerin standart sapması.</td>
+</tr>
+<tr class="odd">
+<td><code>vol_ratio_5d_63d</code></td>
+<td>Kısa/uzun pencere oynaklık oranı.</td>
+</tr>
+<tr class="even">
+<td><code>volume_ratio_5d_63d</code></td>
+<td>5 ve 63 günlük ortalama hacimlerin oranı.</td>
+</tr>
+<tr class="odd">
+<td><code>abs_ret_mean_21d</code></td>
+<td>21 günlük mutlak getirilerin ortalaması; günlük hareketlilik.</td>
+</tr>
+<tr class="even">
+<td><code>dist_52w_high</code>, <code>dist_52w_low</code></td>
+<td>Fiyatın en fazla 252 gözlemdeki tepe/dibe göre konumu.</td>
+</tr>
+<tr class="odd">
+<td><code>n_past_events</code></td>
+<td>Şirketin önceki açıklama sayısı.</td>
+</tr>
+<tr class="even">
+<td><code>past_reaction_mean</code>, <code>past_reaction_std</code></td>
+<td>Geçmiş açıklama tepkilerinin ortalaması ve standart sapması.</td>
+</tr>
+<tr class="odd">
+<td><code>past_up_rate</code></td>
+<td>Geçmiş açıklamalarda yükseliş oranı.</td>
+</tr>
+<tr class="even">
+<td><code>last_reaction_return</code></td>
+<td>Önceki açıklamanın fiyat tepkisi.</td>
+</tr>
+<tr class="odd">
+<td><code>last_surprise_pct</code></td>
+<td>Önceki açıklamanın EPS sürprizi yüzdesi.</td>
+</tr>
+<tr class="even">
+<td><code>is_in_market</code></td>
+<td>Hindistan piyasası ise 1; diğerinde 0. Piyasa getirisi değildir.</td>
+</tr>
+</tbody>
+</table>
+<p>Son hedef bilanço tutarı olmadığı için ilk üç dışında. Yol haritasındaki opsiyon ve analist revizyonu özellikleri mevcut 16 girdiye dahil edilmedi.</p>
+</section>
+<section id="moozzart-us-firm-eps-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="moozzart-us-firm-eps-prediction">15. Moozzart — US Firm EPS Prediction</h2>
+<p><a href="https://github.com/Moozzart/Beating-Analysts-Predictions-Using-Machine-Learning-Algorithms-to-predict-EPS-of-US-Firms">Depo</a> · <code>VariableCreation_and_Model.py</code> ve README.</p>
+<p>README üç deneyden bahsediyor: EPS geçmişi; makro+EPS; finansal kalem+EPS. Belirtilen EPS özellikleri son çeyrek, geçen yıl aynı çeyrek, yıllık EPS değişimi ve <code>EPS_(t-1)-ortalama(EPS_(t-2),EPS_(t-3),EPS_(t-4))</code> şokudur.</p>
+<p>Kodda dönüşüm uygulanan ana kalemler: <code>ceqq</code> özkaynak; <code>prccq</code> kapanış fiyatı; <code>req</code> birikmiş kâr; <code>xoprq</code> faaliyet gideri; <code>dp</code> amortisman; <code>ppe</code> maddi duran varlık; <code>txt</code> vergi; <code>csh</code> nakit; <code>cogs</code> satış maliyeti; <code>sales</code> satış; <code>at</code> aktif; <code>ni</code> net kâr; <code>ib</code> olağanüstü kalem öncesi kâr. <code>qoq_*</code> ve <code>yoy_*</code> önceki çeyrek/yıl değerlerini; <code>del_*</code> ve <code>diff_*</code> türevlerini oluşturmak için kullanılıyor. <code>ACTUAL</code> gerçekleşen EPS; <code>Volatility</code> oynaklık.</p>
+<p>Analist alanları <code>NUMEST</code> tahmin sayısı, <code>MEDEST</code> medyan, <code>MEANEST</code> ortalama, <code>HIGHEST</code> en yüksek, <code>LOWEST</code> en düşük tahmin. Bazı çağrılarda düşürülüyor; akışta farklı X/X1 tanımları ve notebook’tan taşınmış hücre sırası sorunları var. Final bütün-model girdi listesi tek bir sabit sözleşmede tutulmuyor. Ayrıca bazı fiyat/oynaklık alanları <code>shift(-1)</code> ile ileri taşınıyor; her sürüm için bilgi zamanının yeniden denetlenmesi gerekir.</p>
+<p><strong>Sınır:</strong> FRED makrolarının tam isimleri incelenen README/ana kodda sabit bir liste olarak doğrulanamadı. Bu nedenle “CPI/GDP kesin kullanılmıştır” gibi bir liste eklenmedi. Bu projeye ait belge, doğrulanabilen değişken aileleri ve açık belirsizlik kaydıdır.</p>
+</section>
+<section id="dhirainvij-earnings-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="dhirainvij-earnings-prediction">16. DhirainVij — Earnings Prediction</h2>
+<p><a href="https://github.com/DhirainVij/earnings-prediction">Depo</a> · <code>prediction.ipynb</code>, <code>earnings_prediction.ipynb</code>.</p>
+<p>Dosyadan okunan alanlar: Revenue ciro; Cost of Revenue satış maliyeti; Gross Profit brüt kâr; Depreciation/Amortization amortisman; Total Operating Expense toplam faaliyet gideri; Operating Income faaliyet kârı; Net Income net kâr; Normalized EBITDA düzeltilmiş FAVÖK; GDP growth rate büyüme oranı.</p>
+<p><strong>Ancak incelenen model yolunda:</strong> <code>df['Net Income']</code> tek sütun olarak seçiliyor, MinMax ölçeklemesi yapılıyor ve varsayılan dört gözlem uzunluğunda pencereler LSTM/GRU/CNN-LSTM/RNN’ye veriliyor. Yani gerçek model girdisi <strong>son dört net kâr gözlemi</strong>, son hedef bir sonraki net kâr. Diğer sekiz alanın okunması modelde kullanıldıkları anlamına gelmiyor. README’deki ciro tahmini iddiası için aynı şekilde açık bir bağımsız ciro giriş/çıkış yolu bu incelemede doğrulanmadı.</p>
+</section>
+<section id="bu-sözlükten-uygulanabilir-sonuç" class="level2">
+<h2 class="anchored" data-anchor-id="bu-sözlükten-uygulanabilir-sonuç">Bu sözlükten uygulanabilir sonuç</h2>
+<p>En sık tekrar eden çekirdek geçmiş EPS/kâr ve mevsimsellik. Ondan sonra nakit akışı, tahakkuk, marj, vergi ve sermaye yapısı geliyor. Sıklık bir başarı kanıtı değildir: değişkenin işe yarayıp yaramadığı aynı zaman dışı testte bloklar çıkarılarak ölçülmeli.</p>
+<p>Her gözlem için şirket kimliği, mali dönem, ilk yayın zamanı, birim/para birimi, konsolide kapsam ve revizyon sürümünü de saklamak gerekir. Bunlar her zaman tahmin özelliği değildir; tahminin doğru ve karşılaştırılabilir olmasını sağlayan veri sözleşmesidir.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
