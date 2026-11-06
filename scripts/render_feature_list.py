@@ -8,8 +8,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = ROOT / "docs/tasarim/degiskenler.json"
-OUTPUT = ROOT / "docs/tasarim/DEGISKEN_LISTESI.md"
+REGISTRY = ROOT / "docs/model_oncesi/degiskenler.json"
+OUTPUT = ROOT / "docs/model_oncesi/DEGISKEN_LISTESI.md"
 
 
 def validate(data):
@@ -71,6 +71,8 @@ def render(data):
         f"Sürüm: **{data['version']}** · Son inceleme: **{data['updated_at']}** · Durum: **taslak, eğitilmiş sonuç yok**.",
         "",
         data["purpose"],
+        "",
+        "Çalışma alanı: [model öncesi / geliştirme ve eğitim](README.md). Aynı tanım sözlüğü [model sonrası tahmin ve işletimde](../model_sonrasi/README.md) de kullanılır; seçilmiş modelin kesin girdi sürümü ayrıca sabitlenir.",
         "",
         "**Yetkili kayıt:** [degiskenler.json](degiskenler.json). Bu Markdown aynı kayıttan üretilir. Kaynak dosyayı güncelledikten sonra depo kökünde `python3 scripts/render_feature_list.py` çalıştırın; eşleşmeyi denetlemek için `--check` ekleyin. [Üretici betik](../../scripts/render_feature_list.py).",
         "",

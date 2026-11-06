@@ -1,6 +1,6 @@
 # Değişken seçimi ve şirkete özgü risk özellikleri
 
-Güncellenebilir uygulama adayları artık [yaşayan değişken listesinde](../../tasarim/DEGISKEN_LISTESI.md) ve [JSON kaydında](../../tasarim/degiskenler.json) tutulur. Bu belge araştırma gerekçelerini korur.
+Güncellenebilir uygulama adayları [yaşayan değişken listesinde](../../DEGISKEN_LISTESI.md) ve [JSON kaydında](../../degiskenler.json) tutulur. Bu belge model geliştirme/eğitim tarafındaki araştırma gerekçelerini korur.
 
 İnceleme tarihi: **6 Kasım 2026**. Bu belge, dört kişilik bir ekibin BIST'te açıklanmamış çeyreğe ilişkin ana finansal kalemleri tahmin etmesi için bir **deney taslağıdır**. Aşağıdaki liste kanıtlanmış bir “en iyi değişken kümesi” değildir. Makalelerin bulguları, hazır risk ölçüleri ve bizim test önerilerimiz ayrılmıştır.
 

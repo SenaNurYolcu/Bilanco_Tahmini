@@ -4,6 +4,8 @@ Sürüm: **0.1.0** · Son inceleme: **2026-11-06** · Durum: **taslak, eğitilmi
 
 Finans dışı BIST şirketlerinin açıklanmamış hedef çeyreğine ait ana finansal kalemleri tahmin etmek için yaşayan aday girdi sözlüğü. Şirket özelinde kurulmaz; savunma yalnızca aynı olayın farklı sonuç doğurabileceği faaliyetlerden biridir. Hisse fiyatı yönü bu kayıt kapsamındaki hedef değildir.
 
+Çalışma alanı: [model öncesi / geliştirme ve eğitim](README.md). Aynı tanım sözlüğü [model sonrası tahmin ve işletimde](../model_sonrasi/README.md) de kullanılır; seçilmiş modelin kesin girdi sürümü ayrıca sabitlenir.
+
 **Yetkili kayıt:** [degiskenler.json](degiskenler.json). Bu Markdown aynı kayıttan üretilir. Kaynak dosyayı güncelledikten sonra depo kökünde `python3 scripts/render_feature_list.py` çalıştırın; eşleşmeyi denetlemek için `--check` ekleyin. [Üretici betik](../../scripts/render_feature_list.py).
 
 Listede **51 özellik ailesi** var: **26 P0**, **19 P1**, **6 P2**. Bunlar sütun sayısı değildir: bir aile birden fazla ham kalem, gecikme veya oran içerebilir. İlk deneyde hepsi açılmayacak.
