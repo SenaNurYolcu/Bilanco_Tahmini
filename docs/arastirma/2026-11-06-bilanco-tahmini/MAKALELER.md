@@ -86,3 +86,5 @@ Bu tablo **uyarlama önerisidir**. Katkı sırası, kendi verimizde zaman dış�
 | 3 | Metin ve faaliyet | Geçmiş yönetim açıklaması, talep/maliyet beklentisi; varsa satış hacmi, kapasite, sipariş, fiyat | Koval; şirkete özgü faaliyet ölçüleri ayrıca test edilecek öneri. |
 
 Değişkenlerin eklenmesini tek tek önem sıralamasıyla değil **blok çıkarma deneyleriyle** değerlendirmek daha açıklayıcı olur: EPS geçmişi → muhasebe → makro/piyasa → metin. Aynı ileri dönemlerde aynı baz modellerle kıyaslanmalı. Muhasebe seviye/dönem birimleri ve bilginin ilk açıklanma zamanı doğrulanmadan performans farkına anlam yüklenmemeli.
+
+Küresel risk ve şirket maruziyeti için yeni inceleme: [değişken seçimi ve risk skoru taslağı](DEGISKEN_SECIMI_VE_RISK_SKORU.md). GPR, GEPU, OFR FSI ve WUI'nin farkları; riskin coğrafi satış, döviz pozisyonu ve borç yapısıyla birlikte kullanımı; yayın gecikmeleri ve karşılaştırmalı deney planı burada açıklanır.

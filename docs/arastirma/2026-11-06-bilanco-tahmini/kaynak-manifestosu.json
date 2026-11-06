@@ -174,5 +174,17 @@
     "file": "projeler/streetbench-main-2026-11-06.zip",
     "sha256": "26880e198f710264b5e302f165cc6ddc955c420893da2b9723cb1c2ad512b932",
     "bytes": 1176225
+  },
+  {
+    "kind": "paper",
+    "name": "Caldara and Iacoviello — Measuring Geopolitical Risk (AER 2022)",
+    "url": "https://doi.org/10.1257/aer.20191823",
+    "pdf_url": "https://www.matteoiacoviello.com/gpr_files/GPR_PAPER.pdf",
+    "accessed": "2026-11-06",
+    "file": "makaleler/caldara-iacoviello-gpr-2022.pdf",
+    "sha256": "61b51d1133e012a09fef611b6347575d720707bf1b1bc8067fa25970a9876640",
+    "bytes": 1208027,
+    "status": "downloaded",
+    "notes": "Yazarın sitesindeki yayımlanmış AER sürümü; risk ölçümü ve firma/sektör maruziyeti için, doğrudan bilanço tahmini başarısı kanıtı olarak kullanılmadı."
   }
 ]

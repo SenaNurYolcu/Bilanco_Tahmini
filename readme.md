@@ -24,6 +24,7 @@ Bazı temel kalemler modelle tahmin edilecek; brüt kâr, marjlar ve EPS gibi t�
 
 | Belge | İçerik |
 |---|---|
+| [Güncellenebilir kendi değişken listemiz](docs/tasarim/DEGISKEN_LISTESI.md) | Seçilen risk endeksleri, aday girdiler, şirket profilleri, olay etkileşimleri ve deney durumları |
 | [Araştırma ve proje karşılaştırması](docs/arastirma/2026-11-06-bilanco-tahmini/ARASTIRMA.md) | İlk üç proje, güçlü yönleri ve sınırlamaları |
 | [Projelerin değişken sözlüğü](docs/arastirma/2026-11-06-bilanco-tahmini/PROJELERIN_DEGISKENLERI.md) | Kullanılan ve aday değişkenler, açıklamaları ve kaynak kodları |
 | [Değişken sözlüğünün HTML sürümü](docs/arastirma/2026-11-06-bilanco-tahmini/PROJELERIN_DEGISKENLERI.html) | Tarayıcıda okunabilecek dışa aktarım |

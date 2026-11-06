@@ -1,0 +1,2552 @@
+{
+  "schema_version": "1.0",
+  "version": "0.1.0",
+  "updated_at": "2026-11-06",
+  "purpose": "Finans dışı BIST şirketlerinin açıklanmamış hedef çeyreğine ait ana finansal kalemleri tahmin etmek için yaşayan aday girdi sözlüğü. Şirket özelinde kurulmaz; savunma yalnızca aynı olayın farklı sonuç doğurabileceği faaliyetlerden biridir. Hisse fiyatı yönü bu kayıt kapsamındaki hedef değildir.",
+  "confirmed_input_ids": [
+    "R01",
+    "R02",
+    "R03"
+  ],
+  "confirmed_decisions": [
+    "GPR, GEPU ve OFR FSI ayrı girdiler olarak seçildi. Birleşik stres skoru yalnız alternatif deney olabilir.",
+    "Tek şirket çalışması yapılmayacak. Ortak olay + tarihsel şirket profili + hedef/zaman ayrımı kullanılacak.",
+    "Şirketlere savaşta kazanır/kaybeder etiketi verilmeyecek; etki işareti ve gecikmesi veriden öğrenilecek.",
+    "Sektör kategorisi başlangıç bilgisi; faaliyet payı, coğrafya, finansman ve tedarik profilleri ayrıca değerlendirilecek.",
+    "Bütün adaylar aynı anda kullanılmayacak. P0 pilot, P1 veri uygunsa ek, P2 sonraki aşama."
+  ],
+  "priorities": {
+    "P0": "İlk temel deney ve veri pilotu için önerilen aile; kullanımı/faydası henüz doğrulanmış değil.",
+    "P1": "Güvenilir kapsama ve kaynak doğrulaması varsa eklenecek aile/uzantı.",
+    "P2": "Dipnot, özel veri veya olay/metin altyapısı isteyen sonraki aşama."
+  },
+  "status_values": {
+    "selection_status": [
+      "accepted",
+      "candidate",
+      "rejected"
+    ],
+    "data_status": [
+      "unmapped",
+      "partial",
+      "verified"
+    ],
+    "evidence_status": [
+      "untested",
+      "validation_only",
+      "locked_test_evaluated"
+    ]
+  },
+  "groups": {
+    "financial": "Finansal geçmiş ve finansal yapı",
+    "macro": "Türkiye makrosu ve sektör koşulları",
+    "risk": "Hazır küresel risk ölçüleri",
+    "profile": "Şirketin faaliyet ve maruziyet profili",
+    "event": "İsteğe bağlı olay bağlamı",
+    "interaction": "Sınırlı olay–profil etkileşimleri"
+  },
+  "targets": [
+    {
+      "id": "T01",
+      "label": "Hasılat",
+      "period_type": "akış"
+    },
+    {
+      "id": "T02",
+      "label": "Satışların maliyeti",
+      "period_type": "akış"
+    },
+    {
+      "id": "T03",
+      "label": "Brüt kâr",
+      "period_type": "türetilmiş akış"
+    },
+    {
+      "id": "T04",
+      "label": "Esas faaliyet kârı",
+      "period_type": "akış"
+    },
+    {
+      "id": "T05",
+      "label": "Finansman gideri",
+      "period_type": "akış"
+    },
+    {
+      "id": "T06",
+      "label": "Vergi gideri/geliri",
+      "period_type": "akış"
+    },
+    {
+      "id": "T07",
+      "label": "Dönem net kârı",
+      "period_type": "akış"
+    },
+    {
+      "id": "T08",
+      "label": "Nakit ve nakit benzerleri",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T09",
+      "label": "Ticari alacak",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T10",
+      "label": "Stok",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T11",
+      "label": "Toplam varlık",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T12",
+      "label": "Finansal borç",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T13",
+      "label": "Toplam yükümlülük",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T14",
+      "label": "Toplam özkaynak",
+      "period_type": "dönem sonu bakiye"
+    },
+    {
+      "id": "T15",
+      "label": "İşletme faaliyetlerinden nakit akışı",
+      "period_type": "akış"
+    },
+    {
+      "id": "T16",
+      "label": "Yatırım faaliyetlerinden nakit akışı",
+      "period_type": "akış"
+    },
+    {
+      "id": "T17",
+      "label": "Finansman faaliyetlerinden nakit akışı",
+      "period_type": "akış"
+    }
+  ],
+  "features": [
+    {
+      "id": "F01",
+      "group": "financial",
+      "label": "Şirket ölçeği",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Son açıklanmış toplam varlık ve tutarların dönüşümünde kullanılacak pozitif ölçek.",
+      "raw_components": [
+        "total_assets"
+      ],
+      "representation": "Bilinen aktif; ölçek ayrıca korunur.",
+      "unit": "para",
+      "period_type": "balance",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Hedef dönemin aktif değeri ölçek olarak kullanılamaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F02",
+      "group": "financial",
+      "label": "Hasılat geçmişi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Önceki satışlar ve dönemsel devamlılık.",
+      "raw_components": [
+        "revenue"
+      ],
+      "representation": "q−1 / q−4; sınırlı yıllık değişim.",
+      "unit": "para",
+      "period_type": "flow",
+      "related_targets": [
+        "T01",
+        "T03",
+        "T04",
+        "T07",
+        "T09",
+        "T10"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Sıfır/negatif paydada büyüme oranı zorlanmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F03",
+      "group": "financial",
+      "label": "Satış maliyeti ve brüt marj",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Maliyet ve hasılat arasındaki ilişki.",
+      "raw_components": [
+        "cost_of_sales",
+        "gross_margin"
+      ],
+      "representation": "Maliyet/aktif; (hasılat−maliyet)/hasılat.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T02",
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01",
+        "F02"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Giderin işareti standartlaştırılmalı; brüt kâr aynı bilgiden türetilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F04",
+      "group": "financial",
+      "label": "Faaliyet kârı ve marjı",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Esas faaliyet sonucunun geçmiş seviyesi.",
+      "raw_components": [
+        "operating_income",
+        "operating_margin"
+      ],
+      "representation": "Kâr/aktif ve faaliyet marjı.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T04",
+        "T07",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01",
+        "F02"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Şirketlerin esas faaliyet/FAVÖK tanımları karıştırılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F05",
+      "group": "financial",
+      "label": "Dönem net kârı",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Dönem net kârı ve ölçekli değişimi.",
+      "raw_components": [
+        "net_income"
+      ],
+      "representation": "q−1 / q−4; değişim/bilinen aktif.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T07",
+        "T14",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Ana ortaklık kârı ile toplam konsolide dönem kârı ayrılır.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F06",
+      "group": "financial",
+      "label": "İşletme nakit akışı ve tahakkuk",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Kârın nakitle desteklenmesi.",
+      "raw_components": [
+        "operating_cash_flow",
+        "accrual_proxy"
+      ],
+      "representation": "CFO/aktif; (net kâr−CFO)/aktif.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T07",
+        "T08",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01",
+        "F05"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Kâr/CFO aynı dönem ve konsolidasyonda olmalı; basit fark tam tahakkuk ayrıştırması değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F07",
+      "group": "financial",
+      "label": "Vergi gideri/geliri",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Vergi bileşeninin seviyesi ve değişimi.",
+      "raw_components": [
+        "income_tax_expense"
+      ],
+      "representation": "Tutar/aktif; aktif ölçekli yıllık değişim.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T06",
+        "T07"
+      ],
+      "source_ids": [
+        "S02",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Efektif vergi oranı sıfıra yakın vergi öncesi kârda kullanılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F08",
+      "group": "financial",
+      "label": "Finansman ve faiz giderleri",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Borçlanma ve diğer finansman giderlerinin geçmişi.",
+      "raw_components": [
+        "finance_cost",
+        "interest_expense_if_separate"
+      ],
+      "representation": "Ayrı raporlanan tutarlar/aktif.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "flow",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T17"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Finansman gideri faizden daha geniş olabilir; gelirlerle körlemesine netlenmez.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F09",
+      "group": "financial",
+      "label": "Nakit ve nakit benzerleri",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Şirketin raporlanmış nakit bakiyesi.",
+      "raw_components": [
+        "cash_and_equivalents"
+      ],
+      "representation": "Bakiye/aktif; önceki karşılaştırılabilir dönem.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T08",
+        "T12",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Bakiye bir çeyrek akışı değildir; kısıtlı nakit kapsamı kaydedilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F10",
+      "group": "financial",
+      "label": "Ticari alacak",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Satışların tahsilata dönüşümünü temsil eden bakiye.",
+      "raw_components": [
+        "trade_receivables"
+      ],
+      "representation": "Alacak/aktif; sınırlı değişim; alacak/satış aday.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T08",
+        "T09",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01",
+        "F02"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Sözleşme varlığı ile koşulsuz ticari alacak aynı değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F11",
+      "group": "financial",
+      "label": "Stok",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Üretim ve satış döngüsündeki stok bakiyesi.",
+      "raw_components": [
+        "inventories"
+      ],
+      "representation": "Stok/aktif ve yıllık değişim.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T02",
+        "T08",
+        "T10",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S02"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Stok/maliyet oranı stok ve akış döneminin tanımı korunarak üretilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F12",
+      "group": "financial",
+      "label": "Ticari borç",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Tedarikçi finansmanı ve ödeme döngüsü.",
+      "raw_components": [
+        "trade_payables"
+      ],
+      "representation": "Bakiye/aktif ve değişim.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T08",
+        "T13",
+        "T15"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Finansal borçla aynı hesap sayılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F13",
+      "group": "financial",
+      "label": "Finansal borç ve vade dağılımı",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Kısa/uzun vadeli finansal borç ve refinansman ihtiyacı.",
+      "raw_components": [
+        "short_term_financial_debt",
+        "long_term_financial_debt",
+        "financial_debt_to_assets"
+      ],
+      "representation": "Borç/aktif; kısa vadeli borç/aktif.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T05",
+        "T08",
+        "T12",
+        "T17"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Toplam yükümlülük finansal borç değildir; kısa vadeye aktarılan uzun borç doğru eşlenir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F14",
+      "group": "financial",
+      "label": "Yükümlülük ve özkaynak",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Finansal yapının iki ayrı toplamı.",
+      "raw_components": [
+        "total_liabilities",
+        "total_equity"
+      ],
+      "representation": "Ayrı bakiyeler/aktif.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T11",
+        "T13",
+        "T14"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Kontrol gücü olmayan pay kapsamı ve bilanço eşitliği tanımları tutarlı olmalı.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F15",
+      "group": "financial",
+      "label": "Yatırım, duran varlık ve amortisman",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Üretim kapasitesi yatırımı ve varlık tüketimi.",
+      "raw_components": [
+        "cash_capex",
+        "property_plant_equipment",
+        "depreciation"
+      ],
+      "representation": "CAPEX/aktif; PPE/aktif; amortisman ayrı.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "mixed",
+      "related_targets": [
+        "T02",
+        "T04",
+        "T11",
+        "T16"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Nakit CAPEX toplam yatırım nakit akışı veya toplam yatırım taahhüdüyle aynı değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F16",
+      "group": "financial",
+      "label": "Faaliyet giderleri ve Ar-Ge",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Faaliyet giderleri ve giderleşen/aktifleştirilen Ar-Ge.",
+      "raw_components": [
+        "selling_expense",
+        "administrative_expense",
+        "expensed_rd",
+        "capitalized_rd"
+      ],
+      "representation": "Satış veya aktif ölçekli, ayrı kalemler.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "mixed",
+      "related_targets": [
+        "T04",
+        "T07",
+        "T11",
+        "T16"
+      ],
+      "source_ids": [
+        "S01",
+        "S08"
+      ],
+      "depends_on": [
+        "F01",
+        "F02"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Ar-Ge aktifleştirmesi kâr ve nakdi farklı etkiler; aynı kalem gibi toplanmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F17",
+      "group": "financial",
+      "label": "Sözleşme varlığı",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "İfa ile koşulsuz faturalama/tahsilat hakkı arasındaki fark.",
+      "raw_components": [
+        "contract_assets"
+      ],
+      "representation": "Bakiye/aktif ve değişim.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T01",
+        "T08",
+        "T09",
+        "T15"
+      ],
+      "source_ids": [
+        "S08",
+        "S11"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Proje sektörlerinde önemli aday; ticari alacağa otomatik eklenmez.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F18",
+      "group": "financial",
+      "label": "Müşteri avansı ve sözleşme yükümlülüğü",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Müşteri ön finansmanı ve henüz ifa edilmemiş yükümlülükler.",
+      "raw_components": [
+        "contract_liabilities",
+        "customer_advances"
+      ],
+      "representation": "Ayrı bakiyeler/aktif ve değişim.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T01",
+        "T08",
+        "T13",
+        "T15"
+      ],
+      "source_ids": [
+        "S08",
+        "S11"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Avans nakit yaratabilir; aynı anda gelir veya kâr sayılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F19",
+      "group": "financial",
+      "label": "Net döviz pozisyonu",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Döviz varlık/yükümlülük dengesi ve açıklanmış duyarlılık.",
+      "raw_components": [
+        "net_fx_position",
+        "fx_sensitivity"
+      ],
+      "representation": "İşareti korunmuş pozisyon/aktif; mümkünse para birimi ayrımı.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "balance",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T08",
+        "T12"
+      ],
+      "source_ids": [
+        "S08",
+        "S12"
+      ],
+      "depends_on": [
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Türev/korunma kapsamı korunur; finansal araç duyarlılığı tüm operasyonel etki değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "F20",
+      "group": "financial",
+      "label": "Borç koşulları ve korunma",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Borç faiz türü, para birimi, sözleşmesel vade ve korunma ayrıntıları.",
+      "raw_components": [
+        "floating_rate_debt_share",
+        "debt_currency_mix",
+        "debt_maturity",
+        "hedging_terms"
+      ],
+      "representation": "Önceki açıklanmış paylar ve koşullar.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "profile",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T08",
+        "T12",
+        "T17"
+      ],
+      "source_ids": [
+        "S12",
+        "S17"
+      ],
+      "depends_on": [
+        "F13"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Türev nominali ekonomik korunma oranı değildir; net değer/vade temelleri farklı olabilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M01",
+      "group": "macro",
+      "label": "USD/TL değişimi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Tahmin anına kadar gerçekleşmiş dolar kuru hareketi.",
+      "raw_components": [
+        "usdtry"
+      ],
+      "representation": "İlk aday: son bilinen 90 günlük değişim.",
+      "unit": "oran",
+      "period_type": "daily_to_window",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T05",
+        "T07",
+        "T12"
+      ],
+      "source_ids": [
+        "S06"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Gelecek çeyrek gerçekleşmiş kuru kullanılamaz; satış ve bilanço etkileri farklıdır.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M02",
+      "group": "macro",
+      "label": "EUR/TL değişimi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Avro satış/maliyet/bilanço kanalı.",
+      "raw_components": [
+        "eurtry"
+      ],
+      "representation": "İlk aday: son bilinen 90 günlük değişim.",
+      "unit": "oran",
+      "period_type": "daily_to_window",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T05",
+        "T07",
+        "T12"
+      ],
+      "source_ids": [
+        "S06"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Dolar ve avro maruziyetleri birbirinin yerine varsayılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M03",
+      "group": "macro",
+      "label": "Ticari kredi faizi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "TL şirket finansman maliyetine yakın makro aday.",
+      "raw_components": [
+        "try_commercial_loan_rate"
+      ],
+      "representation": "Son yayımlanan seviye ve tek değişim özeti.",
+      "unit": "yıllık yüzde; değişim yüzde puan",
+      "period_type": "weekly",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T12",
+        "T17"
+      ],
+      "source_ids": [
+        "S06"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Şirketin gerçek kredi marjı/faiziyle aynı değildir; EVDS seri kodu eşlenecek.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M04",
+      "group": "macro",
+      "label": "TÜFE",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Tüketici fiyatlarının yayımlanmış yıllık değişimi.",
+      "raw_components": [
+        "cpi_yoy"
+      ],
+      "representation": "Son yayımlanmış aylık yıllık değişim.",
+      "unit": "yüzde",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S06",
+        "S07",
+        "S14"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Fiyat endeksi girdisi, TMS 29 raporlama temelinin otomatik düzeltilmesi değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M05",
+      "group": "macro",
+      "label": "Yİ-ÜFE",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Üretici fiyatları ve maliyet koşulları.",
+      "raw_components": [
+        "domestic_ppi_yoy"
+      ],
+      "representation": "Son yayımlanmış aylık yıllık değişim.",
+      "unit": "yüzde",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ],
+      "source_ids": [
+        "S06",
+        "S07"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Sektörün gerçek girdi sepetini tam temsil etmeyebilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M06",
+      "group": "macro",
+      "label": "Sanayi üretimi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Genel üretim/talep koşulları.",
+      "raw_components": [
+        "industrial_production_yoy"
+      ],
+      "representation": "Son yayımlanmış yıllık değişim ve gözlem yaşı.",
+      "unit": "yüzde",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T10",
+        "T15"
+      ],
+      "source_ids": [
+        "S06",
+        "S07"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Açıklama gecikmesi ve mevsimsel revizyonlar var; hedef aya göre doldurulmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M07",
+      "group": "macro",
+      "label": "İlgili emtia fiyatı",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Enerji, metal veya başka temel girdinin/ürünün fiyatı.",
+      "raw_components": [
+        "sector_commodity_price_change"
+      ],
+      "representation": "Sektör için önceden seçilmiş az sayıda emtia değişimi.",
+      "unit": "oran",
+      "period_type": "daily_or_monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T10",
+        "T15"
+      ],
+      "source_ids": [
+        "S06",
+        "S15"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Bir emtia bütün sektörleri aynı yönde etkilemez; uygun tarihsel kaynak eşlenecek.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "M08",
+      "group": "macro",
+      "label": "Sektör talep ve faaliyet göstergesi",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "İlgili sektörün üretim, tüketim veya talep bilgisi.",
+      "raw_components": [
+        "sector_demand_index",
+        "sector_activity_index"
+      ],
+      "representation": "Önceden belirlenen tek/az sayıda yayımlanmış gösterge.",
+      "unit": "seri tanımına göre",
+      "period_type": "monthly_or_quarterly",
+      "related_targets": [
+        "T01",
+        "T04",
+        "T10",
+        "T15"
+      ],
+      "source_ids": [
+        "S06",
+        "S07",
+        "S15"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Hangi seri olduğu pilotta eşlenir; her sektörde aynı gösterge kullanılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "R01",
+      "group": "risk",
+      "label": "GPR: jeopolitik risk",
+      "priority": "P0",
+      "selection_status": "accepted",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Jeopolitik tehdit ve olaylarla ilişkili haber yoğunluğu.",
+      "raw_components": [
+        "global_gpr",
+        "country_gpr_optional"
+      ],
+      "representation": "Son yayımlanmış aylık küresel seviye; ülke serileri profil uzantısında.",
+      "unit": "endeks",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S03"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Aylık ay başı, günlük küresel seri haftalık güncellenir; gözlem/yayım ve eski sürüm ayrılır.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Kullanıcı hazır endeksi kullanmayı seçti; veri/vintage ve tahmin katkısı doğrulanmadı.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "R02",
+      "group": "risk",
+      "label": "GEPU: ekonomik politika belirsizliği",
+      "priority": "P0",
+      "selection_status": "accepted",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Küresel ekonomik politika belirsizliği; ilk tercih PPP ağırlıklı sürüm.",
+      "raw_components": [
+        "gepu_ppp"
+      ],
+      "representation": "Son yayımlanmış aylık seviye; tek tanımlı sürüm.",
+      "unit": "endeks",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S04"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Tarihsel ilk yayımlanma saati/sabit gecikme varsayılmaz; arşiv veya snapshot gerekir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Kullanıcı hazır endeksi kullanmayı seçti; veri/vintage ve tahmin katkısı doğrulanmadı.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "R03",
+      "group": "risk",
+      "label": "OFR FSI: finansal stres",
+      "priority": "P0",
+      "selection_status": "accepted",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Küresel piyasa stresi ve finansman koşulları.",
+      "raw_components": [
+        "ofr_fsi_global"
+      ],
+      "representation": "Bilinen son 60 işlem günü ortalaması.",
+      "unit": "endeks",
+      "period_type": "daily_to_window",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S05"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "İki iş günü geriden gelir; negatif değer alabilir; revizyonlar kaydedilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Kullanıcı hazır endeksi kullanmayı seçti; veri/vintage ve tahmin katkısı doğrulanmadı.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "R04",
+      "group": "risk",
+      "label": "GPR tehdit / gerçekleşen eylem ayrımı",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Talep beklentisiyle fiilî üretim/tedarik olayını ayırabilecek alt seriler.",
+      "raw_components": [
+        "gpr_threats",
+        "gpr_acts"
+      ],
+      "representation": "GPRT / GPRA; toplam GPR’ye alternatif veya kontrollü ek.",
+      "unit": "endeks",
+      "period_type": "monthly",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S03"
+      ],
+      "depends_on": [
+        "R01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Aynı haber bilgisini çoğaltabilir; ek katkı test edilmeden birlikte tutulmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C01",
+      "group": "profile",
+      "label": "Tarihsel sektör ve faaliyet kategorisi",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Şirketin o tarihte bilinen faaliyet kategorisi.",
+      "raw_components": [
+        "historical_industry",
+        "business_role"
+      ],
+      "representation": "Kaynaklı kategori; çok faaliyetli yapı ayrıca işaretlenir.",
+      "unit": "kategori",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S09",
+        "S10",
+        "S17"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Bugünkü sektör geçmişe taşınmaz; kategori gelir payı değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C02",
+      "group": "profile",
+      "label": "Ürün / faaliyet gelir karması",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Savunma/sivil, üretim/hizmet gibi açıklanmış faaliyet payları.",
+      "raw_components": [
+        "segment_revenue_shares"
+      ],
+      "representation": "Son açıklanmış faaliyet gelir payları ve kapsama.",
+      "unit": "0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "source_ids": [
+        "S09",
+        "S10",
+        "S13"
+      ],
+      "depends_on": [
+        "C01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Şirket ismi veya sektör etiketiyle sayısal pay uydurulmaz; kategori ve pay ayrılır.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C03",
+      "group": "profile",
+      "label": "Yurtdışı gelir ve ihracat payları",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "İki ayrı kavramla dış talep ve döviz satış bağlantısı.",
+      "raw_components": [
+        "foreign_revenue_share",
+        "export_revenue_share"
+      ],
+      "representation": "Kaynakta ayrı açıklanıyorsa iki ayrı pay.",
+      "unit": "0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T07",
+        "T09"
+      ],
+      "source_ids": [
+        "S09",
+        "S10",
+        "S17"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Yabancı iştirakin yerel satışı Türkiye’den ihracat değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C04",
+      "group": "profile",
+      "label": "Satış coğrafyası ve yoğunlaşma",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Satışların ülke/bölge dağılımı ve kapsama.",
+      "raw_components": [
+        "geographic_revenue_shares",
+        "geographic_concentration"
+      ],
+      "representation": "Açıklanmış paylar; kapsama; uygun yoğunlaşma.",
+      "unit": "0–1 pay / yoğunlaşma",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T04",
+        "T07",
+        "T09"
+      ],
+      "source_ids": [
+        "S09",
+        "S10",
+        "S16"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "TFRS 8 tam ülke matrisi garanti etmez; bölgeden ülke payı üretilmez; satış coğrafyası tedarik değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C05",
+      "group": "profile",
+      "label": "Müşteri türü ve yoğunlaşması",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Açıklanmış kamu/özel müşteri veya büyük müşteri yoğunlaşması.",
+      "raw_components": [
+        "public_customer_share",
+        "largest_customer_share"
+      ],
+      "representation": "Kaynaklı kategori/pay; açıklanmadıysa eksik.",
+      "unit": "kategori / 0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T07",
+        "T09",
+        "T15"
+      ],
+      "source_ids": [
+        "S09",
+        "S10"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Büyük müşteri kimliği zorunlu olmayabilir; ilişkili taraf payı kamu payı değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C06",
+      "group": "profile",
+      "label": "Tedarik ve ithal girdi profili",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Girdi/tedarikçi coğrafyası ve bağımlılığı.",
+      "raw_components": [
+        "imported_input_share",
+        "supplier_geography",
+        "supplier_concentration"
+      ],
+      "representation": "Açıklanmış pay veya kaynaklı nitel kategori.",
+      "unit": "kategori / 0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T02",
+        "T03",
+        "T10",
+        "T15"
+      ],
+      "source_ids": [
+        "S17",
+        "S13"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Genel panelde hazır tedarik matrisi beklenmez; satış ülkesi yerine kullanılamaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C07",
+      "group": "profile",
+      "label": "Enerji / emtia üretici-tüketici rolü",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Şirketin emtiayı üretme veya tüketme rolü.",
+      "raw_components": [
+        "commodity_role",
+        "energy_cost_share_optional"
+      ],
+      "representation": "Kaynaklı rol kategorisi; maliyet payı varsa ayrı.",
+      "unit": "kategori / 0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04"
+      ],
+      "source_ids": [
+        "S13",
+        "S17"
+      ],
+      "depends_on": [
+        "C01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Sektör kategorisi gerçek enerji maliyet oranı değildir; korunma ve ürün karması etkiyi değiştirebilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C08",
+      "group": "profile",
+      "label": "Sözleşme fiyatlama yapısı",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Sabit/endeksli fiyat ve sözleşme para birimi.",
+      "raw_components": [
+        "fixed_price_share",
+        "indexed_price_share",
+        "contract_currency"
+      ],
+      "representation": "Kaynakta açıklanan şartlar ve varsa paylar.",
+      "unit": "kategori / 0–1 pay",
+      "period_type": "profile",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "source_ids": [
+        "S11",
+        "S17"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Fiyatlama gücü doğrudan gözlenmeyebilir; marj geçmişi bunun kesin ölçüsü değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C09",
+      "group": "profile",
+      "label": "Sipariş ve ifa görünürlüğü",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Yeni sipariş, bakiye ve beklenen ifa/teslimat dönemleri.",
+      "raw_components": [
+        "order_intake",
+        "backlog",
+        "book_to_bill",
+        "performance_schedule"
+      ],
+      "representation": "Backlog/TTM satış; book-to-bill=yeni sipariş_q/satış_q; ifa aralığı.",
+      "unit": "kaynak birimi / uygun oran",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T03",
+        "T07",
+        "T08",
+        "T15"
+      ],
+      "source_ids": [
+        "S11",
+        "S17"
+      ],
+      "depends_on": [
+        "F02"
+      ],
+      "applicability": "proje/sipariş bazlı sektör uzantısı; savunma tek örnek",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Bakiye ve TTM satış aynı para/ölçüm temelinde olmalı; book-to-bill pay ve paydası aynı çeyreğe ait olmalı. İmza anında otomatik gelir yok; bildirimler bütün siparişleri kapsamayabilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "C10",
+      "group": "profile",
+      "label": "Üretim kapasitesi, hacim ve birim fiyat",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Talebin fiilî üretim ve satışa dönüşme imkânı.",
+      "raw_components": [
+        "capacity_utilization",
+        "sales_volume",
+        "unit_price",
+        "capacity_expansion"
+      ],
+      "representation": "Sektöre uygun açıklanmış hacim/kapasite; büyüme.",
+      "unit": "sektöre özgü miktar / oran",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T10",
+        "T16"
+      ],
+      "source_ids": [
+        "S17"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Şirketler arasında ölçü birimleri farklıdır; talep kapasite doluyken hemen satışa dönüşmeyebilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "E01",
+      "group": "event",
+      "label": "Olay türü, coğrafyası ve ekonomik kanalı",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Çatışma, yaptırım/ticaret kısıtı veya arz kesintisinin doğrulanmış bağlamı.",
+      "raw_components": [
+        "event_type",
+        "affected_geography",
+        "affected_products",
+        "event_first_known_at"
+      ],
+      "representation": "Önceden tanımlı etiketler; kaynak ve ilk açıklama zamanı.",
+      "unit": "kategori / olay zamanı",
+      "period_type": "event",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S13",
+        "S17"
+      ],
+      "depends_on": [],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "GPR tek başına olayın bütün ayrıntısını içermez. Haber/LLM toplama ayrı iş; sonradan bilinen sonuç etiketlenmez.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X01",
+      "group": "interaction",
+      "label": "Kur × net döviz pozisyonu",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Kur şokunun şirketin finansal döviz dengesiyle ilişkisi.",
+      "raw_components": [
+        "fx_change_x_net_fx_position"
+      ],
+      "representation": "Uygun para birimi değişimi × önceki net FX/aktif.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T08",
+        "T12"
+      ],
+      "source_ids": [
+        "S12",
+        "S17"
+      ],
+      "depends_on": [
+        "M01",
+        "M02",
+        "F19",
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Toplam net pozisyon ile tek kur yalnız vekildir; işaret dayatılmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "channel_specific"
+    },
+    {
+      "id": "X02",
+      "group": "interaction",
+      "label": "Faiz × finansal borçluluk",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Finansman maliyetinin borç profiline göre değişmesi.",
+      "raw_components": [
+        "rate_change_x_financial_leverage"
+      ],
+      "representation": "Faiz değişimi × önceki finansal borç/aktif.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T05",
+        "T07",
+        "T12",
+        "T17"
+      ],
+      "source_ids": [
+        "S06",
+        "S12"
+      ],
+      "depends_on": [
+        "M03",
+        "F13",
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Toplam borç ilk vekildir; değişken faizli borç varsa ayrı geliştirilir; bileşenleri de modelde tut.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X03",
+      "group": "interaction",
+      "label": "Finansal stres × kısa vadeli borç",
+      "priority": "P0",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Ortak piyasa stresinin refinansman ihtiyacıyla ilişkisi.",
+      "raw_components": [
+        "fsi_x_short_term_debt"
+      ],
+      "representation": "OFR FSI × önceki kısa vadeli finansal borç/aktif.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T05",
+        "T08",
+        "T12",
+        "T17"
+      ],
+      "source_ids": [
+        "S05",
+        "S12"
+      ],
+      "depends_on": [
+        "R03",
+        "F13",
+        "F01"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Vade/likidite profili eksikse sıfır sayılmaz; risk artışı otomatik sonuç etiketi olmaz.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X04",
+      "group": "interaction",
+      "label": "Jeopolitik risk × faaliyet karması",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Aynı jeopolitik durumun farklı ürün/iş paylarına yansıması.",
+      "raw_components": [
+        "gpr_x_activity_share"
+      ],
+      "representation": "GPR × açıklanmış faaliyet payları; tehdit/eylem ayrımı ayrı deney.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T07"
+      ],
+      "source_ids": [
+        "S03",
+        "S09",
+        "S13"
+      ],
+      "depends_on": [
+        "R01",
+        "C02"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Savunma gibi bir faaliyet için etki zorla pozitif yapılmaz; kategoriyle etkileşim ayrıca açık vekil olarak denenebilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X05",
+      "group": "interaction",
+      "label": "Coğrafi satış ağırlıklı ülke riski",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Ülke riskinin şirketin satış pazarlarıyla eşleşmesi.",
+      "raw_components": [
+        "sales_weighted_country_gpr"
+      ],
+      "representation": "Toplam: bilinen satış payı × normalize ülke GPR.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T04",
+        "T07",
+        "T09"
+      ],
+      "source_ids": [
+        "S03",
+        "S10",
+        "S16"
+      ],
+      "depends_on": [
+        "R01",
+        "C04"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Eksik ülke payı yeniden 1’e normalize edilerek kapsama gizlenmez; bu tedarik riski değildir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X06",
+      "group": "interaction",
+      "label": "Emtia × üretici/tüketici profili",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Fiyat hareketinin satış ve maliyet kanalını ayırmak.",
+      "raw_components": [
+        "commodity_change_x_business_role"
+      ],
+      "representation": "Emtia değişimi × rol/pay; güvenilir maliyet payı varsa ayrıca.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T10"
+      ],
+      "source_ids": [
+        "S13",
+        "S17"
+      ],
+      "depends_on": [
+        "M07",
+        "C07"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Aynı emtia artışı iki rolde farklı ilişki kurabilir; işaret ve gecikme öğrenilir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "all"
+    },
+    {
+      "id": "X07",
+      "group": "interaction",
+      "label": "Kur × ihracat / yurtdışı satış",
+      "priority": "P1",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Döviz satış kanalını finansal döviz bilançosundan ayırmak.",
+      "raw_components": [
+        "fx_change_x_export_share",
+        "fx_change_x_foreign_revenue_share"
+      ],
+      "representation": "İki farklı payla ayrı etkileşimler.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T03",
+        "T07",
+        "T09"
+      ],
+      "source_ids": [
+        "S09",
+        "S12"
+      ],
+      "depends_on": [
+        "M01",
+        "M02",
+        "C03"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "İhracat payı net kur kazancı değildir; ithal maliyet ve korunma başka kanallar.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "channel_specific"
+    },
+    {
+      "id": "X08",
+      "group": "interaction",
+      "label": "Olay bağlamı × ilgili şirket profili",
+      "priority": "P2",
+      "selection_status": "candidate",
+      "data_status": "unmapped",
+      "evidence_status": "untested",
+      "direction_policy": "learn_from_data",
+      "definition": "Özel olayın ürün, müşteri, pazar veya tedarik bağıyla eşleştirilmesi.",
+      "raw_components": [
+        "event_x_business_geography_supply"
+      ],
+      "representation": "Önceden seçilmiş az sayıda olay/profil etkileşimi.",
+      "unit": "türetilmiş",
+      "period_type": "mixed",
+      "related_targets": [
+        "T01",
+        "T02",
+        "T03",
+        "T04",
+        "T05",
+        "T06",
+        "T07",
+        "T08",
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T13",
+        "T14",
+        "T15",
+        "T16",
+        "T17"
+      ],
+      "source_ids": [
+        "S13",
+        "S17"
+      ],
+      "depends_on": [
+        "E01",
+        "C02",
+        "C04",
+        "C06"
+      ],
+      "applicability": "finans dışı şirketler",
+      "availability_rule": "available_at <= t0; sonradan açıklanan/revize edilen değer geçmişe doldurulmaz",
+      "allowed_history": "Hedef mali çeyrek q: ilk finansal referanslar q−1 ve q−4, sadece t0 anında biliniyorsa; makro/profil için ilk temsile bak.",
+      "missing_policy": "Eksik sıfır değildir; neden, kapsam ve gözlem yaşı saklanır. Uygulanamaz ile açıklanmamış ayrı.",
+      "caveat": "Tam çapraz çarpım veya olaydan sonra kazanan etiketi yok; kaynaklı bağ ve zaman gerekir.",
+      "owner": null,
+      "last_reviewed": "2026-11-06",
+      "definition_version": 1,
+      "decision_note": "Beş uzman incelemesinden türetilmiş aday; öncelik performans garantisi değildir.",
+      "dependency_policy": "channel_specific"
+    }
+  ],
+  "sources": {
+    "S01": {
+      "title": "Forma: yöntem ve sonuçlar",
+      "url": "https://arxiv.org/html/2608.11327v1",
+      "scope": "Çok kalemli finansal tahmin; BIST başarısı kanıtı değil."
+    },
+    "S02": {
+      "title": "Cao–You, 2021 açık taslak",
+      "url": "https://business.columbia.edu/sites/default/files-efs/imce-uploads/CEASA/Cao%20and%20You%2020210120.pdf",
+      "scope": "Yıllık kâr için finansal kalem ve değişimler; burada 2024 yayımlanan sürümün tamamı doğrulanmış sayılmıyor."
+    },
+    "S03": {
+      "title": "GPR resmi veri ve sürüm arşivi",
+      "url": "https://www.matteoiacoviello.com/gpr.htm",
+      "scope": "GPR, tehdit/eylem ayrımı, yayım ve revizyonlar; özellik faydası ayrıca test edilecek."
+    },
+    "S04": {
+      "title": "GEPU resmi açıklaması",
+      "url": "https://policyuncertainty.com/global_monthly.html",
+      "scope": "Aylık belirsizlik; PPP sürümü ilk tercih. İlk yayımlanma tarihleri ayrıca doğrulanmalı."
+    },
+    "S05": {
+      "title": "OFR Financial Stress Index",
+      "url": "https://www.financialresearch.gov/financial-stress-index/",
+      "scope": "Günlük stres ve iki iş günlük gecikme; revizyon kontrolü gerekiyor."
+    },
+    "S06": {
+      "title": "TCMB EVDS 3",
+      "url": "https://evds3.tcmb.gov.tr/",
+      "scope": "Makro kaynak adayı; seri kodları ve tarihsel sürümler henüz eşlenmedi."
+    },
+    "S07": {
+      "title": "TÜİK veri takvimi",
+      "url": "https://tuik.gov.tr/Kurumsal/Veri_Takvimi",
+      "scope": "Gerçek yayım takvimi; güncel dosya eski sürüm garantisi değildir."
+    },
+    "S08": {
+      "title": "KAP site kılavuzu",
+      "url": "https://www.kap.org.tr/tr/api/about/content-file/402832a195b3017d0195bd17e2e07e9a",
+      "scope": "Kalem sorgusu ilgili dönemin son yayımlanan cari sütununu içerir; ilk açıklama için kaynak bildirime gidilir."
+    },
+    "S09": {
+      "title": "IFRS 8 Operating Segments",
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/ifrs-8-operating-segments/",
+      "scope": "Faaliyet, coğrafya ve büyük müşteri açıklamaları; tam ülke/müşteri matrisi garantisi yok."
+    },
+    "S10": {
+      "title": "2026 TFRS 8, özellikle §33–34",
+      "url": "https://www.kgk.gov.tr/Portalv2Uploads/files/Duyurular/v2/TMS_TFRS_Setleri/2026/Kirmizi_Kitap/TFRS/TFRS%208.pdf",
+      "scope": "Ülke içi/yabancı ve önemli ülkeler; büyük müşteri eşiği kimliğin zorunlu açıklanması anlamına gelmez."
+    },
+    "S11": {
+      "title": "IFRS 15 Revenue from Contracts with Customers",
+      "url": "https://www.ifrs.org/issued-standards/list-of-standards/ifrs-15-revenue-from-contracts-with-customers/",
+      "scope": "Hasılat ifa yükümlülüğüne göre zaman içinde veya belirli anda tanınabilir; imza anında otomatik gelir değildir."
+    },
+    "S12": {
+      "title": "2026 TFRS 7",
+      "url": "https://www.kgk.gov.tr/Portalv2Uploads/files/Duyurular/v2/TMS_TFRS_Setleri/2026/Kirmizi_Kitap/TFRS/TFRS%207.pdf",
+      "scope": "Finansal araçların vade ve piyasa riski açıklamaları; bütün operasyonel maruziyetle aynı değil."
+    },
+    "S13": {
+      "title": "Fed: sektörlerin farklı jeopolitik risk maruziyeti",
+      "url": "https://www.federalreserve.gov/econres/notes/feds-notes/measuring-geopolitical-risk-exposure-across-industries-a-firm-centered-approach-20250829.html",
+      "scope": "Tehdit/fırsat ve sektör farklılığı; sonuçlar hisse tepkileri için, bizim finansal tahmin kazancımız değil."
+    },
+    "S14": {
+      "title": "KGK enflasyon muhasebesi rehberi",
+      "url": "https://www.kgk.gov.tr/ContentAssignmentDetail/5079/Enflasyon-Muhasebesi-Uygulama-Rehberinin-Gu%CC%88ncellenmesi",
+      "scope": "Satın alma gücü ve raporlama temeli kontrolü; basit TÜFE bölmesi tam TMS 29 motoru değildir."
+    },
+    "S15": {
+      "title": "Koval ve diğerleri, Financial Forecasting from Textual and Tabular Time Series",
+      "url": "https://aclanthology.org/2024.findings-emnlp.486/",
+      "scope": "Muhasebe, makro ve metnin kâr sürprizi görevindeki katkısı; üç tablonun bütün kalemleri için kanıt değil."
+    },
+    "S16": {
+      "title": "Coğrafi segmentlerle şirket jeopolitik riski, 2026",
+      "url": "https://doi.org/10.1016/j.jaccpubpol.2026.107407",
+      "scope": "Yayınevi özeti/girişi incelendi; satış ağırlıklı risk mevcut bir fikir. Tam PDF incelenmedi."
+    },
+    "S17": {
+      "title": "KAP bildirim ve finansal rapor sorguları",
+      "url": "https://kap.org.tr/tr/icerik/Diger/yardim",
+      "scope": "Finansal/operasyonel ham kaynaklar; şirket bazında rapor/dipnot ve kapsam pilotta doğrulanacak."
+    },
+    "S18": {
+      "title": "SHAP: tahmin ve nedensellik sınırı",
+      "url": "https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html",
+      "scope": "SHAP, değişkenin ek test değerini veya olayın nedensel etkisini kanıtlamaz."
+    }
+  },
+  "heterogeneity_note": "Model için talep, maliyet, tedarik, finansman ve nakit dönüşümü ayrı kanallardır. Ortak risk göstergesi tek başına da tahmin değeri taşıyabilir; şirketler arasındaki farklı etkileri temsil etmek için önceden bilinen profille birlikte değerlendirilir; tek sektör etiketi aynı sektördeki şirket farklarını tam açıklamaz. Aşağıdaki satırlar ekonomik hipotezdir, pozitif/negatif eğitim etiketi değildir. Toplu GPR/GEPU/FSI her olayın türünü, coğrafyasını ve ürününü tek başına anlatmaz; ayrıntılı bağlam E01 sonraki aşamadır.",
+  "event_examples": [
+    {
+      "event": "Jeopolitik gerilim/çatışma",
+      "profile": "Savunma faaliyeti, siparişli üretim",
+      "channels": "Talep/sipariş ihtimali; karşı yönde girdi, ambargo, kapasite ve işletme sermayesi baskısı. İfa zamanına göre gelir; tahsilat ayrıca."
+    },
+    {
+      "event": "Aynı jeopolitik gerilim",
+      "profile": "Turizm/taşımacılık; etkilenen coğrafya ve müşteri",
+      "channels": "Talep, rota ve maliyet değişebilir; başka pazara yönelme veya rakip kaybı farklı sonuç doğurabilir."
+    },
+    {
+      "event": "Petrol/enerji fiyat artışı",
+      "profile": "Enerji üreticisi, enerji yoğun tüketici veya karma faaliyet",
+      "channels": "Satış fiyatı ve girdi maliyeti kanalları farklıdır; sözleşme ve korunma etkiler."
+    },
+    {
+      "event": "Kur hareketi",
+      "profile": "İhracat, ithal girdi, döviz borcu ve korunma dengesi",
+      "channels": "Satış, maliyet ve finansal kur farkı aynı şirkette ters yönlerde olabilir."
+    },
+    {
+      "event": "Faiz/piyasa stresi",
+      "profile": "Kısa vade, değişken faiz, nakit tamponu",
+      "channels": "Faiz gideri, kredi yenileme, yatırım ve tahsilat farklı zamanlarda değişebilir."
+    }
+  ],
+  "data_contract": [
+    "q hedef mali çeyrek, t0 sabit tahmin anıdır. Finansal referanslar q−1 ve q−4 ancak available_at ≤ t0 ise kullanılabilir. Son rapor t ve hedef t+1 ise aynı hedefin geçen yılki karşılığı t−3 olur.",
+    "q−1 açıklanmadıysa sonradan açıklanan veriyle doldurulmaz. Son kullanılabilir değer ve yaşı ayrıca tutulabilir. Eğitim etiketleri de eğitim kesiminde açıklanmış olmalı.",
+    "İlk adayda az sayıda referans ve dönüşüm kullanılır; 12 gecikme × tüm oranlar × bütün etkileşimler açılmaz. İlk profil etkileşim bütçesi en fazla 3–5 aile.",
+    "Kâr büyümesi sıfır/negatif paydada zorlanmaz; değişim/bilinen aktif adaydır. Negatif tutara log uygulanmaz. Ölçek ve uç değer işlemleri yalnız eğitimde öğrenilir.",
+    "Bilanço bakiyesi ile gelir/nakit akışı ayrılır. Para birimi, konsolidasyon ve satın alma gücü temeli eşleştirilir; farklı TMS 29 temellerindeki YTD tutarlar doğrudan çıkarılmaz.",
+    "GPR günlük gözlemi yayımlanma gününde bilinmeyebilir; GEPU için sabit tarih uydurulmaz; OFR iki iş günü geriden gelir. Güncel veri dosyası tarihsel vintage değildir.",
+    "Profil payları ve sektör sınıfı tarihsel sürümle kullanılır. Yeni yıllık profil geçmişe taşınmaz; yaş/kapsam tutulur. İhracat, yurtdışı hasılat, satış coğrafyası ve tedarik coğrafyası ayrılır.",
+    "Eksik sıfır değildir. not_disclosed, not_applicable, not_extracted, unavailable_vintage ayrılır. Payı bilinmeyen coğrafya gizlice sıfır veya yeniden normalize edilmiş tam kapsama yapılmaz.",
+    "Ağaç modelleri etkileşimleri kendileri öğrenebilir. Çarpım sütunlarının ek katkısı ayrıca ölçülür; uzman görüşüyle dayatılan etki varsa öğrenilmiş tahmin diye sunulmaz.",
+    "Yıllık değişim, gözlemin kendi mali çeyreğinin dört çeyrek öncesine göre hesaplanır: son bilinen r için değer(r) − değer(r−4). r=q−1 ise karşılık q−5 olur. Hedef q için q−4 mevsimsel referansı ayrı kavramdır.",
+    "depends_on aile düzeyindeki ilişkili girdileri listeler. dependency_policy=all seçilen temsilin bütün girdilerini, channel_specific ise kur/ürün/coğrafya kanalına uygun alt kümeyi gerektirir; ilgisiz para birimi veya tedarik alanı zorunlu değildir."
+  ],
+  "observation_fields": {
+    "feature_id": "Bu sözlükteki değişken ailesi.",
+    "entity_id": "Şirket/ülke veya ortak seri kimliği.",
+    "observation_period": "Verinin anlattığı dönem; t0 ile aynı şey değildir.",
+    "first_published_at": "İlk kamuya açıklama zamanı; mümkünse saat ve saat dilimiyle.",
+    "available_at": "Operasyonel olarak modelin kullanabileceği zaman.",
+    "vintage": "Kullanılan sürüm veya snapshot kimliği.",
+    "value_and_unit": "Değer, para/miktar birimi ve yüzde/puan ayrımı.",
+    "period_type": "Bakiye, akış, profil veya olay.",
+    "consolidation": "Konsolide/solo ve raporlama kapsamı.",
+    "price_level_date": "Enflasyon düzeltmesinin satın alma gücü tarihi.",
+    "source_document_id_url": "Kaynak bildirim kimliği ve bağlantısı.",
+    "page_or_note": "Sayfa/dipnot veya seri metaverisi.",
+    "coverage_ratio": "Satış/ülke/segment kapsamının ölçüsü.",
+    "age_days": "t0 anındaki gözlem eskiliği.",
+    "is_proxy": "Gerçek ölçü yerine vekil kullanılıp kullanılmadığı ve tanımı.",
+    "missing_reason": "not_disclosed / not_applicable / not_extracted / unavailable_vintage.",
+    "extraction_method_reviewer": "Otomatik/elle çıkarım yöntemi ve doğrulayan kişi."
+  },
+  "experiments": [
+    {
+      "id": "E0",
+      "inputs": "Finansal geçmiş + mali takvim / tarihsel sektör",
+      "question": "Mevsimsel basit tahmin ve son değer kıyasını geçiyor mu?"
+    },
+    {
+      "id": "E1",
+      "inputs": "E0 + küçük Türkiye makro kümesi",
+      "question": "Yerel koşullar ek bilgi sağlıyor mu?"
+    },
+    {
+      "id": "E2",
+      "inputs": "E1 + ayrı GPR, GEPU ve OFR FSI",
+      "question": "Küresel riskin ek katkısı var mı?"
+    },
+    {
+      "id": "E3",
+      "inputs": "E2 + doğrulanmış şirket profillerinin ana etkileri",
+      "question": "Profil tek başına ne katıyor?"
+    },
+    {
+      "id": "E4",
+      "inputs": "E3 + önceden seçilmiş 3–5 etkileşim",
+      "question": "Aynı olayın şirketlere farklı yansımasını temsil etmek ne katıyor?"
+    },
+    {
+      "id": "E5",
+      "inputs": "E1 + eğitimden ölçeklenen birleşik stres özeti",
+      "question": "Ayrı endeksli E2’ye alternatif tek skor nasıl?"
+    }
+  ],
+  "evaluation_note": "Karşılaştırmalar aynı şirket–hedef–tarih örnekleminde ve benzer ayar bütçesiyle yapılır. Önce takvim çeyrekleri bölünür; bütün şirket satırları o tarih bloklarına atanır. Ortak risk değerinin çok şirkete kopyalanması bağımsız makro örneklem sayısını artırmaz. Kalem bazında hata, mevsimsel kıyasa göre fark, kapsama ve çeyrek bloklu belirsizlik raporlanır. SHAP açıklamaya yardımcıdır; ek katkı veya nedensellik kanıtı değildir. Kriz ve başarılı örnekler test sonucuna bakılarak seçilmez.",
+  "pilot": "Dört farklı ekonomik profilden ikişer şirket: 8 şirket × 4 çeyrek ve her şirketin o tarihte erişilebilir yıllık rapor/dipnotu. İlk hafta P0 kalemleri, birim ve yayın tarihleri; ikinci hafta 5–8 profil ailesinin kapsama ve çıkarım süresi. İki kişi kaynak kontrolü yapar. Çıktı tahmin başarısı değil; hangi adayın gerçekten toplanabildiği ve hangi önceliğe alınacağıdır.",
+  "maintenance_rules": [
+    "Önce degiskenler.json güncellenir, sonra üretici betik çalıştırılır. Markdown elle değiştirilmez; --check eşleşmeyi doğrular.",
+    "Yeni aday benzersiz ID, tanım, ilk temsil, kaynak, hedef, erişilebilirlik ve eksik politikasıyla eklenir.",
+    "selection_status, data_status ve evidence_status bağımsız güncellenir. Seçili endeksin yararlı olduğu otomatik işaretlenmez.",
+    "Reddedilen ID silinmez; gerekçe decision_note alanına yazılır. Tanım değişince definition_version ve change_log artırılır.",
+    "Kaynak veya tanım değişirse owner / last_reviewed ve veri kapsamı kaydedilir. P1/P2 ancak güvenilir pilot sonucuyla öne alınır.",
+    "Bankalar/sigortalar ayrı tablo ve model kapsamıdır. Bu ilk sözlük finans dışı evren içindir."
+  ],
+  "review_areas": [
+    {
+      "area": "Finansal değişkenler",
+      "decision": "20 aile, q−1/q−4 referansı, stok/akış ve muhasebe ölçeği."
+    },
+    {
+      "area": "Makro ve hazır risk ölçüleri",
+      "decision": "Üç ayrı risk, az sayıda yerel makro, yayım/sürüm kontrolü."
+    },
+    {
+      "area": "Genel sektör ve şirket maruziyeti",
+      "decision": "Tek şirket odağı kaldırıldı; faaliyet, coğrafya, talep–maliyet–tedarik–finansman kanalları."
+    },
+    {
+      "area": "Veri uygulanabilirliği",
+      "decision": "KAP ilk açıklama sınırı; ihracat/yurtdışı ayrımı; ülke/müşteri/tedarikte eksik veri ve pilot."
+    },
+    {
+      "area": "Deney ve kayıt tasarımı",
+      "decision": "Seçim/hazırlık/kanıt ayrımı; işaret dayatmama, sınırlı etkileşim ve tarih blokları."
+    }
+  ],
+  "change_log": [
+    {
+      "version": "0.1.0",
+      "date": "2026-11-06",
+      "note": "Kullanıcının istediği beş uzman incelemesiyle ilk genel aday listesi. GPR/GEPU/OFR seçili; tek şirket odağı yok; hiçbir aday için test başarısı iddia edilmiyor."
+    }
+  ],
+  "community_notes": [
+    {
+      "emoji": "🗂️",
+      "title": "How to Build a Point-in-Time Fundamentals Database from SEC EDGAR (and When Not To)",
+      "url": "https://dev.to/tradevodata/how-to-build-a-point-in-time-fundamentals-database-from-sec-edgar-and-when-not-to-2gn6",
+      "username": "tradevodata",
+      "takeaway": "İlk açıklama ve sonraki düzeltmeleri ayırma deneyimi, kayıttaki available_at ve vintage alanlarını destekliyor."
+    },
+    {
+      "emoji": "🔧",
+      "title": "Feature Stores Version Tables. They Should Version Transforms",
+      "url": "https://dev.to/aiexplore369zoho/feature-stores-version-tables-they-should-version-transforms-3gnm",
+      "username": "aiexplore369zoho",
+      "takeaway": "Aynı isimli özelliğin farklı pencere/eksik kurallarıyla hesaplanabilmesi, tanım ve dönüşüm sürümünü de kaydetmemizi gerekçelendiriyor."
+    }
+  ]
+}
