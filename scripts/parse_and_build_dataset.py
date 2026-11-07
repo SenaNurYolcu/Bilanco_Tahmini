@@ -332,6 +332,7 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
     kisa_borc_parts: list[float] = []
     uzun_borc_parts: list[float] = []
     alt_cash_parts: list[float] = []
+    tax_parts = {}
     alt_rev_ytd: float | None = None
     alt_rev_3m: float | None = None
     alt_cogs_ytd: float | None = None
@@ -469,41 +470,43 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
 
         # ---------------- 2. GELİR TABLOSU (IS) ----------------
         elif statement == "IS":
+            if ln in ("- donem vergi gelir/gideri", "- ertelenmis vergi gelir/gideri"):
+                tax_parts[ln] = (scale(v_ytd), scale(v_3m))
             if ln in ("satis gelirleri", "hasilat") and out["T01_hasilat_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["T01_hasilat_ytd"] = scale(v_ytd)
                     out["T01_hasilat_3m_raw"] = scale(v_3m)
             elif ln in ("finans sektoru faaliyetleri hasilati", "faiz, ucret, prim, komisyon ve diger gelirler", "esas faaliyet gelirleri") and alt_rev_ytd is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     alt_rev_ytd = scale(v_ytd)
                     alt_rev_3m = scale(v_3m)
             elif ln in ("satislarin maliyeti (-)", "satislarin maliyeti") and out["T02_satislarin_maliyeti_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["T02_satislarin_maliyeti_ytd"] = scale(v_ytd)
                     out["T02_satislarin_maliyeti_3m_raw"] = scale(v_3m)
             elif ln in ("finans sektoru faaliyetleri maliyeti (-)", "faiz, ucret, prim, komisyon ve diger giderler (-)", "esas faaliyet giderleri (-)") and alt_cogs_ytd is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     alt_cogs_ytd = scale(v_ytd)
                     alt_cogs_3m = scale(v_3m)
             elif ln in ("brut kar/zarar", "brut kar (zarar)", "ticari faaliyetlerden brut kar (zarar)", "ticari faaliyetlerden brut kar/zarar"):
                 if out["T03_brut_kar_ytd"] is None or (out["T03_brut_kar_ytd"] == 0 and v_ytd):
-                    if v_ytd is not None:
+                    if v_ytd is not None or v_3m is not None:
                         out["T03_brut_kar_ytd"] = scale(v_ytd)
                         out["T03_brut_kar_3m_raw"] = scale(v_3m)
             elif ln in ("faaliyet kari/zarari", "esas faaliyet kari/zarari", "esas faaliyet kari (zarari)", "net faaliyet k/z", "esas faaliyet kari veya zarari") and out["T04_esas_faaliyet_kari_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["T04_esas_faaliyet_kari_ytd"] = scale(v_ytd)
                     out["T04_esas_faaliyet_kari_3m_raw"] = scale(v_3m)
             elif ln in ("finansal gelirler", "finansman gelirleri", "esas faaliyet disi finansal gelirler") and out["F07_finansman_geliri_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["F07_finansman_geliri_ytd"] = scale(v_ytd)
                     out["F07_finansman_geliri_3m_raw"] = scale(v_3m)
             elif ln in ("finansal giderler (-)", "finansman giderleri (-)", "finansman giderleri", "esas faaliyet disi finansal giderler (-)") and out["T05_finansman_gideri_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["T05_finansman_gideri_ytd"] = scale(v_ytd)
                     out["T05_finansman_gideri_3m_raw"] = scale(v_3m)
-            elif ("surdurulen faaliyetler vergi" in ln or ln == "vergi karsiligi (-)") and not ln.startswith("-") and out["T06_vergi_gideri_geliri_ytd"] is None:
-                if v_ytd is not None:
+            elif ("surdurulen faaliyetler vergi" in ln or ln == "vergi karsiligi (-)") and "vergi oncesi" not in ln and not ln.startswith("-") and out["T06_vergi_gideri_geliri_ytd"] is None:
+                if v_ytd is not None or v_3m is not None:
                     out["T06_vergi_gideri_geliri_ytd"] = scale(v_ytd)
                     out["T06_vergi_gideri_geliri_3m_raw"] = scale(v_3m)
             elif ln in (
@@ -516,11 +519,11 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
                 "donem net kari veya zarari",
             ):
                 if out["T07_donem_net_kari_ytd"] is None or ln in ("donem kari/zarari", "donem kari (zarari)", "donem net kari veya zarari"):
-                    if v_ytd is not None:
+                    if v_ytd is not None or v_3m is not None:
                         out["T07_donem_net_kari_ytd"] = scale(v_ytd)
                         out["T07_donem_net_kari_3m_raw"] = scale(v_3m)
             elif ln in ("ana ortaklik paylari", "- ana ortaklik paylari") and out["T07_ana_ortaklik_net_kari_ytd"] is None:
-                if v_ytd is not None:
+                if v_ytd is not None or v_3m is not None:
                     out["T07_ana_ortaklik_net_kari_ytd"] = scale(v_ytd)
                     out["T07_ana_ortaklik_net_kari_3m_raw"] = scale(v_3m)
             elif ln in (
@@ -624,6 +627,14 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
                     or "finansman faaliyetlerinden (kullanilan)" in ln
                 ):
                     out["T17_finansman_nakit_akisi_ytd"] = scale(v_ytd)
+
+    # A blank tax parent is recoverable only from BOTH explicitly reported parts.
+    if len(tax_parts) == 2:
+        for index, suffix in enumerate(["ytd", "3m_raw"]):
+            values = [v[index] for v in tax_parts.values()]
+            key = "T06_vergi_gideri_geliri_" + suffix
+            if out[key] is None and all(v is not None for v in values):
+                out[key] = round(sum(values), 2)
 
     # Hasılat yedeği (GSDDE 2010-2013 gibi esas faaliyet geliri üst satırda yer alanlar için)
     if out["T01_hasilat_ytd"] is None and alt_rev_ytd is not None:

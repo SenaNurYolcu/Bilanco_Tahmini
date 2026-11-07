@@ -52,13 +52,13 @@ Aşağıdaki sayılar eksik olmayan gözlemleri sayar; kalite, sürüm veya eği
 
 | Hedef alanı | Dolu | Eksik |
 |---|---:|---:|
-| `T01_hasilat_ceyrek` | 1312 | 8 |
-| `T02_satislarin_maliyeti_ceyrek` | 1311 | 9 |
-| `T03_brut_kar_ceyrek` | 1312 | 8 |
-| `T04_esas_faaliyet_kari_ceyrek` | 1311 | 9 |
-| `T05_finansman_gideri_ceyrek` | 1296 | 24 |
-| `T06_vergi_gideri_geliri_ceyrek` | 1312 | 8 |
-| `T07_donem_net_kari_ceyrek` | 1312 | 8 |
+| `T01_hasilat_ceyrek` | 1318 | 2 |
+| `T02_satislarin_maliyeti_ceyrek` | 1317 | 3 |
+| `T03_brut_kar_ceyrek` | 1318 | 2 |
+| `T04_esas_faaliyet_kari_ceyrek` | 1317 | 3 |
+| `T05_finansman_gideri_ceyrek` | 1302 | 18 |
+| `T06_vergi_gideri_geliri_ceyrek` | 1296 | 24 |
+| `T07_donem_net_kari_ceyrek` | 1318 | 2 |
 | `T08_nakit_ve_nakit_benzerleri` | 1320 | 0 |
 | `T09_ticari_alacaklar` | 570 | 750 |
 | `T10_stoklar` | 1293 | 27 |
@@ -66,9 +66,9 @@ Aşağıdaki sayılar eksik olmayan gözlemleri sayar; kalite, sürüm veya eği
 | `T12_finansal_borclar` | 1181 | 139 |
 | `T13_toplam_yukumlulukler` | 1320 | 0 |
 | `T14_toplam_ozkaynaklar` | 1320 | 0 |
-| `T15_isletme_nakit_akisi_ceyrek` | 1219 | 101 |
-| `T16_yatirim_nakit_akisi_ceyrek` | 1262 | 58 |
-| `T17_finansman_nakit_akisi_ceyrek` | 1227 | 93 |
+| `T15_isletme_nakit_akisi_ceyrek` | 1264 | 56 |
+| `T16_yatirim_nakit_akisi_ceyrek` | 1286 | 34 |
+| `T17_finansman_nakit_akisi_ceyrek` | 1251 | 69 |
 
 ## Öğretim üyesinin önerdiği çalışma
 

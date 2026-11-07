@@ -1,12 +1,12 @@
 ﻿feature_id,label,priority,mapped_columns,rows_with_any_component,minimum_component_nonmissing,total_company_quarters,status,missing_reason,note,source_observations_2010_2020,strict_source_observations_2010_2020
 F01,Şirket ölçeği,P0,T11_toplam_varliklar,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F02,Hasılat geçmişi,P0,T01_hasilat_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F03,Satış maliyeti ve brüt marj,P0,T02_satislarin_maliyeti_ceyrek|T03_brut_kar_ceyrek,1312,1311,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F04,Faaliyet kârı ve marjı,P0,T04_esas_faaliyet_kari_ceyrek,1311,1311,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F05,Dönem net kârı,P0,T07_donem_net_kari_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F06,İşletme nakit akışı ve tahakkuk,P0,T15_isletme_nakit_akisi_ceyrek,1219,1219,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F07,Vergi gideri/geliri,P0,T06_vergi_gideri_geliri_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F08,Finansman ve faiz giderleri,P0,T05_finansman_gideri_ceyrek|F08_finansman_geliri_ceyrek,1301,1202,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F02,Hasılat geçmişi,P0,T01_hasilat_ceyrek,1318,1318,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F03,Satış maliyeti ve brüt marj,P0,T02_satislarin_maliyeti_ceyrek|T03_brut_kar_ceyrek,1318,1317,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F04,Faaliyet kârı ve marjı,P0,T04_esas_faaliyet_kari_ceyrek,1317,1317,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F05,Dönem net kârı,P0,T07_donem_net_kari_ceyrek,1318,1318,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F06,İşletme nakit akışı ve tahakkuk,P0,T15_isletme_nakit_akisi_ceyrek,1264,1264,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F07,Vergi gideri/geliri,P0,T06_vergi_gideri_geliri_ceyrek,1296,1296,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F08,Finansman ve faiz giderleri,P0,T05_finansman_gideri_ceyrek|F08_finansman_geliri_ceyrek,1307,1208,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F09,Nakit ve nakit benzerleri,P0,T08_nakit_ve_nakit_benzerleri,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F10,Ticari alacak,P0,T09_ticari_alacaklar,570,570,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F11,Stok,P0,T10_stoklar,1293,1293,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
@@ -14,7 +14,7 @@ F12,Ticari borç,P0,F12_ticari_borclar,460,460,1320,partial_financial_mapping,,F
 F13,Finansal borç ve vade dağılımı,P0,T12_finansal_borclar,1181,1181,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F14,Yükümlülük ve özkaynak,P0,T13_toplam_yukumlulukler|T14_toplam_ozkaynaklar,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F15,"Yatırım, duran varlık ve amortisman",P1,F15_maddi_duran_varliklar|F15_capex_nakit_ceyrek|F15_amortisman_itfa_ceyrek,1312,864,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
-F16,Faaliyet giderleri ve Ar-Ge,P1,F16_ar_ge_gideri_ceyrek|F16_genel_yonetim_gideri_ceyrek|F16_pazarlama_gideri_ceyrek,1061,683,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F16,Faaliyet giderleri ve Ar-Ge,P1,F16_ar_ge_gideri_ceyrek|F16_genel_yonetim_gideri_ceyrek|F16_pazarlama_gideri_ceyrek,1070,684,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F17,Sözleşme varlığı,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
 F18,Müşteri avansı ve sözleşme yükümlülüğü,P1,F18_alinan_siparis_avanslari_kisa_vadeli_yukumlulukler|F18_alinan_siparis_avanslari_uzun_vadeli_yukumlulukler|F18_ertelenmis_gelirler_kisa_vadeli_yukumlulukler|F18_ertelenmis_gelirler_uzun_vadeli_yukumlulukler|F18_ertelenmis_gelirler_current,672,13,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
 F19,Net döviz pozisyonu,P1,,0,0,1320,company_note_pilot_partial_snapshot,not_extracted,Small source-note pilot only; conflicting/disaggregated definitions preserved; original vintage unverified.,3,0

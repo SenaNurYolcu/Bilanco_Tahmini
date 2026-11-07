@@ -86,7 +86,7 @@ def extract_extra(rows, mult):
     }
     def store_flow(key, y, q):
         if key + '_ytd' not in out:
-            out[key + '_ytd'] = y * mult
+            out[key + '_ytd'] = y * mult if y is not None else None
             out[key + '_3m_raw'] = q * mult if q is not None else None
     for label, y, q in rows:
         n = normalize_tr(label).lstrip('- ').strip()
@@ -107,11 +107,11 @@ def extract_extra(rows, mult):
                 if key.startswith(('F17_', 'F18_')):
                     key += '_' + bs
                 out.setdefault(key, y * mult)
-        if y is None:
+        if y is None and q is None:
             continue
         if section == 'IS' and n in flow:
             store_flow(flow[n], y, q)
-        if section == 'CF':
+        if section == 'CF' and y is not None:
             if n in flow:
                 store_flow(flow[n], y, q)
             # Tax/interest lines and operating profit adjustments are not CFO.
@@ -122,6 +122,17 @@ def extract_extra(rows, mult):
                     out['T16_yatirim_nakit_akisi_ytd'] = y * mult
                 elif n.startswith(('finansman faaliyetlerinden', 'finansman faaliyetlerinde', 'finansal faaliyetlerden', 'finansal faaliyetlerde')):
                     out['T17_finansman_nakit_akisi_ytd'] = y * mult
+            # Verified final totals in legacy statements; not pre-tax/intermediate cash.
+            legacy_totals = {
+                'isletme faaliyetlerine iliskin nakit akisi': 'T15_isletme_nakit_akisi',
+                'isletme faaliyetlerinden dolayi net nakit girisi': 'T15_isletme_nakit_akisi',
+                'faaliyetlerden elde edilen/(kullanilan) nakit': 'T15_isletme_nakit_akisi',
+                'yatirim faaliyetlerine iliskin nakit akisi': 'T16_yatirim_nakit_akisi',
+                'finansman faaliyetlerine iliskin nakit akisi': 'T17_finansman_nakit_akisi',
+                'finansal faaliyetlerden elde edilen/(kullanilan) nakit': 'T17_finansman_nakit_akisi',
+            }
+            if n in legacy_totals:
+                out[legacy_totals[n] + '_ytd'] = y * mult
             if n in ('maddi ve maddi olmayan duran varliklarin alimindan kaynaklanan nakit cikislari',
                      'maddi ve maddi olmayan duran varlik alimlari'):
                 capex_combined = y * mult
@@ -187,9 +198,12 @@ def quarterize(df, base):
     compatible = grouped['quarter'].shift().eq(df.quarter - 1)
     for col in ['consolidation', 'currency', 'price_level_date']:
         compatible &= grouped[col].shift().eq(df[col]) & df[col].notna() & df[col].ne('')
-    diff = (y - grouped[base + '_ytd'].shift()).where(compatible)
     raw = df.get(base + '_3m_raw', pd.Series(np.nan, index=df.index))
-    return y.where(df.quarter.eq(1), raw.where(raw.notna(), diff))
+    # Only Q1 has identical year-to-date and three-month periods.
+    effective_ytd = y.fillna(raw.where(df.quarter.eq(1)))
+    previous_ytd = effective_ytd.groupby([df.ticker, df.year], sort=False).shift()
+    diff = (effective_ytd - previous_ytd).where(compatible)
+    return effective_ytd.where(df.quarter.eq(1), raw.where(raw.notna(), diff))
 
 
 def quality_issues(df):
@@ -314,7 +328,7 @@ def build_financial_snapshot():
         available = pd.concat([pd.to_datetime(df.available_at,errors='coerce'),
                                pd.to_datetime(prev,errors='coerce')],axis=1).max(axis=1)
         direct = df.quarter.eq(1) | df[base+'_3m_raw'].notna()
-        df[base+'_quarter_method'] = np.where(df.quarter.eq(1),'direct_ytd_q1',
+        df[base+'_quarter_method'] = np.where(df.quarter.eq(1) & df[base+'_ytd'].notna(),'direct_ytd_q1',
             np.where(df[base+'_3m_raw'].notna(),'direct_3m','difference'))
         df[base+'_available_at'] = pd.to_datetime(df.available_at,errors='coerce').where(direct,available)
         current_ok=df.source_vintage_status.isin(VERIFIED_VINTAGES) & df.available_at.ne('')
