@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.TUFE1YI.T1&startDate=01-01-2019&endDate=31-12-2019&type=json&formulas=0",
+    "series_code": "TP.TUFE1YI.T1",
+    "feature_id": "M05",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_tufe1yi",
+    "requested_year": 2019,
+    "rows": 12,
+    "raw_rows": 12,
+    "excluded_boundary_rows": 0,
+    "retrieved_at": "2026-11-07T17:55:05+00:00",
+    "sha256": "cf8efb80880c1026bbdcbef7bc8b32cc2b77b82e8da260b813857928b3cd89dc",
+    "retrieval_mode": "fresh_http",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}

@@ -1,0 +1,9 @@
+{
+  "source_url": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+  "cache_file": "data/external/rebuilt/raw/worldbank_pink_sheet_monthly.xlsx",
+  "retrieved_at": "2026-11-07T17:12:51.411660+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "Tue, 03 Nov 2026 19:30:42 GMT",
+  "sha256": "3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2"
+}

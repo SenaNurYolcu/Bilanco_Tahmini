@@ -1,214 +1,256 @@
-"""
-fetch_external_macro_and_risk.py
-================================
-Bilanco_Tahmini reposundaki (docs/model_oncesi/degiskenler.json ve DEGISKEN_LISTESI.md)
-tanimlara uygun olarak KAP disindaki P0 Makro (M01-M06) ve Kuresel Risk (R01-R04)
-degiskenlerini resmi kaynaklarindan / uluslararasi acik veri arsivlerinden ceker,
-ham dosyalari data/external/ altina kaydeder ve aylik/gunluk zaman serilerini uretir.
+"""Official macro/risk snapshots with honest release/vintage provenance.
 
-Kaynaklar:
-- R01 & R04 (GPR, GPRT, GPRA): Matteo Iacoviello resmi GPR arsivi (S03)
-  https://www.matteoiacoviello.com/gpr_files/data_gpr_export.xls
-- R02 (GEPU_ppp): Economic Policy Uncertainty resmi arsivi (S04)
-  https://www.policyuncertainty.com/media/Global_Policy_Uncertainty_Data.csv
-- R03 (OFR FSI): Office of Financial Research Financial Stress Index (S05)
-  https://www.financialresearch.gov/financial-stress-index/data/fsi.csv
-- M01 & M02 (USD/TRY, EUR/TRY): Günlük kur serisi (Yahoo Finance / TCMB karsiligi)
-- M03 (Faiz / Kısa Vadeli Ticari/Piyasa Faizi): OECD MEI / TCMB (TUR.IRSTCI01.ST.M)
-- M04 (TÜFE Yıllık % Değişim): TCMB Enflasyon Verileri & OECD MEI (TUR.CPALTT01.GY.M)
-- M05 (Yİ-ÜFE Yıllık % Değişim): TCMB Üretici Fiyatları & OECD MEI (TUR.PIEAMP01.GY.M)
-- M06 (Sanayi Üretimi Yıllık % Değişim): OECD MEI / TÜİK (TUR.PRINTO01.GYSA.M)
-"""
+Outputs: data/external/rebuilt/{macro_observations.csv,macro_source_status.csv,
+source_manifest.json}. Current historical downloads are never claimed PIT.
+Yahoo FX, OECD interbank rates and seasonally adjusted IP are not silently used
+as TCMB FX, commercial credit rates or calendar-adjusted industrial production.
 
+Run with --refresh to download, --offline to reproduce cached inputs. An optional
+--evds-spec JSON maps verified M03/M06/M08 codes; EVDS_API_KEY stays in headers.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import html
 import io
 import json
+import os
+import re
 import urllib.request
-from datetime import datetime, date
+import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
+
 import pandas as pd
-from bs4 import BeautifulSoup
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-EXT_DIR = ROOT_DIR / "data" / "external"
-EXT_DIR.mkdir(parents=True, exist_ok=True)
+OUT_DIR = ROOT_DIR / "data/external/rebuilt"
+GPR_URL = "https://www.matteoiacoviello.com/gpr_files/data_gpr_export.xls"
+GEPU_URL = "https://www.policyuncertainty.com/media/Global_Policy_Uncertainty_Data.csv"
+OFR_URL = "https://www.financialresearch.gov/financial-stress-index/data/fsi.csv"
+ECB_URL = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip"
+WB_URL = "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx"
+TCMB_BASE = "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/"
+EVDS_GUIDE = "https://evds3.tcmb.gov.tr/igmevdsms-dis/documents/showDocument?docId=8"
 
 
-def download_bytes(url: str, cache_name: str) -> bytes:
-    cache_path = EXT_DIR / cache_name
-    if cache_path.is_file() and cache_path.stat().st_size > 0:
-        return cache_path.read_bytes()
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) BilancoTahminiResearch/1.0"
-        },
-    )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        data = resp.read()
-    cache_path.write_bytes(data)
-    return data
+class SourceClient:
+    def __init__(self, directory: Path, *, refresh=False, offline=False):
+        self.directory = directory
+        self.refresh, self.offline = refresh, offline
+        self.records = []
+        directory.mkdir(parents=True, exist_ok=True)
 
-
-def fetch_gpr() -> pd.DataFrame:
-    print("[R01/R04] GPR verisi indiriliyor...")
-    raw = download_bytes(
-        "https://www.matteoiacoviello.com/gpr_files/data_gpr_export.xls",
-        "data_gpr_export.xls",
-    )
-    df = pd.read_excel(io.BytesIO(raw))
-    df = df[["month", "GPR", "GPRT", "GPRA"]].dropna(subset=["month", "GPR"])
-    df["ym"] = pd.to_datetime(df["month"]).dt.strftime("%Y-%m")
-    return df[["ym", "GPR", "GPRT", "GPRA"]].drop_duplicates("ym").sort_values("ym")
-
-
-def fetch_gepu() -> pd.DataFrame:
-    print("[R02] GEPU verisi indiriliyor...")
-    raw = download_bytes(
-        "https://www.policyuncertainty.com/media/Global_Policy_Uncertainty_Data.csv",
-        "Global_Policy_Uncertainty_Data.csv",
-    )
-    df = pd.read_csv(io.BytesIO(raw))
-    # Filter valid numeric Year and Month
-    df = df[pd.to_numeric(df["Year"], errors="coerce").notna()]
-    df["Year"] = df["Year"].astype(int)
-    df["Month"] = df["Month"].astype(int)
-    df["ym"] = df.apply(lambda r: f"{int(r['Year']):04d}-{int(r['Month']):02d}", axis=1)
-    col = "GEPU_ppp" if "GEPU_ppp" in df.columns else df.columns[-1]
-    df["GEPU_ppp"] = pd.to_numeric(df[col], errors="coerce")
-    return df[["ym", "GEPU_ppp"]].dropna().drop_duplicates("ym").sort_values("ym")
-
-
-def fetch_ofr_fsi() -> pd.DataFrame:
-    print("[R03] OFR FSI verisi indiriliyor...")
-    raw = download_bytes(
-        "https://www.financialresearch.gov/financial-stress-index/data/fsi.csv",
-        "ofr_fsi.csv",
-    )
-    df = pd.read_csv(io.BytesIO(raw))
-    df["date"] = pd.to_datetime(df["Date"]).dt.date
-    df["OFR_FSI"] = pd.to_numeric(df["OFR FSI"], errors="coerce")
-    return df[["date", "OFR_FSI"]].dropna().sort_values("date")
-
-
-def fetch_fx_daily(symbol: str, col_name: str, cache_name: str) -> pd.DataFrame:
-    print(f"[M01/M02] {col_name} gunluk kur verisi indiriliyor...")
-    # 2008-01-01 (1199145600) to 2022-01-01 (1640995200)
-    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1=1199145600&period2=1640995200&interval=1d"
-    raw = download_bytes(url, cache_name)
-    data = json.loads(raw)["chart"]["result"][0]
-    timestamps = data["timestamp"]
-    closes = data["indicators"]["quote"][0]["close"]
-    rows = []
-    for ts, c in zip(timestamps, closes):
-        if c is not None and c > 0:
-            d = datetime.utcfromtimestamp(ts).date()
-            rows.append({"date": d, col_name: float(c)})
-    df = pd.DataFrame(rows).drop_duplicates("date").sort_values("date")
-    return df
-
-
-def fetch_dbnomics_series(series_path: str, col_name: str, cache_name: str) -> pd.DataFrame:
-    print(f"[Makro] {col_name} ({series_path}) indiriliyor...")
-    url = f"https://api.db.nomics.world/v22/series/{series_path}?observations=1"
-    raw = download_bytes(url, cache_name)
-    doc = json.loads(raw)["series"]["docs"][0]
-    rows = []
-    for p, v in zip(doc["period"], doc["value"]):
-        if v != "NA" and v is not None:
-            rows.append({"ym": str(p)[:7], col_name: float(v)})
-    return pd.DataFrame(rows).drop_duplicates("ym").sort_values("ym")
-
-
-def fetch_tcmb_inflation() -> tuple[pd.DataFrame, pd.DataFrame]:
-    """TCMB resmi web sayfasindaki TUFE ve YI-UFE tablolarini da indirip dogrular."""
-    print("[M04/M05] TCMB resmi enflasyon tablolari indiriliyor...")
-    raw_cpi = download_bytes(
-        "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Tuketici+Fiyatlari",
-        "tcmb_tufe.html",
-    )
-    soup_cpi = BeautifulSoup(raw_cpi.decode("utf-8", errors="ignore"), "html.parser")
-    cpi_rows = []
-    for tr in soup_cpi.find_all("tr"):
-        cells = [td.get_text(" ", strip=True) for td in tr.find_all("td")]
-        if len(cells) >= 2 and "-" in cells[0] and len(cells[0]) == 7:
-            mm, yyyy = cells[0].split("-")
+    def get(self, url, name, *, headers=None):
+        path = self.directory / name
+        meta_path = path.with_name(path.name + ".source.json")
+        meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
+        cached_hash = hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else ""
+        cache_verified = bool(cached_hash and meta.get("sha256") == cached_hash and meta.get("source_url") == url)
+        cache_file = str(path.relative_to(ROOT_DIR)) if path.is_relative_to(ROOT_DIR) else str(path)
+        record = {"source_url": url, "cache_file": cache_file,
+                  "retrieved_at": meta.get("retrieved_at", "") if cache_verified else "", "status": "cached",
+                  "provenance_status": "cached_content_hash_verified" if cache_verified else "cache_provenance_unverified"}
+        if (self.refresh or not path.exists()) and not self.offline:
             try:
-                cpi_rows.append({"ym": f"{int(yyyy):04d}-{int(mm):02d}", "tcmb_cpi_yoy": float(cells[1].replace(",", "."))})
+                req = urllib.request.Request(url, headers={"User-Agent": "BilancoTahminiResearch/2.0", **(headers or {})})
+                with urllib.request.urlopen(req, timeout=30) as response:
+                    raw = response.read()
+                    if not raw:
+                        raise ValueError("empty response")
+                    record["http_last_modified"] = response.headers.get("Last-Modified", "")
+                record.update(status="downloaded", retrieved_at=datetime.now(timezone.utc).isoformat(),
+                              sha256=hashlib.sha256(raw).hexdigest(), provenance_status="downloaded_from_source")
+                # A changed/interrupted raw file cannot inherit an old receipt time.
+                temporary = path.with_name(path.name + ".tmp")
+                temporary.write_bytes(raw)
+                temporary.replace(path)
+                # Last-Modified is not an observation's original publication date.
+                temporary_meta = meta_path.with_name(meta_path.name + ".tmp")
+                temporary_meta.write_text(json.dumps(record, ensure_ascii=False, indent=2))
+                temporary_meta.replace(meta_path)
+            except (OSError, ValueError) as exc:
+                record.update(status="cached_after_download_failure" if path.exists() else "download_failed",
+                              error=f"{type(exc).__name__}: {exc}")
+                if not path.exists():
+                    self.records.append(record)
+                    raise
+        if not path.exists():
+            record["status"] = "offline_cache_missing"
+            self.records.append(record)
+            raise FileNotFoundError(path)
+        raw = path.read_bytes()
+        record["sha256"] = hashlib.sha256(raw).hexdigest()
+        self.records.append(record)
+        return raw, record
+
+
+def parse_tcmb_inflation(raw: bytes, *, producer=False):
+    """Do not fill a blank domestic YI-UFE column with the older general UFE."""
+    rows = []
+    for tr in re.findall(r"<tr\b[^>]*>(.*?)</tr>", raw.decode("utf-8"), re.I | re.S):
+        cells = [html.unescape(re.sub(r"<[^>]+>", " ", cell)).strip()
+                 for cell in re.findall(r"<td\b[^>]*>(.*?)</td>", tr, re.I | re.S)]
+        if len(cells) < (3 if producer else 2) or not re.fullmatch(r"\d{2}-\d{4}", cells[0]):
+            continue
+        mm, yyyy = cells[0].split("-")
+        values = [("M05_YIUFE_YoY", cells[2]), ("legacy_UFE_YoY", cells[1])] if producer else [("M04_TUFE_YoY", cells[1])]
+        for series, value in values:
+            try:
+                rows.append({"period_end": pd.Period(f"{yyyy}-{mm}", "M").end_time.date().isoformat(),
+                             "series_name": series, "value": float(value.replace(",", "."))})
             except ValueError:
                 pass
-    df_tcmb_cpi = pd.DataFrame(cpi_rows)
-
-    raw_ppi = download_bytes(
-        "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Uretici+Fiyatlari",
-        "tcmb_ufe.html",
-    )
-    soup_ppi = BeautifulSoup(raw_ppi.decode("utf-8", errors="ignore"), "html.parser")
-    ppi_rows = []
-    for tr in soup_ppi.find_all("tr"):
-        cells = [td.get_text(" ", strip=True) for td in tr.find_all("td")]
-        if len(cells) >= 3 and "-" in cells[0] and len(cells[0]) == 7:
-            mm, yyyy = cells[0].split("-")
-            val_str = cells[2] if cells[2] else cells[1]
-            try:
-                ppi_rows.append({"ym": f"{int(yyyy):04d}-{int(mm):02d}", "tcmb_ppi_yoy": float(val_str.replace(",", "."))})
-            except ValueError:
-                pass
-    df_tcmb_ppi = pd.DataFrame(ppi_rows)
-    return df_tcmb_cpi, df_tcmb_ppi
+    return pd.DataFrame(rows, columns=["period_end", "series_name", "value"])
 
 
-def build_macro_and_risk_tables():
-    df_gpr = fetch_gpr()
-    df_gepu = fetch_gepu()
-    df_ofr = fetch_ofr_fsi()
-    df_usd = fetch_fx_daily("TRY=X", "USDTRY", "yahoo_usdtry.json")
-    df_eur = fetch_fx_daily("EURTRY=X", "EURTRY", "yahoo_eurtry.json")
+def to_observations(frame, record, *, feature_map, unit, release_rule):
+    result = frame.copy()
+    result["feature_id"] = result["series_name"].map(feature_map).fillna("proxy_only")
+    result["unit"] = unit
+    result["source_url"] = record["source_url"]
+    result["source_sha256"] = record["sha256"]
+    result["retrieved_at"] = record.get("retrieved_at", "")
+    result["source_fetch_status"] = record.get("status", "")
+    result["source_provenance_status"] = record.get("provenance_status", "")
+    result["vintage_id"] = record["sha256"][:16]
+    result["publication_date"] = ""
+    result["available_at"] = ""
+    result["availability_status"] = "historical_release_and_vintage_unverified"
+    result["pit_eligible"] = False
+    result["release_rule"] = release_rule
+    return result
 
-    df_cpi = fetch_dbnomics_series("OECD/MEI/TUR.CPALTT01.GY.M", "M04_TUFE_YoY", "oecd_cpi.json")
-    df_ppi = fetch_dbnomics_series("OECD/MEI/TUR.PIEAMP01.GY.M", "M05_YIUFE_YoY", "oecd_ppi.json")
-    df_ip = fetch_dbnomics_series("OECD/MEI/TUR.PRINTO01.GYSA.M", "M06_SanayiUretimi_YoY", "oecd_ip.json")
-    df_ir = fetch_dbnomics_series("OECD/MEI/TUR.IRSTCI01.ST.M", "M03_Faiz_Orani", "oecd_ir.json")
 
-    df_tcmb_cpi, df_tcmb_ppi = fetch_tcmb_inflation()
+def fetch_ecb(client):
+    raw, record = client.get(ECB_URL, "ecb_eurofxref_hist.zip")
+    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+        data = pd.read_csv(archive.open("eurofxref-hist.csv"))
+    data.columns = data.columns.str.strip()
+    data = data.rename(columns={"Date": "period_end"})
+    data["EURTRY_ECB_reference"] = pd.to_numeric(data["TRY"], errors="coerce")
+    data["USDTRY_ECB_cross_reference"] = data["EURTRY_ECB_reference"] / pd.to_numeric(data["USD"], errors="coerce")
+    long = data.melt(id_vars="period_end", value_vars=["EURTRY_ECB_reference", "USDTRY_ECB_cross_reference"],
+                     var_name="series_name", value_name="value").dropna(subset=["value"])
+    return to_observations(long, record, feature_map={"EURTRY_ECB_reference": "M02", "USDTRY_ECB_cross_reference": "M01"},
+                           unit="TRY per currency unit", release_rule="ECB around 16:00 CET working days; latest download, original vintages unverified")
 
-    # Merge monthly series
-    monthly = df_gpr.merge(df_gepu, on="ym", how="outer")
-    for d in [df_cpi, df_ppi, df_ip, df_ir, df_tcmb_cpi, df_tcmb_ppi]:
-        if not d.empty:
-            monthly = monthly.merge(d, on="ym", how="outer")
-    monthly = monthly.sort_values("ym").reset_index(drop=True)
 
-    # Prefer TCMB official inflation where available, fallback to OECD MEI (identical TURSTAT source)
-    if "tcmb_cpi_yoy" in monthly.columns:
-        monthly["M04_TUFE_YoY"] = monthly["tcmb_cpi_yoy"].combine_first(monthly["M04_TUFE_YoY"])
-    if "tcmb_ppi_yoy" in monthly.columns:
-        monthly["M05_YIUFE_YoY"] = monthly["tcmb_ppi_yoy"].combine_first(monthly["M05_YIUFE_YoY"])
+def fetch_gpr(client):
+    raw, record = client.get(GPR_URL, "data_gpr_export.xls")
+    data = pd.read_excel(io.BytesIO(raw))
+    data["period_end"] = pd.to_datetime(data["month"]).dt.to_period("M").dt.to_timestamp("M").dt.strftime("%Y-%m-%d")
+    long = data.melt(id_vars="period_end", value_vars=["GPR", "GPRT", "GPRA"], var_name="series_name", value_name="value").dropna()
+    return to_observations(long, record, feature_map={"GPR": "R01", "GPRT": "R04", "GPRA": "R04"}, unit="index",
+                           release_rule="Monthly beginning of following month; methodology changed in 2021; historical latest snapshot is not PIT")
 
-    # Compute 1-quarter (3-month) interest rate change for M03
-    monthly["M03_Faiz_3Aylik_Degisim"] = monthly["M03_Faiz_Orani"].diff(3)
 
-    # Save monthly table
-    monthly_out = EXT_DIR / "monthly_macro_and_risk.csv"
-    monthly.to_csv(monthly_out, index=False, encoding="utf-8")
-    print(f"Aylik makro ve risk tablosu kaydedildi: {monthly_out} ({len(monthly)} ay)")
+def fetch_gepu(client):
+    raw, record = client.get(GEPU_URL, "Global_Policy_Uncertainty_Data.csv")
+    data = pd.read_csv(io.BytesIO(raw))
+    for col in ["Year", "Month", "GEPU_ppp"]:
+        data[col] = pd.to_numeric(data[col], errors="coerce")
+    data = data.dropna(subset=["Year", "Month", "GEPU_ppp"])
+    data["period_end"] = [pd.Period(f"{int(y)}-{int(m):02}", "M").end_time.date().isoformat() for y, m in zip(data.Year, data.Month)]
+    data["series_name"], data["value"] = "GEPU_ppp", data["GEPU_ppp"]
+    return to_observations(data[["period_end", "series_name", "value"]], record, feature_map={"GEPU_ppp": "R02"}, unit="index",
+                           release_rule="Monthly series; per-observation publication dates and historical vintages not established")
 
-    # Merge daily series (FX + OFR FSI)
-    daily = df_usd.merge(df_eur, on="date", how="outer").merge(df_ofr, on="date", how="outer")
-    daily = daily.sort_values("date").reset_index(drop=True)
-    daily["USDTRY"] = daily["USDTRY"].ffill()
-    daily["EURTRY"] = daily["EURTRY"].ffill()
 
-    # According to DEGISKEN_LISTESI.md:
-    # M01: son bilinen 90 gunluk USD/TL degisimi (oransal % ve seviye)
-    # M02: son bilinen 90 gunluk EUR/TL degisimi
-    # R03: OFR FSI bilinen son 60 islem gunu ortalamasi (2 is gunu gecikmeli: shift(2))
-    daily["OFR_FSI_avail"] = daily["OFR_FSI"].shift(2)
-    daily["R03_OFR_FSI_60d_mean"] = daily["OFR_FSI_avail"].rolling(60, min_periods=15).mean()
+def fetch_ofr(client):
+    raw, record = client.get(OFR_URL, "ofr_fsi.csv")
+    data = pd.read_csv(io.BytesIO(raw)).rename(columns={"Date": "period_end", "OFR FSI": "value"})
+    data["series_name"] = "OFR_FSI"
+    return to_observations(data[["period_end", "series_name", "value"]].dropna(), record, feature_map={"OFR_FSI": "R03"}, unit="index",
+                           release_rule="OFR publishes data from two business days prior; holiday calendar and historical vintages not established")
 
-    daily_out = EXT_DIR / "daily_fx_and_fsi.csv"
-    daily.to_csv(daily_out, index=False, encoding="utf-8")
-    print(f"Gunluk kur ve OFR FSI tablosu kaydedildi: {daily_out} ({len(daily)} gun)")
+
+def fetch_worldbank(client):
+    raw, record = client.get(WB_URL, "worldbank_pink_sheet_monthly.xlsx")
+    data = pd.read_excel(io.BytesIO(raw), sheet_name="Monthly Prices", header=4)
+    units = data.iloc[0].to_dict()
+    date_col = data.columns[0]
+    data = data[data[date_col].astype(str).str.fullmatch(r"\d{4}M\d{2}")].copy()
+    data["period_end"] = [pd.Period(str(v).replace("M", "-"), "M").end_time.date().isoformat() for v in data[date_col]]
+    # Raw candidate bank; no company/sector commodity mapping is presumed.
+    wanted = [c for c in data.columns if c in {"Crude oil, Brent", "Natural gas, Europe", "Coal, Australian", "Iron ore, cfr spot", "Aluminum", "Copper", "Wheat, US HRW"}]
+    if not wanted:
+        raise ValueError("World Bank columns changed: no expected commodity labels")
+    long = data.melt(id_vars="period_end", value_vars=wanted, var_name="series_name", value_name="value")
+    long["value"] = pd.to_numeric(long["value"], errors="coerce")
+    result = to_observations(long.dropna(subset=["value"]), record, feature_map={c: "M07" for c in wanted},
+                             unit="", release_rule="Monthly current-vintage candidates; sector mapping and historical publications unverified")
+    result["unit"] = result["series_name"].map(units)
+    return result
+
+
+def fetch_evds_spec(client, spec_path):
+    # The EVDS acquisition implementation is PHP, as requested.
+    import subprocess
+    if client.offline:
+        raise ValueError('Offline EVDS uses stored observations, not an API call')
+    if not os.environ.get('EVDS_API_KEY'):
+        raise ValueError('EVDS_API_KEY missing; use the PHP secret prompt separately')
+    subprocess.run(['php', str(ROOT_DIR/'scripts/fetch_evds_data.php'),
+                    '--spec', str(spec_path)], check=True)
+    return [pd.read_csv(OUT_DIR/'evds/observations.csv').dropna(subset=['value'])]
+
+
+def build_macro_and_risk_tables(*, refresh=False, offline=False, evds_spec=None):
+    client = SourceClient(OUT_DIR / "raw", refresh=refresh, offline=offline)
+    outputs, status = [], []
+    operations = [("R01,R04", fetch_gpr), ("R02", fetch_gepu), ("R03", fetch_ofr),
+                  ("M01,M02", fetch_ecb), ("M07", fetch_worldbank)]
+    for feature_ids, call in operations:
+        try:
+            outputs.append(call(client))
+            status.append({"feature_ids": feature_ids, "status": "snapshot_only", "reason": "Historical release/vintage unverified; excluded from strict PIT joins"})
+        except Exception as exc:
+            status.append({"feature_ids": feature_ids, "status": "failed", "reason": f"{type(exc).__name__}: {exc}"})
+    for producer, suffix in [(False, "Tuketici+Fiyatlari"), (True, "Uretici+Fiyatlari")]:
+        feature_id = "M05" if producer else "M04"
+        try:
+            raw, record = client.get(TCMB_BASE + suffix, "tcmb_ufe.html" if producer else "tcmb_tufe.html")
+            frame = parse_tcmb_inflation(raw, producer=producer)
+            if frame.empty:
+                raise ValueError("TCMB table empty or schema changed")
+            outputs.append(to_observations(frame, record, feature_map={"M04_TUFE_YoY": "M04", "M05_YIUFE_YoY": "M05"}, unit="percent year-on-year",
+                                           release_rule="Monthly; exact original release dates/vintages unknown. UFE and domestic YI-UFE distinct"))
+            status.append({"feature_ids": feature_id, "status": "snapshot_only", "reason": "Official TCMB table; original publication history not established"})
+        except Exception as exc:
+            status.append({"feature_ids": feature_id, "status": "failed", "reason": f"{type(exc).__name__}: {exc}"})
+    if evds_spec:
+        try:
+            outputs.extend(fetch_evds_spec(client, evds_spec))
+        except Exception as exc:
+            status.append({"feature_ids": "M03,M06,M08", "status": "failed", "reason": str(exc)})
+    elif (OUT_DIR/'evds/observations.csv').exists():
+        evds=pd.read_csv(OUT_DIR/'evds/observations.csv')
+        # Missing data are retained in the EVDS sidecar; numeric values only here.
+        outputs.append(evds.dropna(subset=['value']))
+    present={str(fid) for frame in outputs if 'feature_id' in frame
+             for fid in frame.loc[frame['value'].notna(),'feature_id'].unique()}
+    for fid in ['M03','M06']:
+        status.append({'feature_ids':fid,'status':'snapshot_only' if fid in present else 'not_fetched',
+                       'reason':'Verified EVDS series; latest snapshot, original release/vintage unverified' if fid in present
+                       else 'Verified EVDS catalogue mapping is available; authenticated data download has not completed'})
+    status.append({'feature_ids':'M08','status':'sector_mapping_required',
+                   'reason':'Document defines a family without fixed sector series; no arbitrary common index substituted'})
+    observations = pd.concat(outputs, ignore_index=True) if outputs else pd.DataFrame()
+    if not observations.empty:
+        observations = observations.sort_values(["feature_id", "series_name", "period_end"]).reset_index(drop=True)
+    observations.to_csv(OUT_DIR / "macro_observations.csv", index=False)
+    pd.DataFrame(status).to_csv(OUT_DIR / "macro_source_status.csv", index=False)
+    (OUT_DIR / "source_manifest.json").write_text(json.dumps(client.records, ensure_ascii=False, indent=2))
+    print(json.dumps({"observations": len(observations), "historical_pit_eligible": int(observations.get("pit_eligible", pd.Series(dtype=bool)).sum()), "source_status": status}, ensure_ascii=False, indent=2))
+    return observations
 
 
 if __name__ == "__main__":
-    build_macro_and_risk_tables()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--offline", action="store_true")
+    parser.add_argument("--evds-spec")
+    args = parser.parse_args()
+    build_macro_and_risk_tables(refresh=args.refresh, offline=args.offline, evds_spec=args.evds_spec)

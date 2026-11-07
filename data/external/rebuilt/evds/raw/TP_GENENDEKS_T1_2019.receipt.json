@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.GENENDEKS.T1&startDate=01-01-2019&endDate=31-12-2019&type=json&formulas=0",
+    "series_code": "TP.GENENDEKS.T1",
+    "feature_id": "M04",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_tukfiy2003",
+    "requested_year": 2019,
+    "rows": 12,
+    "raw_rows": 12,
+    "excluded_boundary_rows": 0,
+    "retrieved_at": "2026-11-07T17:54:59+00:00",
+    "sha256": "04ca379eb0e6a160d1c7cdf954e60851784ef1e51c274502c817c473c2275f19",
+    "retrieval_mode": "fresh_http",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}

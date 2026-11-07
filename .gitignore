@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.env.*
+*.tmp
+*.part
+
+!.env.example
+
+data/financial_source_rows.csv
+data/external/rebuilt/macro_observations.csv

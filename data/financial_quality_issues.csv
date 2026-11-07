@@ -1,0 +1,16 @@
+﻿ticker,year,quarter,code,field,value,source_file
+ALCTL,2010,3,gross_profit_identity_review,T03_brut_kar_ytd,-100000.0,data/kap_raw_xls/ALCTL_2010_Q3.xls
+GSDDE,2013,2,gross_profit_identity_review,T03_brut_kar_ytd,2054000.0,data/kap_raw_xls/GSDDE_2013_Q2.xls
+GSDDE,2013,3,gross_profit_identity_review,T03_brut_kar_ytd,-1616000.0,data/kap_raw_xls/GSDDE_2013_Q3.xls
+GSDDE,2013,4,gross_profit_identity_review,T03_brut_kar_ytd,-1307000.0,data/kap_raw_xls/GSDDE_2013_Q4.xls
+GSDDE,2014,1,gross_profit_identity_review,T03_brut_kar_ytd,120000.0,data/kap_raw_xls/GSDDE_2014_Q1.xls
+GSDDE,2014,2,gross_profit_identity_review,T03_brut_kar_ytd,764000.0,data/kap_raw_xls/GSDDE_2014_Q2.xls
+GSDDE,2014,3,gross_profit_identity_review,T03_brut_kar_ytd,1119000.0,data/kap_raw_xls/GSDDE_2014_Q3.xls
+GSDDE,2014,4,gross_profit_identity_review,T03_brut_kar_ytd,2027000.0,data/kap_raw_xls/GSDDE_2014_Q4.xls
+GSDDE,2015,1,gross_profit_identity_review,T03_brut_kar_ytd,1273000.0,data/kap_raw_xls/GSDDE_2015_Q1.xls
+GSDDE,2015,2,gross_profit_identity_review,T03_brut_kar_ytd,-712000.0,data/kap_raw_xls/GSDDE_2015_Q2.xls
+GSDDE,2015,3,gross_profit_identity_review,T03_brut_kar_ytd,-1610000.0,data/kap_raw_xls/GSDDE_2015_Q3.xls
+GSDDE,2015,4,gross_profit_identity_review,T03_brut_kar_ytd,-2677000.0,data/kap_raw_xls/GSDDE_2015_Q4.xls
+GSDDE,2016,1,gross_profit_identity_review,T03_brut_kar_ytd,-3606000.0,data/kap_raw_xls/GSDDE_2016_Q1.xls
+TUPRS,2010,2,gross_profit_identity_review,T03_brut_kar_ytd,29613000.0,data/kap_raw_xls/TUPRS_2010_Q2.xls
+TUPRS,2010,3,gross_profit_identity_review,T03_brut_kar_ytd,41007000.0,data/kap_raw_xls/TUPRS_2010_Q3.xls

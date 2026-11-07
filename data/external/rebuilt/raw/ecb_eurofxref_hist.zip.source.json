@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip",
+  "cache_file": "data/external/rebuilt/raw/ecb_eurofxref_hist.zip",
+  "retrieved_at": "2026-11-07T17:12:51.128228+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "Fri, 06 Nov 2026 14:56:41 GMT",
+  "sha256": "d34817759624a46b58a42ac585f6d9d2fb12ece793d158656dcc7ddd128779a3"
+}

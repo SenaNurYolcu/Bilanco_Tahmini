@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Tuketici+Fiyatlari",
+  "cache_file": "data/external/rebuilt/raw/tcmb_tufe.html",
+  "retrieved_at": "2026-11-07T17:12:52.039079+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "",
+  "sha256": "fe9a0bb2bde835914d43d6b3105000724137ef4d93f6923b49210126dae26f02"
+}

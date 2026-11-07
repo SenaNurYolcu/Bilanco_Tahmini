@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-11-07T21:21:36.950824+00:00",
+  "rows": 1320,
+  "columns": 205,
+  "source_rows": 308072,
+  "issue_count": 15,
+  "linked_disclosure_vintages": 532,
+  "financial_reference_rows": 499,
+  "canonical_sha256": "c8846a42cfcc729c2b8034f3bb4970e3e4875737596c22e49bbbdbd871920251",
+  "model_ready": false,
+  "reason": "Coverage, historical vintages and source exceptions require review before training."
+}

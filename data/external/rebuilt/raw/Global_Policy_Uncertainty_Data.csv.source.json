@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.policyuncertainty.com/media/Global_Policy_Uncertainty_Data.csv",
+  "cache_file": "data/external/rebuilt/raw/Global_Policy_Uncertainty_Data.csv",
+  "retrieved_at": "2026-11-07T17:12:50.245955+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "Sat, 08 Aug 2026 20:38:27 GMT",
+  "sha256": "6bf641050ecfaac10a32a3aba57cd3b70232cb5d6d50b820e5884fb572466dd7"
+}

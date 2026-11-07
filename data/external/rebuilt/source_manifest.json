@@ -1,0 +1,58 @@
+[
+  {
+    "source_url": "https://www.matteoiacoviello.com/gpr_files/data_gpr_export.xls",
+    "cache_file": "data/external/rebuilt/raw/data_gpr_export.xls",
+    "retrieved_at": "2026-11-07T17:12:49.651921+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "32e54b08df4cbc2954c3b89970008a7a3a2f2e94ed4184135908248e4d01cd83"
+  },
+  {
+    "source_url": "https://www.policyuncertainty.com/media/Global_Policy_Uncertainty_Data.csv",
+    "cache_file": "data/external/rebuilt/raw/Global_Policy_Uncertainty_Data.csv",
+    "retrieved_at": "2026-11-07T17:12:50.245955+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "6bf641050ecfaac10a32a3aba57cd3b70232cb5d6d50b820e5884fb572466dd7"
+  },
+  {
+    "source_url": "https://www.financialresearch.gov/financial-stress-index/data/fsi.csv",
+    "cache_file": "data/external/rebuilt/raw/ofr_fsi.csv",
+    "retrieved_at": "2026-11-07T17:12:50.530240+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "43b6c9be5893db4928748ed41d61ec32a65b461e4dec2ca59dbb921f87da294c"
+  },
+  {
+    "source_url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip",
+    "cache_file": "data/external/rebuilt/raw/ecb_eurofxref_hist.zip",
+    "retrieved_at": "2026-11-07T17:12:51.128228+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "d34817759624a46b58a42ac585f6d9d2fb12ece793d158656dcc7ddd128779a3"
+  },
+  {
+    "source_url": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx",
+    "cache_file": "data/external/rebuilt/raw/worldbank_pink_sheet_monthly.xlsx",
+    "retrieved_at": "2026-11-07T17:12:51.411660+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "3c8d9d8dbb48342fdbf24777c39a8ce8964cc2fd0958f72f6779e6e4ad99cde2"
+  },
+  {
+    "source_url": "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Tuketici+Fiyatlari",
+    "cache_file": "data/external/rebuilt/raw/tcmb_tufe.html",
+    "retrieved_at": "2026-11-07T17:12:52.039079+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "fe9a0bb2bde835914d43d6b3105000724137ef4d93f6923b49210126dae26f02"
+  },
+  {
+    "source_url": "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Uretici+Fiyatlari",
+    "cache_file": "data/external/rebuilt/raw/tcmb_ufe.html",
+    "retrieved_at": "2026-11-07T17:12:52.175095+00:00",
+    "status": "cached",
+    "provenance_status": "cached_content_hash_verified",
+    "sha256": "242550d47482ce3f7e90db19483e7ee274d2ce5bae58fb9cc7125a956e2f846a"
+  }
+]

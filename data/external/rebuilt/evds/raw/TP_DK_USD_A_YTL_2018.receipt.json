@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.DK.USD.A.YTL&startDate=01-01-2018&endDate=31-12-2018&type=json&formulas=0",
+    "series_code": "TP.DK.USD.A.YTL",
+    "feature_id": "M01",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_dkdovytl",
+    "requested_year": 2018,
+    "rows": 365,
+    "raw_rows": 365,
+    "excluded_boundary_rows": 0,
+    "retrieved_at": "2026-11-07T17:52:53+00:00",
+    "sha256": "8e4168ec9a74020a81739e19992970a2169caef3f14cda2de37d9bac942498ac",
+    "retrieval_mode": "verified_cache",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}

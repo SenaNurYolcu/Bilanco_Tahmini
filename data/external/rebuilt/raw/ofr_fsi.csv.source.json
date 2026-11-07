@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.financialresearch.gov/financial-stress-index/data/fsi.csv",
+  "cache_file": "data/external/rebuilt/raw/ofr_fsi.csv",
+  "retrieved_at": "2026-11-07T17:12:50.530240+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "Fri, 06 Nov 2026 15:00:15 GMT",
+  "sha256": "43b6c9be5893db4928748ed41d61ec32a65b461e4dec2ca59dbb921f87da294c"
+}

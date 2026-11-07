@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.KTF17&startDate=01-01-2011&endDate=31-12-2011&type=json&formulas=0",
+    "series_code": "TP.KTF17",
+    "feature_id": "M03",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_kt100h",
+    "requested_year": 2011,
+    "rows": 52,
+    "raw_rows": 53,
+    "excluded_boundary_rows": 1,
+    "retrieved_at": "2026-11-07T17:54:49+00:00",
+    "sha256": "c55a591c876e5b5ba1caa2f83e4418b1188d5846a8108638136af1dd269a9a82",
+    "retrieval_mode": "fresh_http",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}
