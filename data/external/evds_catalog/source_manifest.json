@@ -1,0 +1,90 @@
+[
+  {
+    "file": "categories.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/categories/withDatagroups/type=json",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "3ebb3619452428379cc815cee1d50225ebb0a7ba064cdb4e5cd99e3d4dc0e10f",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "credit_series.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/fe/type=json&code=bie_kt100h",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "b05143c4693d5b9e6057b5caaeb07123baefcbf594d1f57d9847481bbcde14c9",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "industrial_production_calendar_adjusted_series.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/fe/type=json&code=bie_tsanaytkvm2021",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "73c764d129866a3fcef48eaee9bfe246b859ce61abd5e7f7b67b141efc4322a7",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "cpi_2003_series.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/fe/type=json&code=bie_tukfiy2003",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "bcb8071d41ebefbe5d4b59b87ea8522eb64326e539024570a9c0f5986f53182a",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "domestic_ppi_series.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/fe/type=json&code=bie_tufe1yi",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "92cf2487cc5e8617900c55923b21dd03d68e8fb7910622885169309b18449368",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "credit_group_notes.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/dataGroupNotes?dataGroupCode=bie_kt100h",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "2fc8cc039cc1fb52547758997e3209a45897c0b7724d1136bb40963861eace86",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "industrial_production_group_notes.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/dataGroupNotes?dataGroupCode=bie_tsanaytkvm2021",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "d9359cc539b0b4d2a96f6f14ed19b30e9991e1382ba506d390c0c76eee470235",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "selected_series_notes.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieNotes",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "9771045ac135d211345a46b427af85419acec35be055ce855c211d235726096b",
+    "method": "POST",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "credit_range.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/baslangicBitis",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "71ebd209db8adab9acf51b19acb995ee63744c7e3c725d95d2405e507bcd61ab",
+    "method": "POST",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "industrial_production_range.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/serieList/baslangicBitis",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "1bc2a0a21bb4b84bcf872cb501cb0965c80725e1eaf1cd48e619b4c5179a82b7",
+    "method": "POST",
+    "access": "public official website metadata, no account or key"
+  },
+  {
+    "file": "documents.json",
+    "source_url": "https://evds3.tcmb.gov.tr/igmevdsms-dis/documents?lang=TR",
+    "verified_at": "2026-11-07T17:39:09.629024+00:00",
+    "sha256": "e7678d0c8c788e3e139844d75afa29a9bf9e7612a324075a724f8fe941d6efce",
+    "method": "GET",
+    "access": "public official website metadata, no account or key"
+  }
+]

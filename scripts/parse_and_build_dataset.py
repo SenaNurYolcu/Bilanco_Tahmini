@@ -10,11 +10,9 @@ veri sozlesmesine uygun olarak:
 3. Yillik kumulatif (YTD) gelir ve nakit akisi kalemlerinden tek ceyreklik (3 aylik)
    akislari (Q1 = YTD_Q1, Q2 = 3Aylik veya YTD_Q2 - YTD_Q1, Q3 = 3Aylik veya YTD_Q3 - YTD_Q2,
    Q4 = YTD_Q4 - YTD_Q3) turetir.
-4. P0 cekirdek finansal oranlari (F01-F14), Turkiye makroekonomik serilerini (M01-M06),
-   kuresel jeopolitik/ekonomik/finansal risk serilerini (R01-R04) ve rejim etkilesim
-   degiskenlerini (X02-X03) bilanconun donem sonu tarihi (t0) itibariyla ileriye bakma
-   hatasi (look-ahead bias) olmadan birlestirir.
-5. Sonuc veri setini Wide Format .csv olarak kaydeder.
+4. Kaynak, birim, rapor surumu ve eksik nedenlerini korur. Ayni donemin
+   finansal tutarlari hedef verisidir; otomatik olarak model girdisi sayilmaz.
+5. Guncel makro snapshotini tarihsel vintage olarak sunmaz.
 """
 
 from __future__ import annotations
@@ -23,6 +21,7 @@ import html
 import json
 import math
 import re
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -68,6 +67,8 @@ def parse_number(val: Any) -> float | None:
     s = str(val).strip()
     if not s or s in ("-", "--", "nan", "None", "null"):
         return None
+    if re.fullmatch(r"\d{2}\.\d{2}\.\d{4}", s):
+        return None
     neg = False
     if s.startswith("(") and s.endswith(")"):
         neg = True
@@ -91,7 +92,9 @@ def parse_number(val: Any) -> float | None:
             and parts[1].isdigit()
         ):
             s = s.replace(".", "")
-    s = re.sub(r"[^0-9.\-]", "", s)
+    # Metin/dipnot ve tarihleri sayisal veri diye birlestirmeyin.
+    if not re.fullmatch(r"-?\d+(?:\.\d+)?", s):
+        return None
     if not s or s == "-" or s == ".":
         return None
     try:
@@ -106,12 +109,14 @@ def detect_unit_multiplier(unit_str: str) -> tuple[str, float]:
     u_raw = (unit_str or "").strip()
     u = normalize_tr(u_raw)
     if not u:
-        return "TL", 1.0
+        return "unknown", float("nan")
     if "milyon" in u or "1.000.000" in u or "1000000" in u:
         return u_raw, 1_000_000.0
     if "1.000" in u or "1000" in u or "bin" in u or "1,000" in u:
         return u_raw, 1_000.0
-    return u_raw, 1.0
+    if u in ("tl", "try", "turk lirasi"):
+        return u_raw, 1.0
+    return u_raw, float("nan")
 
 
 def extract_rows_from_biff8(file_path: Path) -> tuple[dict[str, str], list[tuple[str, float | None, float | None]]]:
@@ -119,7 +124,7 @@ def extract_rows_from_biff8(file_path: Path) -> tuple[dict[str, str], list[tuple
     df = pd.read_excel(file_path, header=None, engine="xlrd")
     meta = {
         "consolidation": "",
-        "original_unit": "TL",
+        "original_unit": "",
         "published_at_header": "",
     }
     rows: list[tuple[str, float | None, float | None]] = []
@@ -170,7 +175,7 @@ def extract_rows_from_biff8(file_path: Path) -> tuple[dict[str, str], list[tuple
             for j in range(1, min(6, len(r))):
                 if pd.notna(r[j]) and str(r[j]).strip():
                     u_cand = str(r[j]).strip()
-                    if meta["original_unit"] == "TL" and u_cand:
+                    if not meta["original_unit"] and u_cand:
                         meta["original_unit"] = u_cand
                     break
             continue
@@ -180,13 +185,6 @@ def extract_rows_from_biff8(file_path: Path) -> tuple[dict[str, str], list[tuple
 
         val_ytd = parse_number(c_ytd_raw)
         val_3m = parse_number(c_3m_raw)
-
-        # Bazı 2010-2011 tablolarında Cari Dönem sütunu 4. sütuna kaymış olabilir:
-        if val_ytd is None and col_ytd == 2 and len(r) > 4:
-            alt_ytd = parse_number(r[4])
-            if alt_ytd is not None and parse_number(r[2]) is None and parse_number(r[3]) is None:
-                val_ytd = alt_ytd
-                val_3m = parse_number(r[6]) if len(r) > 6 else None
 
         rows.append((c0, val_ytd, val_3m))
 
@@ -208,7 +206,7 @@ def extract_rows_from_html_xls(file_path: Path) -> tuple[dict[str, str], list[tu
 
     meta = {
         "consolidation": "",
-        "original_unit": "TL",
+        "original_unit": "",
         "published_at_header": "",
     }
     m_unit = RE_UNIT.search(html_text[:15000])
@@ -256,7 +254,12 @@ def extract_rows_from_html_xls(file_path: Path) -> tuple[dict[str, str], list[tu
         for cell_html in ctx_cells:
             m_t = RE_TITLE_VAL.search(cell_html)
             if m_t:
-                parsed_vals.append(parse_number(m_t.group(1)))
+                # HTML title is a machine number, not Turkish formatted display.
+                try:
+                    value = float(m_t.group(1))
+                    parsed_vals.append(value if math.isfinite(value) else None)
+                except ValueError:
+                    parsed_vals.append(None)
             else:
                 txt_val = html.unescape(RE_INNER_TEXT.sub(" ", cell_html)).strip()
                 parsed_vals.append(parse_number(txt_val))
@@ -333,10 +336,6 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
     alt_rev_3m: float | None = None
     alt_cogs_ytd: float | None = None
     alt_cogs_3m: float | None = None
-
-    last_cf_op_val: float | None = None
-    last_cf_inv_val: float | None = None
-    last_cf_fin_val: float | None = None
 
     for label, v_ytd, v_3m in rows:
         ln = normalize_tr(label)
@@ -593,13 +592,6 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
                 continue
 
             if v_ytd is not None:
-                if cf_section == "OP":
-                    last_cf_op_val = scale(v_ytd)
-                elif cf_section == "INV":
-                    last_cf_inv_val = scale(v_ytd)
-                elif cf_section == "FIN":
-                    last_cf_fin_val = scale(v_ytd)
-
                 if out["T15_isletme_nakit_akisi_ytd"] is None and (
                     "isletme faaliyetlerinden saglanan" in ln
                     or "isletme faaliyetlerinden elde edilen" in ln
@@ -633,14 +625,6 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
                 ):
                     out["T17_finansman_nakit_akisi_ytd"] = scale(v_ytd)
 
-    # 2010-2012 serbest Nakit Akım Tablosunda bölüm sonu toplam satırı yedeği:
-    if out["T15_isletme_nakit_akisi_ytd"] is None and last_cf_op_val is not None:
-        out["T15_isletme_nakit_akisi_ytd"] = last_cf_op_val
-    if out["T16_yatirim_nakit_akisi_ytd"] is None and last_cf_inv_val is not None:
-        out["T16_yatirim_nakit_akisi_ytd"] = last_cf_inv_val
-    if out["T17_finansman_nakit_akisi_ytd"] is None and last_cf_fin_val is not None:
-        out["T17_finansman_nakit_akisi_ytd"] = last_cf_fin_val
-
     # Hasılat yedeği (GSDDE 2010-2013 gibi esas faaliyet geliri üst satırda yer alanlar için)
     if out["T01_hasilat_ytd"] is None and alt_rev_ytd is not None:
         out["T01_hasilat_ytd"] = alt_rev_ytd
@@ -652,7 +636,7 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
     # Bilanço türetilmiş toplam kontrolü:
     if out["T08_nakit_ve_nakit_benzerleri"] is None and alt_cash_parts:
         out["T08_nakit_ve_nakit_benzerleri"] = round(sum(alt_cash_parts), 2)
-    if out["F10_kisa_vadeli_ticari_alacaklar"] is not None or out["F10_uzun_vadeli_ticari_alacaklar"] is not None:
+    if out["F10_kisa_vadeli_ticari_alacaklar"] is not None and out["F10_uzun_vadeli_ticari_alacaklar"] is not None:
         out["T09_ticari_alacaklar"] = round(
             (out["F10_kisa_vadeli_ticari_alacaklar"] or 0.0) + (out["F10_uzun_vadeli_ticari_alacaklar"] or 0.0), 2
         )
@@ -660,11 +644,11 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
         out["F13_kisa_vadeli_finansal_borclar"] = round(sum(kisa_borc_parts), 2)
     if uzun_borc_parts:
         out["F13_uzun_vadeli_finansal_borclar"] = round(sum(uzun_borc_parts), 2)
-    if out["F13_kisa_vadeli_finansal_borclar"] is not None or out["F13_uzun_vadeli_finansal_borclar"] is not None:
+    if out["F13_kisa_vadeli_finansal_borclar"] is not None and out["F13_uzun_vadeli_finansal_borclar"] is not None:
         out["T12_finansal_borclar"] = round(
             (out["F13_kisa_vadeli_finansal_borclar"] or 0.0) + (out["F13_uzun_vadeli_finansal_borclar"] or 0.0), 2
         )
-    if out["kisa_vadeli_ticari_borclar"] is not None or out["uzun_vadeli_ticari_borclar"] is not None:
+    if out["kisa_vadeli_ticari_borclar"] is not None and out["uzun_vadeli_ticari_borclar"] is not None:
         out["F12_ticari_borclar"] = round(
             (out["kisa_vadeli_ticari_borclar"] or 0.0) + (out["uzun_vadeli_ticari_borclar"] or 0.0), 2
         )
@@ -672,22 +656,16 @@ def parse_financial_rows(rows: list[tuple[str, float | None, float | None]], mul
         if out["donen_varliklar"] is not None and out["duran_varliklar"] is not None:
             out["T11_toplam_varliklar"] = round(out["donen_varliklar"] + out["duran_varliklar"], 2)
     if out["T13_toplam_yukumlulukler"] is None:
-        if out["kisa_vadeli_yukumlulukler"] is not None or out["uzun_vadeli_yukumlulukler"] is not None:
+        if out["kisa_vadeli_yukumlulukler"] is not None and out["uzun_vadeli_yukumlulukler"] is not None:
             out["T13_toplam_yukumlulukler"] = round(
                 (out["kisa_vadeli_yukumlulukler"] or 0.0) + (out["uzun_vadeli_yukumlulukler"] or 0.0), 2
             )
         elif out["T11_toplam_varliklar"] is not None and out["T14_toplam_ozkaynaklar"] is not None:
             out["T13_toplam_yukumlulukler"] = round(out["T11_toplam_varliklar"] - out["T14_toplam_ozkaynaklar"], 2)
-    if out["T14_ana_ortakliga_ait_ozkaynaklar"] is None and out["T14_toplam_ozkaynaklar"] is not None:
-        out["T14_ana_ortakliga_ait_ozkaynaklar"] = out["T14_toplam_ozkaynaklar"]
     if out["T03_brut_kar_ytd"] is None and out["T01_hasilat_ytd"] is not None and out["T02_satislarin_maliyeti_ytd"] is not None:
         out["T03_brut_kar_ytd"] = round(out["T01_hasilat_ytd"] + out["T02_satislarin_maliyeti_ytd"], 2)
         if out["T01_hasilat_3m_raw"] is not None and out["T02_satislarin_maliyeti_3m_raw"] is not None:
             out["T03_brut_kar_3m_raw"] = round(out["T01_hasilat_3m_raw"] + out["T02_satislarin_maliyeti_3m_raw"], 2)
-    if out["T07_ana_ortaklik_net_kari_ytd"] is None and out["T07_donem_net_kari_ytd"] is not None:
-        out["T07_ana_ortaklik_net_kari_ytd"] = out["T07_donem_net_kari_ytd"]
-        out["T07_ana_ortaklik_net_kari_3m_raw"] = out["T07_donem_net_kari_3m_raw"]
-
     return out
 
 
@@ -756,222 +734,11 @@ def load_catalog_dates() -> tuple[dict[tuple[str, int, int], tuple[str, str]], d
 
 
 def build_dataset() -> pd.DataFrame:
-    cat_dates, by_disc_idx = load_catalog_dates()
-
-    file_map: dict[tuple[str, int, int], Path] = {}
-    for fp in sorted(KAP_RAW_DIR.glob("*.xls")):
-        m = re.match(r"^([A-Z0-9]+)_(\d{4})_Q([1-4])(?:_(\d+))?\.xls$", fp.name)
-        if m:
-            t, y, q, _ = m.groups()
-            if t in SELECTED_COMPANIES:
-                file_map[(t, int(y), int(q))] = fp
-
-    records: list[dict[str, Any]] = []
-    for ticker, comp_info in SELECTED_COMPANIES.items():
-        for yr in range(2010, 2021):
-            for q in [1, 2, 3, 4]:
-                fp = file_map.get((ticker, yr, q))
-                period_end = f"{yr}-{QUARTER_END_DATES[q]}"
-                row_data: dict[str, Any] = {
-                    "ticker": ticker,
-                    "company_name": comp_info["title"],
-                    "sector_group": comp_info["sector_group"],
-                    "C01_kap_main_sector": comp_info["kap_main_sector"],
-                    "C01_kap_sub_sector": comp_info["kap_sub_sector"],
-                    "year": yr,
-                    "quarter": q,
-                    "observation_period": f"{yr}Q{q}",
-                    "period_end_date": period_end,
-                    "first_published_at": "",
-                    "disclosure_index": "",
-                    "consolidation": "",
-                    "original_unit": "",
-                    "currency": "TRY",
-                }
-
-                if fp and fp.is_file():
-                    head = fp.read_bytes()[:16]
-                    if head.startswith(b"\xd0\xcf\x11\xe0"):
-                        meta, rows = extract_rows_from_biff8(fp)
-                    else:
-                        meta, rows = extract_rows_from_html_xls(fp)
-
-                    orig_unit, mult = detect_unit_multiplier(meta.get("original_unit", "TL"))
-                    fin = parse_financial_rows(rows, mult)
-
-                    cat_pub, cat_idx = cat_dates.get((ticker, yr, q), ("", ""))
-                    m_fn = re.match(r"^([A-Z0-9]+)_(\d{4})_Q([1-4])(?:_(\d+))?\.xls$", fp.name)
-                    fn_idx = m_fn.group(4) if (m_fn and m_fn.group(4)) else ""
-                    pub_by_idx = by_disc_idx.get(fn_idx, "") if fn_idx else ""
-
-                    row_data["first_published_at"] = pub_by_idx or cat_pub or meta.get("published_at_header", "")
-                    row_data["disclosure_index"] = fn_idx or cat_idx
-                    row_data["consolidation"] = meta.get("consolidation", "")
-                    row_data["original_unit"] = orig_unit
-                    row_data.update(fin)
-
-                records.append(row_data)
-
-    df = pd.DataFrame(records)
-    df.sort_values(["ticker", "year", "quarter"], inplace=True)
-    df.reset_index(drop=True, inplace=True)
-
-    # ---------------- YTD -> ÇEYREKLİK (3 AYLIK) AKIŞ DÖNÜŞÜMÜ ----------------
-    is_flow_items = [
-        ("T01_hasilat", "T01_hasilat_ytd", "T01_hasilat_3m_raw"),
-        ("T02_satislarin_maliyeti", "T02_satislarin_maliyeti_ytd", "T02_satislarin_maliyeti_3m_raw"),
-        ("T03_brut_kar", "T03_brut_kar_ytd", "T03_brut_kar_3m_raw"),
-        ("T04_esas_faaliyet_kari", "T04_esas_faaliyet_kari_ytd", "T04_esas_faaliyet_kari_3m_raw"),
-        ("T05_finansman_gideri", "T05_finansman_gideri_ytd", "T05_finansman_gideri_3m_raw"),
-        ("F07_finansman_geliri", "F07_finansman_geliri_ytd", "F07_finansman_geliri_3m_raw"),
-        ("T06_vergi_gideri_geliri", "T06_vergi_gideri_geliri_ytd", "T06_vergi_gideri_geliri_3m_raw"),
-        ("T07_donem_net_kari", "T07_donem_net_kari_ytd", "T07_donem_net_kari_3m_raw"),
-        ("T07_ana_ortaklik_net_kari", "T07_ana_ortaklik_net_kari_ytd", "T07_ana_ortaklik_net_kari_3m_raw"),
-    ]
-
-    for base_col, ytd_col, raw3m_col in is_flow_items:
-        prev_ytd = df.groupby(["ticker", "year"])[ytd_col].shift(1)
-        diff_ytd = df[ytd_col] - prev_ytd
-        q_col = f"{base_col}_ceyrek"
-        df[q_col] = np.where(
-            df["quarter"] == 1,
-            df[ytd_col],
-            np.where(df[raw3m_col].notna(), df[raw3m_col], diff_ytd),
-        )
-        df.drop(columns=[raw3m_col], inplace=True)
-
-    for cf_base in ["T15_isletme_nakit_akisi", "T16_yatirim_nakit_akisi", "T17_finansman_nakit_akisi"]:
-        ytd_col = f"{cf_base}_ytd"
-        prev_ytd = df.groupby(["ticker", "year"])[ytd_col].shift(1)
-        df[f"{cf_base}_ceyrek"] = np.where(df["quarter"] == 1, df[ytd_col], df[ytd_col] - prev_ytd)
-
-    df["F07_net_finansman_ytd"] = df["F07_finansman_geliri_ytd"].fillna(0.0) + df["T05_finansman_gideri_ytd"].fillna(0.0)
-    df["F07_net_finansman_ceyrek"] = df["F07_finansman_geliri_ceyrek"].fillna(0.0) + df["T05_finansman_gideri_ceyrek"].fillna(0.0)
-
-    # ---------------- HİSSE BAŞINA KÂR (HBK / EPS) ----------------
-    # BIST'te 1 adet (lot) pay = 1 TL nominal ödenmiş sermayedir.
-    paid_cap = df["odenmis_sermaye"].replace(0, np.nan)
-    df["hisse_basina_kar_ytd"] = (df["T07_ana_ortaklik_net_kari_ytd"] / paid_cap).round(6)
-    df["hisse_basina_kar_ceyrek"] = (df["T07_ana_ortaklik_net_kari_ceyrek"] / paid_cap).round(6)
-
-    # ---------------- P0 FİNANSAL ORANLAR VE GECİKMELER (F01-F14) ----------------
-    rev_q = df["T01_hasilat_ceyrek"].replace(0, np.nan)
-    cogs_q_abs = df["T02_satislarin_maliyeti_ceyrek"].abs().replace(0, np.nan)
-    assets = df["T11_toplam_varliklar"].replace(0, np.nan)
-    equity = df["T14_toplam_ozkaynaklar"].replace(0, np.nan)
-
-    df["F01_hasilat_qoq_buyume"] = df.groupby("ticker", group_keys=False)["T01_hasilat_ceyrek"].pct_change(1, fill_method=None)
-    df["F01_hasilat_yoy_buyume"] = df.groupby("ticker", group_keys=False)["T01_hasilat_ceyrek"].pct_change(4, fill_method=None)
-    df["F03_brut_kar_marji"] = df["T03_brut_kar_ceyrek"] / rev_q
-    df["F04_esas_faaliyet_marji"] = df["T04_esas_faaliyet_kari_ceyrek"] / rev_q
-    df["F05_net_kar_marji"] = df["T07_donem_net_kari_ceyrek"] / rev_q
-    df["F06_cfo_aktif_orani"] = df["T15_isletme_nakit_akisi_ceyrek"] / assets
-    df["F06_tahakkuk_aktif_orani"] = (df["T07_donem_net_kari_ceyrek"] - df["T15_isletme_nakit_akisi_ceyrek"]) / assets
-    df["F09_nakit_aktif_orani"] = df["T08_nakit_ve_nakit_benzerleri"] / assets
-    df["F10_alacak_satis_orani"] = df["T09_ticari_alacaklar"] / rev_q
-    df["F11_stok_maliyet_orani"] = df["T10_stoklar"] / cogs_q_abs
-    df["F12_ticari_borc_maliyet_orani"] = df["F12_ticari_borclar"] / cogs_q_abs
-    df["F13_finansal_borc_aktif_orani"] = df["T12_finansal_borclar"] / assets
-    df["F13_kisa_finansal_borc_aktif_orani"] = df["F13_kisa_vadeli_finansal_borclar"] / assets
-    df["F13_net_borc"] = df["T12_finansal_borclar"].fillna(0.0) - df["T08_nakit_ve_nakit_benzerleri"].fillna(0.0)
-    df["F14_ozkaynak_aktif_orani"] = df["T14_toplam_ozkaynaklar"] / assets
-    df["F14_borc_ozkaynak_orani"] = df["T13_toplam_yukumlulukler"] / equity
-
-    # ---------------- DIŞSAL MAKRO VE KÜRESEL RİSK SERİLERİNİ BİRLEŞTİRME ----------------
-    df = merge_external_macro_and_risk(df)
-
-    # ---------------- ETKİLEŞİM DEĞİŞKENLERİ (X02 & X03) ----------------
-    df["X02_faiz_degisimi_x_finansal_borc_aktif"] = (
-        df["M03_Faiz_3Aylik_Degisim"] * df["F13_finansal_borc_aktif_orani"]
-    )
-    df["X03_ofr_fsi_x_kisa_borc_aktif"] = (
-        df["R03_OFR_FSI_60d_mean"] * df["F13_kisa_finansal_borc_aktif_orani"]
-    )
-
-    return df
-
-
-def merge_external_macro_and_risk(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    data/external/monthly_macro_and_risk.csv ve daily_fx_and_fsi.csv dosyalarini
-    bilanconun donem sonu tarihi (period_end_date = t0) itibariyla ileriye bakma hatasi
-    olmadan birlestirir.
-    """
-    monthly_path = EXTERNAL_DIR / "monthly_macro_and_risk.csv"
-    daily_path = EXTERNAL_DIR / "daily_fx_and_fsi.csv"
-
-    if monthly_path.is_file():
-        m_df = pd.read_csv(monthly_path)
-        df["ym"] = df["period_end_date"].str.slice(0, 7)
-        m_cols = [
-            "ym",
-            "M03_Faiz_Orani",
-            "M03_Faiz_3Aylik_Degisim",
-            "M04_TUFE_YoY",
-            "M05_YIUFE_YoY",
-            "M06_SanayiUretimi_YoY",
-            "GPR",
-            "GPRT",
-            "GPRA",
-            "GEPU_ppp",
-        ]
-        m_sub = m_df[[c for c in m_cols if c in m_df.columns]].drop_duplicates(subset=["ym"])
-        df = df.merge(m_sub, on="ym", how="left")
-        df.rename(
-            columns={
-                "GPR": "R01_GPR",
-                "GPRT": "R04_GPRT",
-                "GPRA": "R04_GPRA",
-                "GEPU_ppp": "R02_GEPU_ppp",
-            },
-            inplace=True,
-        )
-        df.drop(columns=["ym"], inplace=True)
-
-    if daily_path.is_file():
-        d_df = pd.read_csv(daily_path)
-        d_df["date"] = pd.to_datetime(d_df["date"])
-        d_df.sort_values("date", inplace=True)
-        d_df["M01_USDTRY_seviye"] = d_df["USDTRY"]
-        d_df["M01_USDTRY_90g_degisim_pct"] = d_df["USDTRY"].pct_change(63, fill_method=None) * 100.0
-        d_df["M02_EURTRY_seviye"] = d_df["EURTRY"]
-        d_df["M02_EURTRY_90g_degisim_pct"] = d_df["EURTRY"].pct_change(63, fill_method=None) * 100.0
-        d_df["R03_OFR_FSI"] = d_df["OFR_FSI"].ffill()
-
-        df["t0_dt"] = pd.to_datetime(df["period_end_date"])
-        df_sorted = df.sort_values("t0_dt")
-        merged = pd.merge_asof(
-            df_sorted,
-            d_df[
-                [
-                    "date",
-                    "M01_USDTRY_seviye",
-                    "M01_USDTRY_90g_degisim_pct",
-                    "M02_EURTRY_seviye",
-                    "M02_EURTRY_90g_degisim_pct",
-                    "R03_OFR_FSI",
-                    "R03_OFR_FSI_60d_mean",
-                ]
-            ],
-            left_on="t0_dt",
-            right_on="date",
-            direction="backward",
-        )
-        merged.sort_values(["ticker", "year", "quarter"], inplace=True)
-        merged.drop(columns=["t0_dt", "date"], inplace=True)
-        df = merged.reset_index(drop=True)
-
-    return df
+    """Compatibility entry point; returns a financial snapshot, not model inputs."""
+    from rebuild_dataset import build_financial_snapshot
+    return build_financial_snapshot()[0]
 
 
 if __name__ == "__main__":
-    print("Veri seti olusturuluyor...", flush=True)
-    dataset = build_dataset()
-    OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
-    root_csv = ROOT_DIR / "bist_bilanco_tahmini_2010_2020.csv"
-    dataset.to_csv(root_csv, index=False, encoding="utf-8-sig")
-    try:
-        dataset.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
-        print(f"Basariyla kaydedildi: {OUTPUT_CSV} ve {root_csv} ({len(dataset)} satir, {len(dataset.columns)} sutun)", flush=True)
-    except PermissionError:
-        print(f"Not: {OUTPUT_CSV} baska bir uygulamada (Excel vb.) acik oldugu icin kilitli; guncel dosya {root_csv} konumuna kaydedildi ({len(dataset)} satir, {len(dataset.columns)} sutun).", flush=True)
+    from rebuild_dataset import run
+    run()

@@ -1,0 +1,42 @@
+{
+  "checks": {
+    "canonical_mirror_identical": true,
+    "unique_company_quarter": true,
+    "expected_grid": true,
+    "feature_label_keys_align": true,
+    "targets_not_unlagged_inputs": true,
+    "financial_availability_before_forecast": true,
+    "macro_snapshot_not_model_input": true,
+    "thyao_2015q4_assets": true,
+    "thyao_2016q1_assets": true,
+    "karel_2012q1_operating_cf": true,
+    "toaso_2013q1_assets": true,
+    "toaso_2014q3_assets": true,
+    "all_51_family_ids_reported": true,
+    "unverified_macro_dates_not_fabricated": true,
+    "evds_six_macro_families_retrieved": true,
+    "evds_monthly_2010_2020_complete": true,
+    "evds_observations_unique": true,
+    "evds_six_series_added_to_main_csv": true,
+    "evds_snapshots_excluded_from_historical_inputs": true,
+    "evds_raw_receipt_hashes_match": true,
+    "evds_credit_2010q1_matches_source_cell": true,
+    "evds_industrial_yoy_matches_two_source_cells": true
+  },
+  "structural_pass": true,
+  "rows": 1320,
+  "columns": 205,
+  "companies": 30,
+  "financial_source_rows": 308072,
+  "macro_observations_2010_2020": 17026,
+  "financial_quality_issues": 15,
+  "evds_php_downloaded": true,
+  "evds_numeric_records": 6909,
+  "model_ready": false,
+  "limits": [
+    "Original report vintages not fully established",
+    "Company exposure profile extraction incomplete",
+    "EVDS original releases/vintages unverified",
+    "No forecasting model trained or evaluated"
+  ]
+}

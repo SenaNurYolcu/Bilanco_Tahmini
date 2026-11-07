@@ -1,0 +1,52 @@
+﻿feature_id,label,priority,mapped_columns,rows_with_any_component,minimum_component_nonmissing,total_company_quarters,status,missing_reason,note,source_observations_2010_2020,strict_source_observations_2010_2020
+F01,Şirket ölçeği,P0,T11_toplam_varliklar,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F02,Hasılat geçmişi,P0,T01_hasilat_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F03,Satış maliyeti ve brüt marj,P0,T02_satislarin_maliyeti_ceyrek|T03_brut_kar_ceyrek,1312,1311,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F04,Faaliyet kârı ve marjı,P0,T04_esas_faaliyet_kari_ceyrek,1311,1311,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F05,Dönem net kârı,P0,T07_donem_net_kari_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F06,İşletme nakit akışı ve tahakkuk,P0,T15_isletme_nakit_akisi_ceyrek,1219,1219,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F07,Vergi gideri/geliri,P0,T06_vergi_gideri_geliri_ceyrek,1312,1312,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F08,Finansman ve faiz giderleri,P0,T05_finansman_gideri_ceyrek|F08_finansman_geliri_ceyrek,1301,1202,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F09,Nakit ve nakit benzerleri,P0,T08_nakit_ve_nakit_benzerleri,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F10,Ticari alacak,P0,T09_ticari_alacaklar,570,570,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F11,Stok,P0,T10_stoklar,1293,1293,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F12,Ticari borç,P0,F12_ticari_borclar,460,460,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F13,Finansal borç ve vade dağılımı,P0,T12_finansal_borclar,1181,1181,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F14,Yükümlülük ve özkaynak,P0,T13_toplam_yukumlulukler|T14_toplam_ozkaynaklar,1320,1320,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F15,"Yatırım, duran varlık ve amortisman",P1,F15_maddi_duran_varliklar|F15_capex_nakit_ceyrek|F15_amortisman_itfa_ceyrek,1312,864,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F16,Faaliyet giderleri ve Ar-Ge,P1,F16_ar_ge_gideri_ceyrek|F16_genel_yonetim_gideri_ceyrek|F16_pazarlama_gideri_ceyrek,1061,683,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F17,Sözleşme varlığı,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+F18,Müşteri avansı ve sözleşme yükümlülüğü,P1,F18_alinan_siparis_avanslari_kisa_vadeli_yukumlulukler|F18_alinan_siparis_avanslari_uzun_vadeli_yukumlulukler|F18_ertelenmis_gelirler_kisa_vadeli_yukumlulukler|F18_ertelenmis_gelirler_uzun_vadeli_yukumlulukler|F18_ertelenmis_gelirler_current,672,13,1320,partial_financial_mapping,,Family coverage is not proof of full definition or historical availability.,0,0
+F19,Net döviz pozisyonu,P1,,0,0,1320,company_note_pilot_partial_snapshot,not_extracted,Small source-note pilot only; conflicting/disaggregated definitions preserved; original vintage unverified.,3,0
+F20,Borç koşulları ve korunma,P2,,0,0,1320,company_note_pilot_partial_snapshot,not_extracted,Small source-note pilot only; conflicting/disaggregated definitions preserved; original vintage unverified.,7,0
+M01,USD/TL değişimi,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,5588,0
+M02,EUR/TL değişimi,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,5588,0
+M03,Ticari kredi faizi,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,573,0
+M04,TÜFE,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,396,0
+M05,Yİ-ÜFE,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,348,0
+M06,Sanayi üretimi,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,264,0
+M07,İlgili emtia fiyatı,P1,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,924,0
+M08,Sektör talep ve faaliyet göstergesi,P1,,0,0,1320,not_extracted,unavailable_vintage,Family coverage is not proof of full definition or historical availability.,0,0
+R01,GPR: jeopolitik risk,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,132,0
+R02,GEPU: ekonomik politika belirsizliği,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,132,0
+R03,OFR FSI: finansal stres,P0,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,2769,0
+R04,GPR tehdit / gerçekleşen eylem ayrımı,P1,,0,0,1320,macro_snapshot_only,unavailable_vintage,Official observations retrieved; historical release/vintage unverified; strict model input remains missing.,264,0
+C01,Tarihsel sektör ve faaliyet kategorisi,P0,,0,0,1320,current_sector_snapshot_unverified_history,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C02,Ürün / faaliyet gelir karması,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C03,Yurtdışı gelir ve ihracat payları,P1,,0,0,1320,company_note_pilot_partial_snapshot,not_extracted,Small source-note pilot only; conflicting/disaggregated definitions preserved; original vintage unverified.,6,0
+C04,Satış coğrafyası ve yoğunlaşma,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C05,Müşteri türü ve yoğunlaşması,P2,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C06,Tedarik ve ithal girdi profili,P2,,0,0,1320,company_note_pilot_partial_snapshot,not_extracted,Small source-note pilot only; conflicting/disaggregated definitions preserved; original vintage unverified.,1,0
+C07,Enerji / emtia üretici-tüketici rolü,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C08,Sözleşme fiyatlama yapısı,P2,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C09,Sipariş ve ifa görünürlüğü,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+C10,"Üretim kapasitesi, hacim ve birim fiyat",P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+E01,"Olay türü, coğrafyası ve ekonomik kanalı",P2,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X01,Kur × net döviz pozisyonu,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X02,Faiz × finansal borçluluk,P0,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X03,Finansal stres × kısa vadeli borç,P0,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X04,Jeopolitik risk × faaliyet karması,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X05,Coğrafi satış ağırlıklı ülke riski,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X06,Emtia × üretici/tüketici profili,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X07,Kur × ihracat / yurtdışı satış,P1,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0
+X08,Olay bağlamı × ilgili şirket profili,P2,,0,0,1320,not_extracted,not_extracted,Family coverage is not proof of full definition or historical availability.,0,0

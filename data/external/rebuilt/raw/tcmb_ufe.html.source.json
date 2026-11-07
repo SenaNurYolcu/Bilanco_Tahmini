@@ -1,0 +1,9 @@
+{
+  "source_url": "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Enflasyon+Verileri/Uretici+Fiyatlari",
+  "cache_file": "data/external/rebuilt/raw/tcmb_ufe.html",
+  "retrieved_at": "2026-11-07T17:12:52.175095+00:00",
+  "status": "downloaded",
+  "provenance_status": "downloaded_from_source",
+  "http_last_modified": "",
+  "sha256": "242550d47482ce3f7e90db19483e7ee274d2ce5bae58fb9cc7125a956e2f846a"
+}

@@ -1,0 +1,11 @@
+feature_ids,status,reason
+"R01,R04",snapshot_only,Historical release/vintage unverified; excluded from strict PIT joins
+R02,snapshot_only,Historical release/vintage unverified; excluded from strict PIT joins
+R03,snapshot_only,Historical release/vintage unverified; excluded from strict PIT joins
+"M01,M02",snapshot_only,Historical release/vintage unverified; excluded from strict PIT joins
+M07,snapshot_only,Historical release/vintage unverified; excluded from strict PIT joins
+M04,snapshot_only,Official TCMB table; original publication history not established
+M05,snapshot_only,Official TCMB table; original publication history not established
+M03,snapshot_only,"Verified EVDS series; latest snapshot, original release/vintage unverified"
+M06,snapshot_only,"Verified EVDS series; latest snapshot, original release/vintage unverified"
+M08,sector_mapping_required,Document defines a family without fixed sector series; no arbitrary common index substituted

@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "registry_version": "0.1.0",
+  "sources": [
+    {
+      "entity_id": "THYAO",
+      "observation_period": "2015Q4",
+      "source_document_id": "THYAO_2015Q4",
+      "source_url": "https://investor.turkishairlines.com/documents/financial-results/31_12_2015_eng_try.pdf",
+      "source_sha256": "108ff24a8dedc5e1b4dec3e0faa4e72df5de4a55ea3b838e3480223035ad6ee9",
+      "available_at": "",
+      "first_published_at": "",
+      "vintage_status": "unavailable_vintage",
+      "training_eligible": false,
+      "page_count": 6,
+      "path": "data/kap_refreshed/THYAO_2015_Q4_official.pdf"
+    },
+    {
+      "entity_id": "THYAO",
+      "observation_period": "2016Q1",
+      "source_document_id": "THYAO_2016Q1",
+      "source_url": "https://investor.turkishairlines.com/documents/financial-results/31_03_2016_eng_try.pdf",
+      "source_sha256": "96c0f251876997dd1fe54f932481f49f87166f9813584009dff19c4583e1b6c4",
+      "available_at": "",
+      "first_published_at": "",
+      "vintage_status": "unavailable_vintage",
+      "training_eligible": false,
+      "page_count": 6,
+      "path": "data/kap_refreshed/THYAO_2016_Q1_official.pdf"
+    },
+    {
+      "entity_id": "KAREL",
+      "observation_period": "2012Q1",
+      "source_document_id": "KAREL_2012Q1",
+      "source_url": "https://www.karel.com.tr/sites/default/files/2023-11/karel-elektronik-31032012.pdf",
+      "source_sha256": "eb58d9b28517330fba9f9d2de4bbfe57c1215ea989d3340f83b9f2365cb9f711",
+      "available_at": "",
+      "first_published_at": "",
+      "vintage_status": "unavailable_vintage",
+      "training_eligible": false,
+      "page_count": 68,
+      "path": "data/kap_refreshed/KAREL_2012_Q1_official.pdf"
+    },
+    {
+      "entity_id": "TOASO",
+      "observation_period": "2013Q1",
+      "source_document_id": "TOASO_2013Q1",
+      "source_url": "https://www.tofas.com.tr/en/InvestorRelations/FinancialStatements/Documents/TOFAS0313.pdf",
+      "source_sha256": "7bbebef4120e895dd20535595ba794d06ba6dfded70280ab827f39afa4af887d",
+      "available_at": "",
+      "first_published_at": "",
+      "vintage_status": "unavailable_vintage",
+      "training_eligible": false,
+      "page_count": 40,
+      "path": "data/kap_refreshed/TOASO_2013_Q1_official.pdf"
+    },
+    {
+      "entity_id": "TOASO",
+      "observation_period": "2014Q3",
+      "source_document_id": "TOASO_2014Q3",
+      "source_url": "https://www.tofas.com.tr/en/InvestorRelations/FinancialStatements/Documents/TOFAS%20CMB%200914%20ENG.pdf",
+      "source_sha256": "435910615cd12937af72f98b9ee6cdb558df1e477a12dd7e8c2077423f0040d1",
+      "available_at": "",
+      "first_published_at": "",
+      "vintage_status": "unavailable_vintage",
+      "training_eligible": false,
+      "page_count": 43,
+      "path": "data/kap_refreshed/TOASO_2014_Q3_official.pdf"
+    }
+  ],
+  "observation_rows": 17,
+  "family_source_searches": 55,
+  "limitation": "Bounded pilot; current historical company PDF copies; no original-vintage proof; no record eligible for PIT training.",
+  "families": [
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "F19",
+    "F20"
+  ],
+  "unregistered_requested_ids": [
+    "C11",
+    "C12"
+  ],
+  "missing_reason_policy": "No keyword hit=not_extracted; explicit disclosure absence=not_disclosed; source version unknown=unavailable_vintage."
+}

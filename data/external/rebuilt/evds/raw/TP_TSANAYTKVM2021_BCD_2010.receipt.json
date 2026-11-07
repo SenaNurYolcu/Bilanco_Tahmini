@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.TSANAYTKVM2021.BCD&startDate=01-01-2010&endDate=31-12-2010&type=json&formulas=0",
+    "series_code": "TP.TSANAYTKVM2021.BCD",
+    "feature_id": "M06",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_tsanaytkvm2021",
+    "requested_year": 2010,
+    "rows": 12,
+    "raw_rows": 12,
+    "excluded_boundary_rows": 0,
+    "retrieved_at": "2026-11-07T17:55:07+00:00",
+    "sha256": "8a70e0c906093938f89c30397290dfc48b7ea06e8732f42cd4b41d3c554921dd",
+    "retrieval_mode": "fresh_http",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}

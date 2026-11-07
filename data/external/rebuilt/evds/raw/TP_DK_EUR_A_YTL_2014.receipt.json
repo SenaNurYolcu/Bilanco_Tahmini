@@ -1,0 +1,14 @@
+{
+    "source_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/series=TP.DK.EUR.A.YTL&startDate=01-01-2014&endDate=31-12-2014&type=json&formulas=0",
+    "series_code": "TP.DK.EUR.A.YTL",
+    "feature_id": "M02",
+    "metadata_url": "https:\/\/evds3.tcmb.gov.tr\/igmevdsms-dis\/serieList\/fe\/type=json&code=bie_dkdovytl",
+    "requested_year": 2014,
+    "rows": 365,
+    "raw_rows": 365,
+    "excluded_boundary_rows": 0,
+    "retrieved_at": "2026-11-07T17:52:59+00:00",
+    "sha256": "5a6acbeca2922c95d05d14b9ae186c4e21ec61d8fc25d4ca3bf4b90d1f34c2f2",
+    "retrieval_mode": "verified_cache",
+    "source_vintage_status": "latest_snapshot_original_publication_unverified"
+}
